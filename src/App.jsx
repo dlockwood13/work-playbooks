@@ -143,6 +143,253 @@ const PLAYBOOKS = [
       { type: 'checklist', title: 'Day 5 — Sustain and report', body: 'Lock in the gains:', items: ['Document the new standard work clearly', 'Train anyone who wasn\'t in the event on the new process', 'Set up daily/weekly measures to track that the change holds', 'Identify any follow-up items that couldn\'t be done in the week', 'Present results to leadership with before/after metrics', 'Recognise the team'] },
       { type: 'reference', title: 'After the event — the 30-day rule', body: 'Most Kaizen events that fail, fail in the 30 days after. Schedule a 30-day check: are the changes still in place? Are metrics holding? If not, find out why immediately. The follow-up is part of the work.' }
     ]
+  },
+  {
+    id: 'communications-plan',
+    title: 'Change Communications Plan',
+    category: 'change',
+    description: 'Build a structured comms plan that lands with every audience at the right moment.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'Why comms make or break change', body: 'Most change failures are diagnosed as "people resisted" but trace back to communication: unclear why, wrong messenger, wrong moment, wrong channel. A plan turns ad-hoc messaging into deliberate influence.' },
+      { type: 'instruction', title: 'Define the core narrative', body: 'Write a one-page narrative covering: why now, what\'s changing, what\'s not changing, what success looks like, and what we\'re asking of people. Every other comm flows from this. If you can\'t fit it on one page, you don\'t understand it well enough yet.' },
+      { type: 'checklist', title: 'Segment your audiences', body: 'Different groups need different messages. Common segments:', items: ['Executives — strategic context and ROI', 'People managers — what they need to do for their teams', 'Directly affected staff — what changes for them and when', 'Indirectly affected teams — heads-up so they\'re not blindsided', 'External (customers, partners, regulators) — only what they need'] },
+      { type: 'instruction', title: 'Match messengers to audiences', body: 'The "from" matters as much as the message. Senior leaders deliver the why. Line managers deliver the what-it-means-for-you. Peers deliver the social proof. Don\'t let one voice carry it all — credibility comes from hearing it from the right person.' },
+      { type: 'reference', title: 'The communications matrix', body: 'Build a grid: rows are audiences, columns are key milestones (announcement, training, go-live, post-launch). Each cell answers: what message, from whom, through which channel, by when. This single artefact catches gaps faster than any narrative.' },
+      { type: 'checklist', title: 'Pick channels deliberately', body: 'Rule of thumb: high-stakes messages need rich channels; reminders can be lean.', items: ['Town halls and live Q&A — for major announcements', '1:1s and team meetings — for personal impact', 'Email — for record and reference', 'Intranet/Slack — for ongoing updates and FAQs', 'Posters and physical reminders — for behaviour change', 'Manager talking points — to enable cascade'] },
+      { type: 'instruction', title: 'Plan repetition, not just announcements', body: 'People need to hear a message 5–7 times before it sinks in. Plan reinforcing comms across the change lifecycle, not a single launch. Vary the format so it doesn\'t feel like spam.' },
+      { type: 'instruction', title: 'Build a feedback loop', body: 'Comms is two-way. Set up channels for questions and concerns: drop-in sessions, anonymous forms, listening posts with managers. Review what\'s coming in weekly and adjust the plan based on what you hear.' }
+    ]
+  },
+  {
+    id: 'change-impact-assessment',
+    title: 'Change Impact Assessment',
+    category: 'change',
+    description: 'Map exactly who is affected, how, and how much — before you roll out.',
+    estMinutes: 35,
+    steps: [
+      { type: 'reference', title: 'Why impact assessment matters', body: 'Without it, you\'re flying blind. You\'ll under-invest in the most affected groups and over-invest in groups that barely notice. A good assessment turns "everyone\'s affected" into a targeted plan.' },
+      { type: 'instruction', title: 'List every group touched by the change', body: 'Go beyond the obvious. Include teams whose inputs change, whose outputs you consume, whose tools you share, and whose metrics will move. Err on the side of listing too many — you can drop them later.' },
+      { type: 'checklist', title: 'Assess impact across dimensions', body: 'For each group, score impact (low/medium/high) on:', items: ['Process — how their day-to-day work changes', 'Tools/systems — what they\'ll need to learn or replace', 'Skills — new capabilities they\'ll need', 'Roles/responsibilities — what gets added, removed, or shifted', 'Performance metrics — how they\'ll be measured differently', 'Reporting lines — any organisational moves', 'Culture/identity — how their sense of role might shift'] },
+      { type: 'instruction', title: 'Quantify where you can', body: 'Numbers focus attention. "Approximately 40 people will need 8 hours of training" is more useful than "people will need training". Estimate hours of disruption, retraining time, and productivity dip during transition.' },
+      { type: 'reference', title: 'The heat map view', body: 'Build a grid: rows are stakeholder groups, columns are impact dimensions, cells are colour-coded (red/amber/green). The visual makes it obvious where to focus support — usually the deep-red rows with multiple high-impact dimensions.' },
+      { type: 'checklist', title: 'Translate impact into support needs', body: 'For each high-impact group, define:', items: ['Specific training and development needed', 'Communications cadence and depth', 'Coaching or hand-holding required', 'Interim arrangements during transition', 'Backfill or capacity relief', 'Recognition for what they\'re giving up'] },
+      { type: 'instruction', title: 'Validate with the affected groups', body: 'Don\'t assess in a vacuum. Run your impact ratings past representatives of each group. They\'ll often reveal impacts you missed and downgrade ones you over-weighted. Update accordingly.' }
+    ]
+  },
+  {
+    id: 'change-champions',
+    title: 'Building a Change Champion Network',
+    category: 'change',
+    description: 'Recruit and equip a network of peers who carry the change inside their teams.',
+    estMinutes: 25,
+    steps: [
+      { type: 'reference', title: 'Why champions work', body: 'People trust peers more than project teams. A change champion network spreads change through trusted relationships, surfaces local issues fast, and gives the project team eyes and ears across the organisation.' },
+      { type: 'checklist', title: 'Profile of a good champion', body: 'Pick for influence, not seniority:', items: ['Respected by their peers (not necessarily their manager\'s favourite)', 'Curious and open to change — early adopter type', 'Honest enough to push back internally', 'Good communicator in their own way (not necessarily polished)', 'Has bandwidth — don\'t pile this on someone already stretched', 'Represents the team\'s working reality, not just the loudest voices'] },
+      { type: 'instruction', title: 'Recruit deliberately, not by volunteer call', body: 'Open volunteer calls give you the keenest, not the most representative. Identify candidates by talking to managers, then invite them personally. Explain why you picked them — it builds commitment.' },
+      { type: 'instruction', title: 'Define the role explicitly', body: 'Champions need a clear scope: time commitment (e.g., 2 hours a week), responsibilities (sharing updates, gathering feedback, modelling behaviours), and what success looks like. Vague roles fizzle out within a month.' },
+      { type: 'checklist', title: 'Equip them properly', body: 'Champions can\'t carry the message without ammunition:', items: ['Early access to information (before broader announcements)', 'A simple toolkit: talking points, FAQs, slide deck', 'A regular forum to connect with each other (weekly or biweekly)', 'Direct line to the project team for questions', 'Recognition that visibly values their contribution'] },
+      { type: 'instruction', title: 'Use them as a two-way channel', body: 'Champions aren\'t just broadcasters. Their highest-value contribution is feedback: what\'s landing, what\'s confusing, what\'s being grumbled about in side-channels. Build a structured way to capture this — a 15-minute weekly check-in, not a survey.' },
+      { type: 'reference', title: 'When networks fail', body: 'Watch for: champions becoming complaint-collectors with no visible follow-up (kills credibility), the network being seen as project-team mouthpieces (loses peer trust), or champions being asked to defend things they don\'t agree with (burns them out). Address these fast.' }
+    ]
+  },
+  {
+    id: 'training-strategy',
+    title: 'Designing a Training Strategy',
+    category: 'change',
+    description: 'Plan training that actually changes behaviour, not just box-ticks completion.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'Training is not the same as learning', body: 'Most training fails because it confuses delivery (a course was run) with outcomes (people work differently). Design backwards from the behaviour you want, not forwards from the content you have.' },
+      { type: 'instruction', title: 'Define behavioural outcomes first', body: 'Write down the specific actions people should take differently after training. "Understands the new system" is not an outcome. "Can complete a refund within 3 minutes using the new workflow" is. If you can\'t see the behaviour, you can\'t train for it.' },
+      { type: 'checklist', title: 'Segment your learners', body: 'Different roles need different training:', items: ['Power users — depth on advanced functionality', 'Standard users — fluent on common workflows', 'Occasional users — quick reference, not deep training', 'Approvers/managers — oversight tasks only', 'Trainers and champions — train-the-trainer plus pedagogy'] },
+      { type: 'instruction', title: 'Choose modalities by purpose', body: 'No single format works for everything. Live sessions are best for nuance, judgement, and Q&A. Async videos work for procedural how-tos. Job aids and quick reference cards work for the moment of need. Practice environments work for skill-building. Mix and match by topic.' },
+      { type: 'reference', title: 'The 70-20-10 reality', body: 'Roughly 70% of learning happens on the job, 20% from peers and managers, 10% from formal training. Plan for all three: don\'t over-invest in the 10% and ignore the rest. Coaching, communities of practice, and team-based learning carry most of the weight.' },
+      { type: 'checklist', title: 'Plan for the moment of need', body: 'People forget 50%+ of training within a week. Reduce reliance on memory:', items: ['Job aids embedded where the work happens', 'Searchable knowledge base for self-service', 'A clear escalation path for "I\'m stuck"', 'Champions or super-users on each team', 'Refresher sessions 30 and 90 days post-launch'] },
+      { type: 'instruction', title: 'Measure what matters', body: 'Smile sheets (did they enjoy it?) tell you nothing useful. Measure: behaviour change at 30/60/90 days, error rates on the new way, support tickets, time-to-competency. If these aren\'t moving, your training isn\'t working — regardless of completion stats.' }
+    ]
+  },
+  {
+    id: 'post-implementation-review',
+    title: 'Post-Implementation Review',
+    category: 'change',
+    description: 'Run a proper PIR that captures lessons and improves the next change.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'PIR vs. project closure', body: 'Project closure asks "did we deliver?". A PIR asks "did it work, and what should we learn?". Closure happens at go-live. PIR happens 60–90 days later, once the change has had time to land or fail.' },
+      { type: 'instruction', title: 'Time it correctly', body: 'Too early (under a month) and you\'re measuring honeymoon, not adoption. Too late (over six months) and people have moved on, memories are fuzzy, and findings are stale. 60–90 days post-go-live is the sweet spot for most changes.' },
+      { type: 'checklist', title: 'Gather evidence before opinions', body: 'Start with data, not interviews:', items: ['Did we hit the success metrics defined in the business case?', 'How does post-change performance compare to baseline?', 'What\'s the support ticket / error / escalation pattern?', 'What\'s adoption like — % of users, frequency, depth?', 'What was actual cost vs. forecast?', 'How long did it take to reach steady state?'] },
+      { type: 'instruction', title: 'Then capture qualitative experience', body: 'Numbers tell you what; people tell you why. Run focused conversations with affected staff, managers, sponsors, and the project team. Same questions, different lenses. Look for patterns across groups, not just isolated complaints.' },
+      { type: 'reference', title: 'The four-question frame', body: 'Keep the structure simple: What worked well and should be repeated? What didn\'t work and should be stopped? What was missing that we needed? What surprised us, good or bad? Anything more elaborate gets bogged down.' },
+      { type: 'checklist', title: 'Distinguish three types of finding', body: 'Sort each lesson into:', items: ['Project-specific issues — fix on this project before fully closing', 'Methodology issues — change how we run future projects of this type', 'Organisational issues — broader patterns that need leadership attention', 'Things that worked unusually well — codify so they\'re repeated'] },
+      { type: 'instruction', title: 'Make the lessons actually used', body: 'Most PIR documents die in SharePoint. To prevent this: assign owners and dates to every action, present findings to a forum that makes decisions (not just records them), and reference the PIR explicitly when scoping the next similar change. Lessons not reused are lessons not learned.' }
+    ]
+  },
+  {
+    id: 'user-stories',
+    title: 'Writing Effective User Stories',
+    category: 'ba',
+    description: 'Write user stories that drive useful conversations and shippable work.',
+    estMinutes: 25,
+    steps: [
+      { type: 'reference', title: 'What user stories are for', body: 'A user story is a placeholder for a conversation, not a complete specification. Its job is to capture who, what, and why — the detail emerges through discussion. A perfect story you never discuss is worse than a rough story you do.' },
+      { type: 'instruction', title: 'Use the standard format', body: 'As a [role], I want [capability], so that [benefit]. The benefit is the part most often missed and the most important — without it, you can\'t evaluate alternative solutions or know when you\'re done.' },
+      { type: 'checklist', title: 'Test stories with INVEST', body: 'A good story is:', items: ['Independent — can be built without depending on other stories', 'Negotiable — open to discussion, not a fixed contract', 'Valuable — delivers value to a user or business', 'Estimable — clear enough that a team can size it', 'Small — fits in a single iteration', 'Testable — has clear acceptance criteria'] },
+      { type: 'instruction', title: 'Write acceptance criteria', body: 'Use Given/When/Then format: Given [context], When [action], Then [outcome]. Cover the happy path and key edge cases. Acceptance criteria turn the story from a wish into something you can verify.' },
+      { type: 'reference', title: 'Common anti-patterns', body: 'Solution stories ("As a user, I want a dropdown" — that\'s a UI choice, not a need). Roleless stories ("the system should..." — whose need?). Mega-stories that span weeks of work. Stories with vague benefits ("so that it works better"). Catch these in story-writing sessions, not after the build.' },
+      { type: 'checklist', title: 'Splitting stories that are too big', body: 'When a story can\'t fit in a sprint, split by:', items: ['Workflow steps (do part of the journey first)', 'Data variations (cover one data type before others)', 'User roles (build for one persona before others)', 'Business rules (basic rules first, edge cases later)', 'Operations (read first, then create, then edit, then delete)', 'Happy path first, error handling later'] },
+      { type: 'instruction', title: 'Keep stories alive, not archived', body: 'Stories aren\'t a write-once artefact. Refine them at backlog grooming sessions: clarify, split, deprioritise, or delete based on what\'s been learned. A story that\'s been sitting for six months untouched is usually a story you no longer need.' }
+    ]
+  },
+  {
+    id: 'moscow-prioritisation',
+    title: 'MoSCoW Prioritisation',
+    category: 'ba',
+    description: 'Use MoSCoW properly so it actually narrows scope instead of blessing it all.',
+    estMinutes: 20,
+    steps: [
+      { type: 'reference', title: 'What MoSCoW is — and isn\'t', body: 'MoSCoW classifies requirements as Must, Should, Could, or Won\'t (this time). Used well, it forces hard trade-offs. Used badly, it produces mostly Musts and a sprinkle of Coulds, which prioritises nothing.' },
+      { type: 'instruction', title: 'Anchor on a fixed timebox', body: 'MoSCoW only works against a constraint. Without one, every requirement looks important enough to be a Must. Set the constraint first: "for the next release in 8 weeks" or "for the £200k budget". Now choices have to be made.' },
+      { type: 'checklist', title: 'Define each category clearly', body: 'Be strict:', items: ['Must — the release fails without this; non-negotiable for go-live', 'Should — important and painful to omit, but the release still works without it', 'Could — desirable, included if there\'s capacity left', 'Won\'t (this time) — explicitly out of scope, prevents scope creep'] },
+      { type: 'reference', title: 'The 60-20-20 rule of thumb', body: 'A common guideline: aim for ~60% Musts, ~20% Shoulds, ~20% Coulds (by effort, not count). If you have 90% Musts, you haven\'t prioritised — you\'ve just made a list. Push back until the proportions are realistic.' },
+      { type: 'instruction', title: 'Run the workshop carefully', body: 'Get the right people: business stakeholders for value, technical leads for effort and feasibility. Go through each requirement asking "what happens if this isn\'t there?". The answer determines the rating. Don\'t accept "it\'d be bad" — push for specifics.' },
+      { type: 'checklist', title: 'Defend the line on Musts', body: 'Stakeholders will try to elevate everything. Hold the line by asking:', items: ['Would the user accept the release without this?', 'Is there a workaround, even an awkward one?', 'Does it fail a regulatory or contractual obligation?', 'Does it block another Must?', 'If the answer to all four is no, it\'s probably not a Must.'] },
+      { type: 'instruction', title: 'Treat Won\'ts as decisions, not omissions', body: 'The Won\'t list is the most powerful part of MoSCoW. It records what you explicitly chose not to do this time, which prevents endless re-litigation and gives a clear backlog for next time. Don\'t skip it.' }
+    ]
+  },
+  {
+    id: 'business-case',
+    title: 'Building a Business Case for Process Improvement',
+    category: 'ba',
+    description: 'Make a compelling, numbers-backed case that wins funding and commitment.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'What a business case has to do', body: 'It has one job: give a decision-maker enough confidence to fund the work. That means showing the problem, the proposed change, the expected return, the cost, and the risk — clearly enough that someone who doesn\'t know the detail can make the call.' },
+      { type: 'instruction', title: 'Lead with the problem, not the solution', body: 'Open with what\'s broken, in numbers people care about. Cost, time, customer impact, risk. If you start with "let\'s implement X", reviewers question the solution before agreeing on the problem. Get alignment on the problem first.' },
+      { type: 'checklist', title: 'Quantify the current state', body: 'Get specific:', items: ['Volume and frequency of the problem', 'Direct cost (people, tech, errors, rework)', 'Indirect cost (customer churn, reputation, opportunity cost)', 'Time impact (cycle time, wait time, manual effort)', 'Risk exposure (compliance, security, financial)', 'How this scales as the business grows'] },
+      { type: 'instruction', title: 'Compare options, not just the preferred one', body: 'Always present alternatives, even if you favour one. At minimum: do nothing, minimal fix, your recommendation, and "gold-plated" version. This shows you\'ve thought it through and lets the decision-maker pick consciously rather than just rubber-stamp.' },
+      { type: 'reference', title: 'Build the financial model', body: 'Cover: one-off costs (tech, people, training), ongoing costs (licences, support), savings or revenue uplift (with assumptions), and the time profile. Use payback period (months to break even), NPV, or ROI depending on what your finance function expects. Be conservative — a case that overshoots once will face years of scepticism.' },
+      { type: 'checklist', title: 'Include the non-financial case', body: 'Numbers don\'t carry the whole argument:', items: ['Strategic alignment (which corporate goals it supports)', 'Customer experience improvement', 'Employee experience and retention impact', 'Risk reduction (regulatory, operational, reputational)', 'Capability building for the future', 'Dependencies blocked by not doing this'] },
+      { type: 'instruction', title: 'Be honest about risk', body: 'Every business case has risks. Listing them transparently builds credibility, not doubt. Include: implementation risk, adoption risk, benefits realisation risk, and what mitigations are in place. Reviewers worry more when risks aren\'t mentioned.' },
+      { type: 'instruction', title: 'Plan benefits realisation upfront', body: 'A case that wins funding but never delivers measured benefits damages your credibility. Define: how each benefit will be tracked, who owns it, the baseline measure, target measure, and review cadence. This is part of the case, not an afterthought.' }
+    ]
+  },
+  {
+    id: 'to-be-process',
+    title: 'Designing the To-Be Process',
+    category: 'ba',
+    description: 'Move from current state to a redesigned future process people will actually adopt.',
+    estMinutes: 45,
+    steps: [
+      { type: 'reference', title: 'Don\'t skip As-Is', body: 'A To-Be design without a solid As-Is is wishful thinking. You can\'t redesign what you don\'t fully understand. If As-Is is rough, fix that first — even a quick walk-through is better than designing in the abstract.' },
+      { type: 'instruction', title: 'Set design principles before drawing', body: 'Agree on principles up-front: e.g., "minimise handoffs", "first-time-right over speed", "automate decisions, judge exceptions", "single source of truth for data". When trade-offs come up later, principles arbitrate. Without them, the loudest voice wins.' },
+      { type: 'checklist', title: 'Target the wastes you found', body: 'For each major issue in As-Is, decide the design response:', items: ['Handoffs — combine steps or create clearer SLAs', 'Approvals — challenge whether each one adds value', 'Rework loops — fix root causes upstream', 'Wait time — parallel where possible, batch less', 'Manual data entry — automate or eliminate', 'Workarounds — formalise the good ones, eliminate the rest'] },
+      { type: 'instruction', title: 'Design from the customer outward', body: 'Start with what the customer experiences and works backwards. This prevents internal-convenience designs that are efficient for staff but miserable for customers. The customer journey is the spine the rest of the design hangs from.' },
+      { type: 'reference', title: 'Levels of "future"', body: 'Distinguish three horizons: realistic (what we can achieve in 6 months with current tools), aspirational (what we could do in 18 months with investment), and visionary (what would be possible if constraints were removed). Show all three — it grounds the conversation and avoids "this is all we get".' },
+      { type: 'checklist', title: 'Design for exceptions, not just the happy path', body: 'Most failures are exception failures. For each major step:', items: ['What\'s the standard path?', 'What goes wrong most often?', 'Who handles each exception type?', 'How does the system flag exceptions for attention?', 'How does data on exceptions feed back into improvement?'] },
+      { type: 'instruction', title: 'Test the design with operators', body: 'Walk the new process with the people who\'ll do the work. Use a real example. Watch where they hesitate or push back — that\'s where the design has gaps. Iterate before locking it. A design that staff helped shape is one they\'ll defend.' },
+      { type: 'instruction', title: 'Document at the right level', body: 'Process maps for the overview, swimlanes for handoffs, work instructions for the operator, RACI for accountability. Match the documentation to who needs it. Over-documenting in one place and under-documenting in another is a common failure mode.' }
+    ]
+  },
+  {
+    id: 'workshop-facilitation',
+    title: 'Facilitating a Workshop',
+    category: 'ba',
+    description: 'Run productive workshops where the right decisions get made by the right people.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'Workshop vs. meeting', body: 'A meeting shares information. A workshop produces an output — a decision, a design, a prioritised list. If you can\'t name the output you\'re creating, don\'t run a workshop. Run a meeting, or send an email.' },
+      { type: 'instruction', title: 'Define the output before anything else', body: 'Write down what will exist at the end that doesn\'t exist now. "Aligned on stakeholder map and engagement plan for Phase 1" beats "discuss stakeholders". The output drives the agenda, the attendees, and the materials.' },
+      { type: 'checklist', title: 'Get the right people in the room', body: 'Workshop attendees should be:', items: ['Decision-makers for the topic at hand', 'People with the relevant knowledge or experience', 'People affected by the outcome (or their representatives)', 'A facilitator who isn\'t also a participant', 'Maximum 8–10 for working sessions; smaller for decisions', 'Avoid: spectators, people there "just in case", and substitutes who can\'t commit'] },
+      { type: 'instruction', title: 'Pre-work is the workshop', body: 'Don\'t use workshop time to share information that could have been read in advance. Send pre-reads, ask for pre-thinking, and start the workshop assuming people did it. If they didn\'t, that\'s a signal — call it out gently and continue.' },
+      { type: 'reference', title: 'The diverge-converge pattern', body: 'Most good workshops follow: frame the problem, diverge (generate options/inputs broadly, no judgement), converge (narrow down, evaluate, decide). Skip the diverge and you get groupthink. Skip the converge and you get a list of unprioritised ideas.' },
+      { type: 'checklist', title: 'Manage energy and dynamics', body: 'A two-hour workshop is a managed performance:', items: ['Vary activity types every 20–30 minutes', 'Mix individual, pair, and group work', 'Make the introvert input visible (sticky notes before discussion)', 'Watch for the loud voice dominating — invite quieter people directly', 'Park off-topic items visibly so they\'re not lost', 'Take breaks; people make worse decisions when tired'] },
+      { type: 'instruction', title: 'Close with explicit decisions and owners', body: 'Don\'t end on a high. End on commitments. Walk through every decision and action, name an owner, set a date, and confirm out loud. Send the summary within 24 hours — the gap is where misunderstanding lives.' }
+    ]
+  },
+  {
+    id: 'fishbone',
+    title: 'Fishbone (Ishikawa) Analysis',
+    category: 'pi',
+    description: 'Structured root cause analysis when 5 Whys is too linear for the problem.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'When to use a fishbone', body: 'Use a fishbone when a problem likely has multiple contributing causes that interact. 5 Whys assumes a single causal chain; fishbones map a web. Manufacturing defects, service failures, project misses — all benefit from the wider lens.' },
+      { type: 'instruction', title: 'Define the problem at the head', body: 'Write the problem statement at the "head" of the fish — the right-hand side. Be specific: "first-call resolution dropped 12% in Q3" beats "customer service issues". Vague problem, vague analysis.' },
+      { type: 'checklist', title: 'Pick your category bones', body: 'The classic 6Ms work for most cases:', items: ['Manpower (People) — skills, training, motivation, capacity', 'Methods — procedures, processes, policies, decisions', 'Machines — tools, equipment, technology, systems', 'Materials — inputs, data, supplies, information', 'Measurement — metrics, monitoring, calibration, definitions', 'Environment — culture, physical setting, external factors'] },
+      { type: 'instruction', title: 'Adapt categories to the problem', body: 'For service problems, swap to: People, Process, Policy, Place, Product, Procedure (the 6Ps). For software issues: People, Process, Code, Data, Infrastructure, External. The categories are scaffolding — change them if they don\'t fit.' },
+      { type: 'instruction', title: 'Brainstorm causes per branch', body: 'Take each main bone and ask "what could be contributing to this problem from this angle?". Capture every plausible cause as a sub-bone. Don\'t evaluate yet — generation and evaluation are separate phases. Going broad is the point.' },
+      { type: 'reference', title: 'Push deeper with mini-Whys', body: 'On each cause, ask "why does that happen?" once or twice. This adds smaller bones off the sub-bones and gets you closer to root causes rather than symptoms. The completed diagram should look genuinely fishlike, not skeletal.' },
+      { type: 'checklist', title: 'Identify likely root causes', body: 'Once the diagram is full, evaluate:', items: ['Which causes appear in multiple branches?', 'Which have the strongest evidence behind them?', 'Which would have the biggest effect if removed?', 'Which can you actually do something about?', 'Pick 2–4 to investigate further with data.'] },
+      { type: 'instruction', title: 'Validate before fixing', body: 'A plausible cause is not a confirmed cause. Test the top candidates against data — incident logs, usage patterns, error rates, interviews. Then design fixes for the validated root causes. Skipping validation leads to expensive fixes for things that weren\'t the problem.' }
+    ]
+  },
+  {
+    id: 'sipoc',
+    title: 'Building a SIPOC Diagram',
+    category: 'pi',
+    description: 'Map a process at a glance to align stakeholders before diving into detail.',
+    estMinutes: 20,
+    steps: [
+      { type: 'reference', title: 'What SIPOC is for', body: 'SIPOC stands for Suppliers, Inputs, Process, Outputs, Customers. It\'s a high-level view that fits on one page and answers "what is this process doing, end to end?" — useful for kicking off improvement work, onboarding new people, or aligning leadership before detail.' },
+      { type: 'instruction', title: 'Start in the middle: the Process', body: 'Define the process in 4–7 high-level steps. Not 20 steps. Not 3 vague ones. Each step is a verb-noun phrase: "receive request", "validate eligibility", "issue refund", "notify customer". This level of granularity is what makes SIPOC powerful.' },
+      { type: 'checklist', title: 'Define Outputs and Customers', body: 'Work right from the process to the right side:', items: ['What does the process produce? (decisions, documents, products, services)', 'Who receives each output? (customers can be internal or external)', 'What does each customer need from the output? (timeliness, accuracy, format)'] },
+      { type: 'instruction', title: 'Define Inputs and Suppliers', body: 'Work left from the process: what does the process need to operate? Forms, data, signatures, materials. Who supplies each one? Be specific — "the customer", "the legal team", "the upstream system" — not "various". You\'ll often discover unmet input needs in this step.' },
+      { type: 'reference', title: 'Why SIPOC reveals so much', body: 'Three common findings: outputs no one actually uses (waste), customers whose needs aren\'t met (defects), inputs the process depends on but doesn\'t consistently get (disruption). Each is a candidate for improvement.' },
+      { type: 'checklist', title: 'Validate with stakeholders', body: 'Walk the SIPOC through:', items: ['The process owner — does this match how it works?', 'Suppliers — do you supply what we say you supply?', 'Customers — is what you receive what you need?', 'Operators — are these the actual steps in the order they happen?', 'Updates after each round — usually 2–3 iterations'] },
+      { type: 'instruction', title: 'Use it as a launchpad', body: 'SIPOC is a starting artefact, not an ending one. From it you scope the deep-dive: which step needs process mapping, where are the worst customer satisfaction gaps, which inputs need supplier conversations. The detailed work follows from the SIPOC, not before it.' }
+    ]
+  },
+  {
+    id: 'pdca',
+    title: 'Running a PDCA Cycle',
+    category: 'pi',
+    description: 'Use Plan-Do-Check-Act to drive structured, evidence-based improvement.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'Why PDCA still matters', body: 'PDCA (Plan, Do, Check, Act) is the simplest sustainable improvement loop ever designed. Most "improvement" fails because teams skip Check (did it actually work?) or Act (what do we do with what we learned?). The full loop is what creates compounding gains.' },
+      { type: 'instruction', title: 'Plan — define the change as a hypothesis', body: 'Write the change as: "If we [do X], we expect [Y to change] because [reasoning]. We\'ll measure success by [metric]." This forces clarity on intent, mechanism, and evidence. Vague plans produce vague results.' },
+      { type: 'checklist', title: 'Plan well before doing', body: 'A solid plan covers:', items: ['The specific change (one variable at a time, ideally)', 'Who, when, where the change happens', 'Baseline measurement before the change', 'Target measurement and how it will be captured', 'Duration of the test', 'What you\'d need to see to call it a success vs. failure'] },
+      { type: 'instruction', title: 'Do — run the change as designed', body: 'Implement the change exactly as planned, not a modified version. If you change two things at once, you won\'t know which one worked. Capture what actually happens during the run, including unexpected events that might affect interpretation.' },
+      { type: 'instruction', title: 'Check — compare results to expectations', body: 'Now compare actual to expected. Did the metric move? In the right direction? By the predicted amount? Did anything else change unexpectedly? Be honest — the temptation to declare victory prematurely is enormous and corrupts the learning.' },
+      { type: 'reference', title: 'Three possible outcomes', body: 'Worked as expected → standardise the change. Worked partially → keep it but iterate further. Didn\'t work → don\'t just abandon the area; revisit your hypothesis. "We were wrong about why" is a valuable result and prevents the next bad guess.' },
+      { type: 'checklist', title: 'Act — institutionalise or iterate', body: 'Based on results:', items: ['If successful — update standard work, train people, lock it in, measure to ensure it holds', 'If partially successful — refine and run another PDCA', 'If unsuccessful — document what was tried and why it didn\'t work, so others don\'t repeat it', 'In all cases — share the learning beyond the immediate team'] },
+      { type: 'instruction', title: 'Cycle, don\'t stop', body: 'PDCA isn\'t a one-shot. After Act, identify the next biggest opportunity and Plan again. Sustained improvement comes from many small loops, not one big project. Teams that do PDCA monthly outperform teams that do it as a special initiative.' }
+    ]
+  },
+  {
+    id: 'pareto',
+    title: 'Pareto Analysis (80/20)',
+    category: 'pi',
+    description: 'Find the vital few causes responsible for most of the impact — and ignore the rest for now.',
+    estMinutes: 25,
+    steps: [
+      { type: 'reference', title: 'The Pareto principle', body: 'Roughly 80% of effects come from 20% of causes. The actual ratio varies — it might be 70/30 or 90/10 — but the pattern holds. The point: not all causes are equal. Pareto analysis tells you which few to focus on.' },
+      { type: 'instruction', title: 'Define what you\'re analysing', body: 'Pick one specific issue: customer complaints, defects, downtime causes, support tickets, reasons for missed deadlines. Mixing types muddies the analysis. Keep it tightly scoped to one defect, one process, or one timeframe.' },
+      { type: 'checklist', title: 'Categorise the data', body: 'For your dataset:', items: ['Choose categories that are mutually exclusive', 'Categories should be at the same level of detail', 'Avoid an "Other" category bigger than 10–15% — split it further', 'Keep total categories to 6–10 for readability', 'Use existing classifications if they exist; create new ones only if needed'] },
+      { type: 'instruction', title: 'Count occurrences per category', body: 'For each category, count: how many incidents, complaints, defects, etc., fall into it? Use frequency for simple analysis. For higher-impact analysis, use cost or time per incident as the unit — sometimes a low-frequency category causes most of the cost.' },
+      { type: 'reference', title: 'Build the chart', body: 'Sort categories from highest to lowest count. Plot bars in that order. Add a cumulative percentage line on top. Where the line crosses ~80% is your "vital few" cutoff. The categories to the left of that line are where to focus.' },
+      { type: 'checklist', title: 'Avoid common mistakes', body: 'Be careful of:', items: ['Counting frequency when impact varies wildly per incident', 'Categories that are themselves causes-of-causes (go deeper)', 'Time periods too short to show real patterns', 'Treating outliers as the norm, or vice versa', 'Skipping validation that "vital few" really are vital'] },
+      { type: 'instruction', title: 'Act on the vital few', body: 'For each of the top categories, run root cause analysis (5 Whys or fishbone) and design countermeasures. Don\'t spread effort across all categories — that\'s precisely what Pareto tells you not to do. The "useful many" can wait.' },
+      { type: 'instruction', title: 'Re-run after fixing', body: 'Once you\'ve addressed the top 1–2 categories, run Pareto again on fresh data. The chart will look different — what was second is now first. This rotating focus is how compounding improvement works in practice.' }
+    ]
+  },
+  {
+    id: 'standard-work',
+    title: 'Documenting Standard Work',
+    category: 'pi',
+    description: 'Capture the current best way to do a task so improvements have something to build on.',
+    estMinutes: 25,
+    steps: [
+      { type: 'reference', title: 'Why standard work matters', body: 'Without a documented standard, every operator works slightly differently. Variation hides waste, makes training inconsistent, and means improvements have nothing to compare against. Standard work isn\'t about removing autonomy — it\'s about creating a baseline you can improve from.' },
+      { type: 'instruction', title: 'Standard work isn\'t a manual', body: 'Forget 40-page procedure documents. Standard work is concise: typically one page per task, focused on the steps that matter, the right sequence, and the elements that affect quality, safety, or timing. If it\'s too long to be useful at the workstation, it\'s too long.' },
+      { type: 'checklist', title: 'Capture the three core elements', body: 'Every standard work document includes:', items: ['Takt time — the rate at which the task should be completed', 'Work sequence — the order of steps to follow', 'Standard work-in-progress — the materials/inputs needed at each step', 'Plus key quality checks at each step', 'Plus safety considerations where relevant'] },
+      { type: 'instruction', title: 'Write it with the operator, not for them', body: 'The best person to document standard work is someone who does it well — not a manager describing what they think happens. Watch them work, take notes, then draft together. The operator catches what an outside observer misses.' },
+      { type: 'reference', title: 'Format for the workstation', body: 'Use simple visual layouts: numbered steps, a column for "what to look for", a column for "what to do if X happens". Photos beat text where possible. Diagrams beat photos where layout matters. The goal is glanceable, not comprehensive.' },
+      { type: 'checklist', title: 'Validate the standard works', body: 'Before locking it in:', items: ['Have a different operator follow it cold — can they complete the task?', 'Watch for steps they skip or improvise — those need clarification', 'Time it — does the takt time hold up in practice?', 'Check quality outcomes — are they consistent when the standard is followed?', 'Iterate based on what you observe; expect 2–3 revisions'] },
+      { type: 'instruction', title: 'Use it as the basis for improvement', body: 'Standard work isn\'t a final answer — it\'s today\'s best known way. When someone finds a better way, the standard gets updated. Without a standard, "better" is meaningless. With one, every improvement is captured and shared. This is the engine of continuous improvement.' },
+      { type: 'instruction', title: 'Keep it alive', body: 'A standard nobody updates is a standard nobody follows. Build in a quarterly review. Audit adherence by observation, not self-report. When deviations are found, ask whether the standard is wrong or the practice is — sometimes the operator has improved on it without telling anyone.' }
+    ]
   }
 ];
 
