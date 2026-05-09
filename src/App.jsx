@@ -800,9 +800,9 @@ const StepIcon = ({ type }) => {
 };
 
 // ==================== TEMPLATE VIEWER MODAL ====================
-function TemplateViewer({ template, onClose, onDownload }) {
+function TemplateViewer({ template, onClose, onDownload, categoryMap = TEMPLATE_CATEGORIES }) {
   const [copied, setCopied] = useState(false);
-  const cat = TEMPLATE_CATEGORIES[template.category];
+  const cat = categoryMap[template.category];
 
   const handleCopy = () => {
     const content = `${template.title}\n\n${template.description}\n\n` +
@@ -1104,18 +1104,21 @@ export default function App() {
 
   // App state
   const [view, setView] = useState('library');
-  const [section, setSection] = useState('playbooks'); // 'playbooks' or 'templates'
+  const [section, setSection] = useState('playbooks'); // 'playbooks' | 'templates' | 'cheatsheets'
   const [activePlaybook, setActivePlaybook] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
   const [activeTemplate, setActiveTemplate] = useState(null);
+  const [activeCheatSheet, setActiveCheatSheet] = useState(null);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [templateFilter, setTemplateFilter] = useState('all');
+  const [cheatSheetFilter, setCheatSheetFilter] = useState('all');
   const [showCelebration, setShowCelebration] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [pendingPlaybook, setPendingPlaybook] = useState(null);
   const [pendingTemplate, setPendingTemplate] = useState(null);
+  const [pendingCheatSheet, setPendingCheatSheet] = useState(null);
 
   const dailyQuote = getDailyQuote();
 
@@ -1150,6 +1153,10 @@ export default function App() {
       setActiveTemplate(pendingTemplate);
       setPendingTemplate(null);
     }
+    if (pendingCheatSheet) {
+      setActiveCheatSheet(pendingCheatSheet);
+      setPendingCheatSheet(null);
+    }
   };
 
   const handleLogin = (email) => {
@@ -1163,6 +1170,10 @@ export default function App() {
     if (pendingTemplate) {
       setActiveTemplate(pendingTemplate);
       setPendingTemplate(null);
+    }
+    if (pendingCheatSheet) {
+      setActiveCheatSheet(pendingCheatSheet);
+      setPendingCheatSheet(null);
     }
   };
 
@@ -1214,9 +1225,24 @@ export default function App() {
     setActiveTemplate(template);
   };
 
+  const openCheatSheet = (sheet) => {
+    if (!currentUser) {
+      setPendingCheatSheet(sheet);
+      setShowAuthGate(true);
+      return;
+    }
+    setActiveCheatSheet(sheet);
+  };
+
   const filteredTemplates = TEMPLATES.filter(t => {
     const matchesSearch = !search || t.title.toLowerCase().includes(search.toLowerCase()) || t.description.toLowerCase().includes(search.toLowerCase());
     const matchesFilter = templateFilter === 'all' || t.category === templateFilter;
+    return matchesSearch && matchesFilter;
+  });
+
+  const filteredCheatSheets = CHEAT_SHEETS.filter(s => {
+    const matchesSearch = !search || s.title.toLowerCase().includes(search.toLowerCase()) || s.description.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter = cheatSheetFilter === 'all' || s.category === cheatSheetFilter;
     return matchesSearch && matchesFilter;
   });
 
@@ -1408,11 +1434,12 @@ export default function App() {
           users={users}
           onLogin={handleLogin}
           onSignUp={handleSignUp}
-          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); setPendingTemplate(null); }}
+          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); setPendingTemplate(null); setPendingCheatSheet(null); }}
           isModal={true}
           contextMessage={
             pendingPlaybook ? `Sign in to start "${pendingPlaybook.title}" and save your progress.` :
             pendingTemplate ? `Sign in to access "${pendingTemplate.title}".` :
+            pendingCheatSheet ? `Sign in to access "${pendingCheatSheet.title}".` :
             undefined
           }
         />
@@ -1423,6 +1450,15 @@ export default function App() {
           template={activeTemplate}
           onClose={() => setActiveTemplate(null)}
           onDownload={downloadTemplate}
+        />
+      )}
+
+      {activeCheatSheet && (
+        <TemplateViewer
+          template={activeCheatSheet}
+          categoryMap={CHEAT_SHEET_CATEGORIES}
+          onClose={() => setActiveCheatSheet(null)}
+          onDownload={downloadCheatSheet}
         />
       )}
 
@@ -1505,7 +1541,7 @@ export default function App() {
         <DailyQuoteWidget quote={dailyQuote} />
 
         {/* Section tabs */}
-        <div className="flex gap-2 mb-8 p-1 bg-slate-100 rounded-2xl w-fit">
+        <div className="flex flex-wrap gap-2 mb-8 p-1 bg-slate-100 rounded-2xl w-fit">
           <button
             onClick={() => { setSection('playbooks'); setSearch(''); }}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${
@@ -1525,6 +1561,16 @@ export default function App() {
             <Briefcase className="w-4 h-4" />
             Freelance Toolkit
             <span className={`text-xs px-2 py-0.5 rounded-full ${section === 'templates' ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-600'}`}>{TEMPLATES.length}</span>
+          </button>
+          <button
+            onClick={() => { setSection('cheatsheets'); setSearch(''); }}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${
+              section === 'cheatsheets' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <BookOpen className="w-4 h-4" />
+            Cheat Sheets
+            <span className={`text-xs px-2 py-0.5 rounded-full ${section === 'cheatsheets' ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-600'}`}>{CHEAT_SHEETS.length}</span>
           </button>
         </div>
 
@@ -1741,6 +1787,105 @@ export default function App() {
                 <Search className="w-8 h-8 text-slate-400" />
               </div>
               <p className="text-slate-700 font-semibold mb-1">No templates match your search</p>
+              <p className="text-slate-500 text-sm">Try a different keyword or category</p>
+            </div>
+          )}
+        </>)}
+
+        {section === 'cheatsheets' && (<>
+          <div className="mb-6 bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-900 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-500 opacity-25 blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-44 h-44 rounded-full bg-gradient-to-br from-violet-500 to-pink-500 opacity-20 blur-3xl pointer-events-none" />
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-bold uppercase tracking-wider mb-3">
+                <BookOpen className="w-3 h-3 text-amber-300" />
+                Cheat Sheets
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 leading-tight">The technical reference, BA-style.</h2>
+              <p className="text-slate-300 leading-relaxed">Quick reference guides for Excel, SQL, statistics, and data storytelling — written for practitioners who need answers fast, not theory at length.</p>
+            </div>
+          </div>
+
+          <div className="mb-8 space-y-4">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search cheat sheets..."
+                className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400 font-medium"
+              />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button onClick={() => setCheatSheetFilter('all')} className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${cheatSheetFilter === 'all' ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'}`}>
+                All ({CHEAT_SHEETS.length})
+              </button>
+              {Object.entries(CHEAT_SHEET_CATEGORIES).map(([key, cat]) => {
+                const count = CHEAT_SHEETS.filter(s => s.category === key).length;
+                const Icon = cat.icon;
+                return (
+                  <button key={key} onClick={() => setCheatSheetFilter(key)} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${cheatSheetFilter === key ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg` : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'}`}>
+                    <Icon className="w-4 h-4" />
+                    {cat.label} ({count})
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {filteredCheatSheets.map(sheet => {
+              const cat = CHEAT_SHEET_CATEGORIES[sheet.category];
+              const Icon = cat.icon;
+              return (
+                <div key={sheet.id} className="relative bg-white rounded-2xl border-2 border-slate-200 hover:border-slate-300 overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 group">
+                  <div className={`h-1.5 bg-gradient-to-r ${cat.gradient}`} />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r ${cat.gradient} text-white shadow-sm`}>
+                        <Icon className="w-3 h-3" />
+                        {cat.short}
+                      </div>
+                      <div className="flex items-center gap-1 text-xs font-medium text-slate-500">
+                        <FileText className="w-3 h-3" />
+                        {sheet.sections.length} sections
+                      </div>
+                    </div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-2 leading-tight">{sheet.title}</h2>
+                    <p className="text-slate-600 mb-4 leading-relaxed text-sm">{sheet.description}</p>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => openCheatSheet(sheet)} className={`flex-1 bg-gradient-to-r ${cat.gradient} text-white py-3 rounded-xl font-bold hover:opacity-90 transition shadow-md hover:shadow-lg flex items-center justify-center gap-2`}>
+                        <Eye className="w-4 h-4" />
+                        Open
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (!currentUser) {
+                            setPendingCheatSheet(sheet);
+                            setShowAuthGate(true);
+                            return;
+                          }
+                          downloadCheatSheet(sheet);
+                        }}
+                        className="p-3 rounded-xl border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition"
+                        title="Download"
+                      >
+                        <Download className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {filteredCheatSheets.length === 0 && (
+            <div className="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 flex items-center justify-center">
+                <Search className="w-8 h-8 text-slate-400" />
+              </div>
+              <p className="text-slate-700 font-semibold mb-1">No cheat sheets match your search</p>
               <p className="text-slate-500 text-sm">Try a different keyword or category</p>
             </div>
           )}
