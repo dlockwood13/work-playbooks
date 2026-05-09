@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, ArrowLeft, ArrowRight, CheckCircle2, Circle, Clock, Sparkles, RotateCcw, Zap, TrendingUp, Target, Compass, Flame, Trophy, LogOut, User, Mail, Lock, Eye, EyeOff, AlertCircle, Quote, LogIn } from 'lucide-react';
+import { Search, ArrowLeft, ArrowRight, CheckCircle2, Circle, Clock, Sparkles, RotateCcw, Zap, TrendingUp, Target, Compass, Flame, Trophy, LogOut, User, Mail, Lock, Eye, EyeOff, AlertCircle, Quote, LogIn, FileText, Download, Briefcase, X, Copy, Check, BookOpen, Database, BarChart3, Calculator } from 'lucide-react';
 
 const QUOTES = [
   { text: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts" },
@@ -50,6 +50,302 @@ function getDailyQuote() {
   const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
   const index = (dayOfYear + today.getFullYear()) % QUOTES.length;
   return QUOTES[index];
+}
+
+// ==================== FREELANCE TEMPLATES ====================
+const TEMPLATES = [
+  {
+    id: 'client-proposal',
+    title: 'Client Proposal Template',
+    category: 'proposals',
+    description: 'A clean structure for proposing a project to a new client — overview, objectives, approach, timeline, pricing.',
+    sections: [
+      { heading: 'Project Overview', body: "Brief summary of the client's challenge and your proposed solution." },
+      { heading: 'Objectives', body: 'Key goals and outcomes the client should expect.' },
+      { heading: 'Approach', body: 'Outline your phases of work, methodology, and tools.' },
+      { heading: 'Timeline', body: 'Estimated start and end dates, along with milestones.' },
+      { heading: 'Pricing', body: 'Project-based pricing, optional extras, and payment terms.' },
+      { heading: 'Next Steps', body: 'Instructions for the client to proceed or book a call.' }
+    ]
+  },
+  {
+    id: 'discovery-phase',
+    title: 'Project Discovery Phase Template',
+    category: 'discovery',
+    description: 'Comprehensive discovery doc covering objectives, stakeholders, requirements, risks, timeline, and budget.',
+    sections: [
+      { heading: '1. Project Overview', body: 'Project Name: [Insert Project Name]\nPrepared By: [Your Name/Team]\nDate: [Insert Date]\nVersion: [Version Number]' },
+      { heading: '2. Objectives', body: 'Business Goals: [Clearly define what the business aims to achieve with this project.]\nProduct Vision: [Describe the overarching vision for the product or solution.]' },
+      { heading: '3. Stakeholder Identification', body: 'Primary Stakeholders:\n• Name: [Stakeholder Name]\n• Role: [Stakeholder Role]\n• Contact Information: [Email/Phone]\n• Responsibilities: [Brief description of their involvement]\n\nSecondary Stakeholders: [Repeat as necessary]' },
+      { heading: '4. Target Audience', body: 'User Personas:\n• Persona Name: [e.g., "Tech-Savvy Young Professional"]\n• Demographics: [Age, Gender, Location, etc.]\n• Needs and Pain Points: [What challenges does this persona face?]\n• Behavioural Traits: [How does this persona typically interact with similar products/services?]' },
+      { heading: '5. Functional Requirements', body: 'Core Features:\n• [Feature Name]: [Description and purpose]\n\nUser Stories:\n• As a [user role], I want to [action], so that [benefit].' },
+      { heading: '6. Non-Functional Requirements', body: 'Performance: [e.g., System should handle 1,000 concurrent users without performance degradation.]\nSecurity: [e.g., Data encryption standards, compliance requirements.]\nUsability: [e.g., The application should be accessible to users with disabilities.]\nScalability: [e.g., Ability to add more servers to handle increased load.]' },
+      { heading: '7. Technical Constraints', body: 'Platforms: [e.g., iOS, Android, Web]\nTechnologies: [e.g., Specific programming languages, frameworks, or third-party services]\nIntegration Needs: [e.g., APIs, databases, external systems]' },
+      { heading: '8. Risk Assessment', body: 'Potential Risks:\n• Risk: [Description]\n• Impact: [High/Medium/Low]\n• Mitigation Strategy: [Steps to minimise or manage the risk]' },
+      { heading: '9. Project Timeline', body: 'Phases and Milestones:\n• Phase: [e.g., Discovery, Design, Development, Testing, Deployment]\n• Start Date: [DD/MM/YYYY]\n• End Date: [DD/MM/YYYY]\n• Deliverables: [List of expected outputs for the phase]' },
+      { heading: '10. Budget Estimate', body: 'Resource Allocation:\n• Resource: [e.g., Developer, Designer, Project Manager]\n• Hours: [Estimated number of hours]\n• Cost: [Hourly rate or fixed cost]\n\nTotal Estimated Budget: [Sum of all costs]' },
+      { heading: '11. Assumptions and Dependencies', body: 'Assumptions: [e.g., "Users will have internet access."]\nDependencies: [e.g., "Completion of the backend API by the integration team."]' },
+      { heading: '12. Approval', body: 'Signatures:\nProject Sponsor: _________________________ Date: ___________\nProduct Owner: _________________________ Date: ___________\nProject Manager: _________________________ Date: ___________' }
+    ]
+  },
+  {
+    id: 'discovery-interview-toolkit',
+    title: 'Enterprise Discovery Interview Toolkit',
+    category: 'discovery',
+    description: 'A full toolkit for running enterprise-wide discovery interviews — universal questions, function-specific overlays, stakeholder tailoring, mapping templates.',
+    sections: [
+      { heading: 'Overview', body: 'This toolkit is designed for consultants conducting enterprise-wide discovery interviews across all business functions and stakeholder levels. It includes a universal question set, function-specific overlays, stakeholder tailoring, editable note sections, stakeholder mapping template, and pre/post interview checklists.' },
+      { heading: '1. Universal Core Questions — Role & Context', body: '• Describe your role and responsibilities.\n• What are your current priorities?\n• Who do you collaborate with most?' },
+      { heading: '1.1 Operating Model & Ways of Working', body: '• How does your team fit into the broader operating model?\n• What processes are most critical to your function?\n• Where do you experience bottlenecks or duplication of effort?' },
+      { heading: '1.2 Technology & Data', body: '• What core systems/tools do you rely on?\n• Where does data help or hinder decision-making?\n• Are there any workarounds or manual processes you rely on?' },
+      { heading: '1.3 KPIs & Success Measures', body: '• How is performance measured in your area?\n• Do the current metrics reflect what success really looks like?\n• What\'s working well — and what isn\'t?' },
+      { heading: '1.4 Pain Points & Opportunities', body: '• What frustrates you or slows you down?\n• What has the team raised repeatedly but hasn\'t been addressed?\n• Where do you see quick wins or major change potential?' },
+      { heading: '1.5 Transformation Readiness', body: '• Has your area experienced recent change? How was it handled?\n• How open is your team to doing things differently?\n• What support would you need to make meaningful improvements?' },
+      { heading: '2. Function-Specific Overlays — Finance', body: '• How are budgets set and tracked across departments?\n• Where do you see inefficiencies in cost management or forecasting?\n• Are there challenges in getting timely, accurate financial data?\n• What\'s the process for tracking profitability by product/customer/channel?' },
+      { heading: '2.1 Operations / Supply Chain', body: '• What are the critical processes driving daily operations?\n• Where are delays, waste, or quality issues occurring?\n• How well are suppliers/vendors integrated into your processes?\n• What\'s the level of automation vs. manual effort?' },
+      { heading: '2.2 Sales & Commercial', body: '• How are leads generated, qualified, and closed?\n• What\'s the process for pricing, discounts, and approvals?\n• How is sales performance measured and improved?\n• Are there disconnects between sales, marketing, and delivery?' },
+      { heading: '2.3 Marketing', body: '• What channels and campaigns are driving results?\n• How is ROI measured on marketing spend?\n• Where are there disconnects between marketing and sales?\n• Are you able to personalise or segment based on real-time data?' },
+      { heading: '2.4 HR / People / Talent', body: '• How are roles, responsibilities, and org structures defined?\n• What\'s the current state of recruitment, onboarding, and retention?\n• Are performance management and development processes effective?\n• How do employees raise issues or feedback?' },
+      { heading: '2.5 Technology / IT', body: '• What are your core platforms and who owns them?\n• Where do tech limitations hold the business back?\n• How is tech support delivered and prioritised?\n• How is innovation or automation being approached?' },
+      { heading: '2.6 Procurement / Legal / Compliance', body: '• What is the procurement process from need to contract?\n• Where are delays, risks, or compliance issues common?\n• How are contracts stored, managed, and monitored?\n• Are compliance requirements adding unnecessary complexity?' },
+      { heading: '3. Stakeholder-Level Tailoring — Executives / Senior Leaders', body: '• What are your strategic priorities?\n• Where does the org underperform vs potential?\n• What worries you most about the future?\n• Where do you see the biggest need (or resistance) to change?\n• If you had a blank cheque, what would you fix?' },
+      { heading: '3.1 Middle Management', body: '• What are the top 3 processes your team runs regularly?\n• How are these processes measured and improved?\n• Where do you spend the most time firefighting?\n• What do you need more of — resources, systems, clarity, etc.?\n• How do you pass feedback up or down the chain?' },
+      { heading: '3.2 SMEs / Frontline / Operational Staff', body: '• Walk me through a typical day or workflow — what\'s smooth, what\'s not?\n• What tools or systems do you use, and where do they fall short?\n• What steps do you take outside the "official" process to get things done?\n• What\'s the most frustrating or repetitive part of your job?\n• If you could automate or change one task, what would it be?' },
+      { heading: '4. Stakeholder Mapping Template', body: 'Track stakeholders across functions and engagement.\n\nColumns: Name | Role | Function | Influence (High/Med/Low) | Interview Status | Notes' },
+      { heading: '5. Pre-Interview Checklist', body: '• Review available org charts, decks, or process maps (if any).\n• Understand the function\'s role in the value chain.\n• Customise questions based on role and business area.\n• Set clear meeting objectives in calendar invites.\n• Be prepared to explain purpose and confidentiality of session.' },
+      { heading: '6. Post-Interview Checklist', body: '• Summarise insights: pain points, blockers, quick wins.\n• Note recurring quotes, phrases, or themes.\n• Capture stakeholder sentiment and change readiness.\n• Update stakeholder map with new intelligence.\n• Log areas needing further validation or deep-dive.' }
+    ]
+  },
+  {
+    id: 'client-onboarding',
+    title: 'Client Onboarding Form',
+    category: 'discovery',
+    description: 'A simple onboarding form to capture company details, objectives, stakeholders, and access needs.',
+    sections: [
+      { heading: 'Company Information', body: 'Name, address, registration number, key contacts.' },
+      { heading: 'Project Background', body: 'Brief description of current challenges.' },
+      { heading: 'Key Objectives', body: 'Top goals and desired outcomes.' },
+      { heading: 'Stakeholders', body: 'Names and roles of decision-makers.' },
+      { heading: 'Access Needs', body: 'Systems, documents, or teams you\'ll need access to.' },
+      { heading: 'Preferred Communication', body: 'Email, video, phone, frequency.' }
+    ]
+  },
+  {
+    id: 'consultancy-agreement',
+    title: 'Freelance Consultancy Agreement',
+    category: 'contracts',
+    description: 'A full freelance consultancy agreement covering scope, payment, IP, confidentiality, and termination.',
+    sections: [
+      { heading: 'Preamble', body: 'This Freelance Consultancy Agreement (the "Agreement") is made and entered into on this [DATE], by and between the Client (hereinafter referred to as "Client") and the Consultant (hereinafter referred to as "Consultant").' },
+      { heading: '1. Scope of Work', body: 'Consultant shall provide Business Transformation consultancy services to Client. The nature, scope, and deliverables of the services shall be mutually agreed in writing prior to the start of each project phase or engagement.' },
+      { heading: '2. Payment Terms', body: 'Client agrees to pay Consultant on a project basis, with invoices issued monthly. Payment shall be made within 14 days of receipt of invoice. Late payments may be subject to a 5% late fee.' },
+      { heading: '3. Work Location', body: 'Consultant may perform services remotely and/or on-site at the Client\'s location, as required. Travel and related expenses for on-site work shall be pre-approved by Client and reimbursed in full.' },
+      { heading: '4. Intellectual Property', body: 'Consultant retains ownership of all intellectual property, frameworks, templates, and materials created during services. Client is granted a non-exclusive, non-transferable licence to use the deliverables solely for internal business purposes.' },
+      { heading: '5. Confidentiality', body: 'Both parties agree to maintain the confidentiality of any proprietary or sensitive information disclosed during the engagement.' },
+      { heading: '6. Termination', body: 'Either party may terminate this Agreement with 14 days\' written notice. Client shall pay Consultant for all work completed up to the termination date.' },
+      { heading: '7. Governing Law', body: 'This Agreement shall be governed by and construed in accordance with the laws of England and Wales.' },
+      { heading: 'Signatures', body: 'IN WITNESS WHEREOF, the parties hereto have executed this Agreement as of the date first written above.\n\n__________________________          __________________________\nClient Name                                            Consultant Name' }
+    ]
+  },
+  {
+    id: 'statement-of-work',
+    title: 'Statement of Work Template',
+    category: 'contracts',
+    description: 'A clear SoW covering scope, timeline, responsibilities, payment, and acceptance criteria.',
+    sections: [
+      { heading: 'Scope of Services', body: 'Detailed description of the services and deliverables.' },
+      { heading: 'Project Timeline', body: 'Start date, end date, and major milestones.' },
+      { heading: 'Roles and Responsibilities', body: 'What you handle vs what the client handles.' },
+      { heading: 'Payment Terms', body: 'Project fee, invoice schedule, and payment method.' },
+      { heading: 'Acceptance Criteria', body: 'How and when the client will approve the work.' },
+      { heading: 'Signatures', body: 'Space for sign-off from both sides.' }
+    ]
+  },
+  {
+    id: 'nda',
+    title: 'NDA Template',
+    category: 'contracts',
+    description: 'A standard non-disclosure agreement covering confidentiality scope, obligations, exclusions, and duration.',
+    sections: [
+      { heading: 'Definition of Confidential Information', body: 'Covers what counts as confidential between you and the client.' },
+      { heading: 'Obligations of Receiving Party', body: 'The client agrees not to disclose or misuse your confidential info.' },
+      { heading: 'Exclusions', body: 'Information that is public or already known is not covered.' },
+      { heading: 'Duration', body: 'Usually 2–5 years. Define how long confidentiality is required.' },
+      { heading: 'Governing Law', body: 'Subject to the laws of England and Wales.' },
+      { heading: 'Signatures', body: 'Space for both parties to sign and date.' }
+    ]
+  },
+  {
+    id: 'privacy-policy',
+    title: 'Privacy & Data Protection Policy',
+    category: 'contracts',
+    description: 'A UK GDPR-compliant privacy policy template for client-facing data practices.',
+    sections: [
+      { heading: 'Data Collected', body: 'Names, emails, project data, and other client-submitted info.' },
+      { heading: 'Usage of Data', body: 'Only for agreed consulting purposes.' },
+      { heading: 'Data Storage', body: 'How and where client data is stored securely.' },
+      { heading: 'Client Rights', body: 'Right to access, correct, or delete their data.' },
+      { heading: 'Contact', body: 'Your details for data-related queries.' },
+      { heading: 'Governing Law', body: 'Complies with UK GDPR.' }
+    ]
+  },
+  {
+    id: 'invoice-standard',
+    title: 'Invoice Template (Standard)',
+    category: 'finance',
+    description: 'A clean, professional invoice template for consulting services with VAT support.',
+    sections: [
+      { heading: 'Header', body: 'INVOICE\n\nConsultant Name: [Your Full Name]\nBusiness Address: [Your Address]\nEmail: [Your Email Address]\nPhone: [Your Phone Number]\n\nInvoice Date: [Date]\nInvoice Number: [Unique Number]' },
+      { heading: 'Bill To', body: 'Client Name: [Client\'s Name]\nClient Company: [Client\'s Company Name]\nClient Address: [Client\'s Address]' },
+      { heading: 'Line Items', body: 'Description | Hours/Days | Rate | Amount\n———————————————————————————————\nBusiness Transformation Consulting Services for [Month] | [e.g. 10] | £[Rate] | £[Total]' },
+      { heading: 'Totals', body: 'Subtotal: £[Subtotal]\nVAT (if applicable): £[VAT]\nTotal Amount Due: £[Total Amount]' },
+      { heading: 'Payment Terms', body: 'Payment is due within 14 days of invoice date.\n\nBank Details: [Your Bank Name, Sort Code, Account Number]\n\nThank you for your business!' }
+    ]
+  },
+  {
+    id: 'invoice-logo',
+    title: 'Invoice Template (With Logo)',
+    category: 'finance',
+    description: 'Invoice template with a placeholder for your logo and a default day rate.',
+    sections: [
+      { heading: 'Header', body: 'INVOICE\n\n[YOUR LOGO HERE]\n\nConsultant Name: [Your Full Name]\nBusiness Address: [Your Address]\nEmail: [Your Email Address]\nPhone: [Your Phone Number]\n\nInvoice Date: [Date]\nInvoice Number: [Unique Number]' },
+      { heading: 'Bill To', body: 'Client Name: [Client\'s Name]\nClient Company: [Client\'s Company Name]\nClient Address: [Client\'s Address]' },
+      { heading: 'Line Items', body: 'Description | Days | Rate | Amount\n———————————————————————————————\nBusiness Transformation Consulting Services for [Month] | [e.g. 10] | £500 | £[Total]' },
+      { heading: 'Totals', body: 'Subtotal: £[Subtotal]\nVAT (if applicable): £[VAT]\nTotal Amount Due: £[Total Amount]' },
+      { heading: 'Payment Terms', body: 'Payment is due within 14 days of invoice date.\n\nBank Details: [Your Bank Name, Sort Code, Account Number]\n\nThank you for your business!' }
+    ]
+  },
+  {
+    id: 'expense-report',
+    title: 'Expense Report Template',
+    category: 'finance',
+    description: 'Track client-billable expenses with a simple, repeatable format.',
+    sections: [
+      { heading: 'How to Use', body: 'Fill out this form for each client-billable expense.' },
+      { heading: 'Table Format', body: 'Include: Date | Description | Amount | Receipt Attached (Y/N)' },
+      { heading: 'Submission', body: 'Include this report with your invoice.' }
+    ]
+  }
+];
+
+const TEMPLATE_CATEGORIES = {
+  proposals: { label: 'Proposals', short: 'Proposals', gradient: 'from-cyan-500 to-blue-600', icon: FileText },
+  discovery: { label: 'Discovery & Onboarding', short: 'Discovery', gradient: 'from-emerald-500 to-teal-600', icon: Search },
+  contracts: { label: 'Contracts', short: 'Contracts', gradient: 'from-rose-500 to-red-600', icon: Briefcase },
+  finance: { label: 'Finance & Admin', short: 'Finance', gradient: 'from-amber-500 to-orange-600', icon: TrendingUp }
+};
+
+function downloadTemplate(template) {
+  const content = `${template.title}\n${'='.repeat(template.title.length)}\n\n${template.description}\n\n` +
+    template.sections.map(s => `${s.heading}\n${'-'.repeat(s.heading.length)}\n${s.body}`).join('\n\n');
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${template.id}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ==================== CHEAT SHEETS ====================
+const CHEAT_SHEETS = [
+  {
+    id: 'excel-essentials',
+    title: 'Excel Essentials for BAs',
+    category: 'spreadsheets',
+    description: 'The Excel knowledge a business analyst actually uses — formulas, lookups, conditional logic, and pivot tables.',
+    sections: [
+      { heading: 'Cell References', body: 'Relative: A1 — moves when copied\nAbsolute: $A$1 — never moves\nMixed: $A1 (column locked) or A$1 (row locked)\n\nRule of thumb: lock what shouldn\'t change. If you\'re copying a formula down a column but always want it to refer to the same lookup table, lock the table reference with $.' },
+      { heading: 'Logical Functions', body: 'IF — single condition\n=IF(A1>100, "High", "Low")\n\nIFS — multiple conditions, returns first match\n=IFS(A1>=90,"A", A1>=80,"B", A1>=70,"C", TRUE,"Fail")\n\nAND / OR — combine conditions\n=IF(AND(A1>100, B1<50), "Yes", "No")\n\nIFERROR — fallback if formula fails\n=IFERROR(A1/B1, 0)' },
+      { heading: 'Lookups (the BA\'s most-used skill)', body: 'XLOOKUP (modern, recommended)\n=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found])\n=XLOOKUP("Acme", A:A, B:B, "Not found")\n\nVLOOKUP (legacy, still common)\n=VLOOKUP(lookup_value, table, column_number, FALSE)\n=VLOOKUP("Acme", A:C, 2, FALSE)\n\nINDEX/MATCH (flexible, works in any direction)\n=INDEX(B:B, MATCH("Acme", A:A, 0))' },
+      { heading: 'Counting and Summing with Conditions', body: 'COUNTIF — count matching cells\n=COUNTIF(A:A, ">100")\n=COUNTIF(A:A, "London")\n\nSUMIF — sum matching cells\n=SUMIF(A:A, "London", B:B)\n\nMultiple conditions:\n=COUNTIFS(A:A, "London", B:B, ">100")\n=SUMIFS(C:C, A:A, "London", B:B, ">100")\n\nAVERAGEIFS — same pattern' },
+      { heading: 'Text Functions', body: 'LEN — length of a string\nLEFT / RIGHT / MID — extract characters\n  =LEFT(A1, 3) returns first 3 characters\n  =MID(A1, 4, 5) starts at position 4, takes 5 characters\n\nUPPER / LOWER / PROPER — change case\n\nTRIM — remove extra spaces (essential before lookups)\n=TRIM(A1)\n\nCONCAT or & — join strings\n=A1 & " — " & B1\n\nTEXTSPLIT (modern) — split on a delimiter\n=TEXTSPLIT(A1, ",")' },
+      { heading: 'Date Functions', body: 'TODAY() — current date\nNOW() — current date and time\nYEAR / MONTH / DAY — extract parts of a date\nWEEKDAY — returns day number (1=Sun by default, use 2 for Mon=1)\nDATEDIF — difference between dates\n=DATEDIF(start, end, "d") — days\n=DATEDIF(start, end, "m") — months\n=DATEDIF(start, end, "y") — years\nEOMONTH — last day of the month\n=EOMONTH(A1, 0) — current month\n=EOMONTH(A1, 1) — next month' },
+      { heading: 'Pivot Tables — the BA\'s power tool', body: '1. Select your data (or click in any cell of a clean dataset)\n2. Insert → PivotTable → choose where to place it\n3. Drag fields into:\n   • Rows — categories you want to break down\n   • Columns — secondary breakdown (optional)\n   • Values — what to count, sum, or average\n   • Filters — top-level filters\n\nKey tricks:\n• Right-click a value → Summarise Values By → change Sum to Count, Average, etc.\n• Right-click → Show Values As → % of Grand Total, % of Row\n• Group dates by month/quarter/year via right-click → Group\n• Refresh after data changes (Data → Refresh All)' },
+      { heading: 'Filtering and Sorting Data', body: 'FILTER — return rows that match a condition (modern Excel)\n=FILTER(A2:C100, B2:B100>50)\n\nSORT — sort an array by a column\n=SORT(A2:C100, 2, -1) — sort by column 2, descending\n\nUNIQUE — distinct values from a range\n=UNIQUE(A2:A100)\n\nThese three combined replace 80% of pivot table use cases for simple analysis.' },
+      { heading: 'Common BA Formulas', body: 'Year-over-year change:\n=(this_year/last_year)-1\n\nRunning total:\n=SUM($B$2:B2) — drag down\n\nFlag duplicates:\n=COUNTIF($A:$A, A1)>1\n\nClassify with thresholds:\n=IFS(A1>=10000,"Enterprise", A1>=1000,"Mid", TRUE,"Small")\n\nCount unique values:\n=COUNTA(UNIQUE(A2:A100))\n\nLast value in a column:\n=LOOKUP(2, 1/(A:A<>""), A:A)' },
+      { heading: 'Keyboard Shortcuts Worth Knowing', body: 'Ctrl+Arrow — jump to edge of data\nCtrl+Shift+Arrow — select to edge\nCtrl+T — turn data into a Table (then formulas auto-extend)\nCtrl+Shift+L — toggle filters\nF4 — toggle absolute/relative reference (when editing a formula)\nAlt+= — auto-sum\nCtrl+; — insert today\'s date\nCtrl+Shift+: — insert current time\nCtrl+E — Flash Fill (auto-detect a pattern)' }
+    ]
+  },
+  {
+    id: 'sql-for-bas',
+    title: 'SQL for Business Analysts',
+    category: 'sql',
+    description: 'Practical SQL for BAs — pulling, filtering, joining, and aggregating data without needing a developer.',
+    sections: [
+      { heading: 'The Anatomy of a SELECT Statement', body: 'SELECT column1, column2  -- which columns\nFROM table_name           -- which table\nWHERE condition           -- filter rows\nGROUP BY column           -- aggregate by\nHAVING aggregate_filter   -- filter aggregates\nORDER BY column           -- sort\nLIMIT n;                  -- only n rows\n\nThe order you write it differs from the order it runs. Always start with FROM (where), then WHERE (filter), then SELECT (columns).' },
+      { heading: 'Selecting Columns', body: '-- All columns (use sparingly on big tables)\nSELECT * FROM customers;\n\n-- Specific columns\nSELECT customer_id, name, email FROM customers;\n\n-- Rename a column in the output\nSELECT name AS customer_name FROM customers;\n\n-- Distinct values\nSELECT DISTINCT country FROM customers;' },
+      { heading: 'Filtering with WHERE', body: '-- Equality\nWHERE country = \'UK\'\n\n-- Inequality\nWHERE status <> \'Closed\'\n\n-- Numeric ranges\nWHERE order_value > 100\nWHERE order_value BETWEEN 100 AND 500\n\n-- Multiple values\nWHERE country IN (\'UK\', \'France\', \'Spain\')\n\n-- Pattern matching\nWHERE email LIKE \'%@gmail.com\'\nWHERE name LIKE \'A%\'\n\n-- Missing data\nWHERE phone IS NULL\nWHERE phone IS NOT NULL\n\n-- Combining\nWHERE country = \'UK\' AND status = \'Open\'\nWHERE country = \'UK\' OR country = \'France\'' },
+      { heading: 'Aggregating Data', body: 'COUNT(*) — count all rows\nCOUNT(column) — count non-null values\nCOUNT(DISTINCT column) — count unique values\nSUM(column) — total\nAVG(column) — mean\nMIN / MAX(column) — extremes\n\nExample:\nSELECT\n  COUNT(*) AS total_orders,\n  SUM(order_value) AS revenue,\n  AVG(order_value) AS avg_order\nFROM orders;' },
+      { heading: 'Grouping with GROUP BY', body: 'Whenever SELECT mixes aggregate functions with regular columns, every regular column must be in GROUP BY.\n\nSELECT\n  country,\n  COUNT(*) AS orders,\n  SUM(order_value) AS revenue\nFROM orders\nGROUP BY country\nORDER BY revenue DESC;\n\n-- Filter aggregates with HAVING (not WHERE)\nSELECT country, COUNT(*) AS orders\nFROM orders\nGROUP BY country\nHAVING COUNT(*) > 50;' },
+      { heading: 'Joining Tables', body: 'INNER JOIN — only rows that match in both tables\nLEFT JOIN — all rows from the left table; null for unmatched right rows\nRIGHT JOIN — opposite of LEFT (rare in practice)\nFULL JOIN — all rows from both sides\n\nSELECT\n  o.order_id,\n  c.name,\n  o.order_value\nFROM orders o\nLEFT JOIN customers c\n  ON o.customer_id = c.customer_id;\n\n-- Always alias tables (o, c) for readable joins\n-- Always specify the join type explicitly' },
+      { heading: 'Useful Patterns BAs Hit Daily', body: '-- Top N records\nSELECT * FROM orders\nORDER BY order_value DESC\nLIMIT 10;\n\n-- Records this month\nWHERE order_date >= DATE_TRUNC(\'month\', CURRENT_DATE)\n\n-- Records in last 30 days\nWHERE order_date >= CURRENT_DATE - INTERVAL \'30 days\'\n\n-- Find duplicates\nSELECT email, COUNT(*)\nFROM customers\nGROUP BY email\nHAVING COUNT(*) > 1;\n\n-- Customers who haven\'t ordered\nSELECT c.*\nFROM customers c\nLEFT JOIN orders o ON c.customer_id = o.customer_id\nWHERE o.order_id IS NULL;' },
+      { heading: 'Conditional Logic with CASE', body: 'CASE\n  WHEN order_value >= 1000 THEN \'High\'\n  WHEN order_value >= 100 THEN \'Medium\'\n  ELSE \'Low\'\nEND AS value_band\n\n-- Often used inside aggregates for pivoting\nSELECT\n  country,\n  SUM(CASE WHEN status=\'Open\' THEN 1 ELSE 0 END) AS open_orders,\n  SUM(CASE WHEN status=\'Closed\' THEN 1 ELSE 0 END) AS closed_orders\nFROM orders\nGROUP BY country;' },
+      { heading: 'Window Functions (the BA superpower)', body: 'Window functions calculate across a set of rows without collapsing them.\n\n-- Running total\nSUM(order_value) OVER (ORDER BY order_date) AS running_total\n\n-- Rank within a group\nRANK() OVER (PARTITION BY country ORDER BY order_value DESC) AS country_rank\n\n-- Compare to previous row\nLAG(order_value) OVER (ORDER BY order_date) AS previous_order\n\n-- Running average over last 7 rows\nAVG(order_value) OVER (\n  ORDER BY order_date\n  ROWS BETWEEN 6 PRECEDING AND CURRENT ROW\n) AS rolling_7_day' },
+      { heading: 'Common Pitfalls to Avoid', body: '• NULLs don\'t equal anything, even themselves. Use IS NULL, never = NULL.\n• COUNT(column) ignores NULLs; COUNT(*) counts all rows. Know which you want.\n• WHERE filters before grouping; HAVING filters after. Don\'t mix them up.\n• Always check JOIN cardinality. If a join unexpectedly multiplies row counts, you have duplicates somewhere.\n• Date types differ between databases. Test date logic on a small sample first.\n• Production queries should always have a LIMIT during exploration.' }
+    ]
+  },
+  {
+    id: 'data-storytelling',
+    title: 'Data Storytelling for Practitioners',
+    category: 'storytelling',
+    description: 'How to turn analysis into insight that drives decisions — structuring narratives, choosing visuals, and presenting to stakeholders.',
+    sections: [
+      { heading: 'What Data Storytelling Actually Is', body: 'Data storytelling combines three things:\n\n• Data — the underlying numbers and analysis\n• Visuals — charts and graphics that make patterns visible\n• Narrative — the human framing that gives it meaning\n\nA chart without narrative is decoration. A narrative without data is opinion. A story without visuals is hard to follow. The skill is weaving all three.' },
+      { heading: 'Start with the Audience, Not the Data', body: 'Before building a single chart, answer:\n\n• Who is the audience? (Executive, peer, frontline)\n• What do they already know?\n• What decision are they trying to make?\n• What\'s their tolerance for detail?\n• What\'s in it for them?\n\nThe same data needs three different stories for an executive, an operational lead, and a peer analyst. Tailor relentlessly.' },
+      { heading: 'The Three Audience Types', body: 'EXECUTIVES — basic data literacy, prioritise outcomes\n• Lead with the decision and the recommendation\n• 1–2 charts max per page\n• Skip methodology unless asked\n\nDATA-LITERATE PEERS — care about rigour\n• Show your working\n• Discuss methodology and caveats\n• Be open about uncertainty\n\nOPERATIONAL STAFF — care about what to do differently\n• Focus on tactical implications\n• Make the next action obvious\n• Keep technical content minimal' },
+      { heading: 'The Narrative Arc', body: 'Good data stories follow a structure, not a pile of charts:\n\n1. Context — what\'s the situation?\n2. Change/Trigger — what\'s different or worth attention?\n3. Tension — what\'s at stake or in conflict?\n4. Insight — what does the data reveal?\n5. Recommendation — what should happen?\n\n"Sales were stable for two years (context). In Q3 they dropped 18% (change). At current rates we\'ll miss target by £4M (tension). The drop is concentrated in two products and one region (insight). We should reallocate marketing spend (recommendation)."' },
+      { heading: 'Choosing the Right Chart', body: 'COMPARISON across categories → bar chart\nCHANGE over time → line chart\nDISTRIBUTION of values → histogram or box plot\nPART-TO-WHOLE → bar chart (better than pie)\nRELATIONSHIP between two variables → scatter plot\nSINGLE KPI → big number with context\n\nDefault rule: if you\'re reaching for a pie chart, try a bar chart instead. They\'re almost always more readable.' },
+      { heading: 'Decluttering Visuals', body: 'Remove anything that isn\'t the message:\n\n• Drop chart borders, gridlines, and unnecessary legends\n• Label data directly when possible (no legend hunting)\n• Use a single accent colour to highlight what matters; mute the rest\n• Cut decimal places that don\'t change the story (£1,234,567 → £1.2M)\n• Sort categorical data deliberately (largest first, or chronological — never alphabetical unless lookup is the point)\n• Remove data labels if they create visual noise; keep axes if you can\'t' },
+      { heading: 'Using Colour with Intent', body: 'Three types of palette:\n\nQUALITATIVE — distinct hues for unordered categories (regions, products)\nSEQUENTIAL — single hue, varying intensity for ordered values (low to high)\nDIVERGING — two hues for values around a midpoint (negative/positive variance)\n\nRules:\n• Use grey for context, colour for emphasis\n• Limit to 1–3 colours where possible\n• Avoid red/green only — colour-blind users miss the contrast\n• Be consistent across charts in the same deck\n• Don\'t encode meaningful data in chart-style decoration' },
+      { heading: 'Using Text in Visuals', body: 'Text is part of the visualisation, not separate from it:\n\n• Put the insight in the title, not a generic description ("Sales fell 18% in Q3" beats "Quarterly sales")\n• Use the subtitle for context ("Driven by product line A and the EMEA region")\n• Annotate key data points directly on the chart\n• Don\'t make the reader work — call out what they should notice' },
+      { heading: 'Avoiding Misleading Stories', body: 'Common ways data stories mislead:\n\n• Truncated y-axes that exaggerate small changes\n• Cherry-picked time ranges that hide the bigger trend\n• Aggregate metrics that mask underlying variation\n• Sample sizes too small to support claims\n• Correlation presented as causation\n\nIntegrity test: would I be comfortable showing this to someone who disagreed with my conclusion? If they\'d cry foul, fix the chart.' },
+      { heading: 'Choosing the Format', body: 'PRESENTATION — for live discussion and decisions\n• Big visuals, minimal text per slide\n• One idea per slide\n• Reserve detail for appendix\n\nWRITTEN REPORT — for async consumption and reference\n• Executive summary up front (TL;DR)\n• Full context and methodology\n• Specific recommendations with owners\n\nDASHBOARD — for ongoing monitoring\n• Most important metric top-left\n• Group related metrics\n• Make filters and refresh dates visible\n• Always include a "what should I do?" cue\n\nMatch the format to how the audience will actually consume it.' },
+      { heading: 'The 30-Second Test', body: 'Strip your data story down to a 30-second elevator pitch:\n\n• What\'s the headline insight?\n• What\'s the recommendation?\n• What\'s the most important supporting evidence?\n\nIf you can\'t do it in 30 seconds, you don\'t understand your own analysis well enough yet. Iterate until you can.' }
+    ]
+  },
+  {
+    id: 'stats-for-bas',
+    title: 'Statistics for Practitioners',
+    category: 'stats',
+    description: 'The descriptive statistics, probability concepts, and distributions a practitioner needs to interpret data without a maths degree.',
+    sections: [
+      { heading: 'Why Stats Matters for BAs', body: 'You don\'t need to derive formulas. You do need to:\n\n• Know which summary statistic to use\n• Spot when an "average" is misleading\n• Recognise when a sample is too small to draw conclusions\n• Read a distribution chart correctly\n• Push back when someone misuses correlation\n\nThis cheat sheet covers the practical 20% you\'ll use 80% of the time.' },
+      { heading: 'Measures of Centre', body: 'MEAN (average) — sum ÷ count\n• Best for symmetric data\n• Pulled toward outliers (a few huge values skew it)\n\nMEDIAN — middle value when sorted\n• Best for skewed data (income, house prices)\n• Robust to outliers\n\nMODE — most frequent value\n• Best for categorical data\n• Useful when distribution is multi-peaked\n\nRule: if mean and median are very different, the data is skewed. Always check both.' },
+      { heading: 'Measures of Spread', body: 'RANGE — max minus min\n• Quick but heavily affected by outliers\n\nINTERQUARTILE RANGE (IQR) — Q3 minus Q1\n• Range of the middle 50%\n• Robust to outliers\n\nVARIANCE — average squared deviation from the mean\n• Mathematical foundation; not directly interpretable\n\nSTANDARD DEVIATION — square root of variance\n• Same units as the data\n• Roughly: 68% of normal data falls within 1 SD of the mean, 95% within 2 SDs\n\nA mean without a measure of spread tells you very little.' },
+      { heading: 'Percentiles and Quartiles', body: 'PERCENTILE — the value below which X% of data falls\n• 50th percentile = median\n• 90th percentile = top 10% threshold\n\nQUARTILES — split data into 4 equal groups\n• Q1 = 25th percentile\n• Q2 = median (50th)\n• Q3 = 75th percentile\n\nUse percentiles when reporting performance. "Median load time is 1.2s, but the 95th percentile is 8s" tells a much truer story than "average load time is 2s".' },
+      { heading: 'Distributions to Recognise', body: 'NORMAL (bell curve)\n• Symmetric around mean = median\n• Lots of natural data (heights, measurement errors)\n\nSKEWED\n• Right-skewed: long tail on the right (income, sales values)\n  Mean > Median\n• Left-skewed: long tail on the left (less common)\n  Mean < Median\n\nBIMODAL — two peaks\n• Often signals two populations mixed together\n• Investigate before treating as one group\n\nUNIFORM — flat\n• Each value equally likely (often signals randomness or coverage)' },
+      { heading: 'Correlation', body: 'Measures how two variables move together. Scored from -1 to +1.\n\n+1 — perfect positive (X up, Y up)\n+0.7 — strong positive\n+0.3 — weak positive\n0 — no linear relationship\n-0.3 — weak negative\n-1 — perfect negative\n\nThree critical caveats:\n• Correlation only catches LINEAR relationships. Curves can show as 0.\n• Correlation ≠ causation. Ice cream sales correlate with drowning. Both are caused by summer.\n• A single outlier can drastically change correlation. Always plot before believing the number.' },
+      { heading: 'Probability Basics', body: 'P(A) — probability of event A, between 0 and 1\nP(not A) = 1 - P(A)\n\nMUTUALLY EXCLUSIVE events (can\'t both happen):\n• P(A or B) = P(A) + P(B)\n• P(A and B) = 0\n\nINDEPENDENT events (one doesn\'t affect the other):\n• P(A and B) = P(A) × P(B)\n\nCONDITIONAL probability — P(A | B), probability of A given B happened:\n• Useful for diagnostic thinking\n• Often misused — see Bayes\' theorem if exploring further' },
+      { heading: 'Counts vs Proportions', body: 'COUNTS tell you size: "We had 47 complaints this month"\nPROPORTIONS tell you context: "47 complaints out of 4,200 customers = 1.1%"\n\nAlways present both when possible. A raw count can be alarming or trivial depending on the denominator.\n\n"Conversions doubled" is meaningless if you don\'t know whether they went from 5 to 10 or 5,000 to 10,000.' },
+      { heading: 'Sample Size — When Can You Trust It?', body: 'Rough guide for "is this sample reliable?":\n\n• Under 30 — treat as anecdotal, not statistical\n• 30–100 — useful directionally, wide error bars\n• 100–1,000 — reasonable confidence in patterns\n• Over 1,000 — small effects become detectable\n\nRule: the smaller the sample, the bigger the effect needs to be before you trust it. With 10 customers, a 20% difference might be noise. With 10,000, a 0.5% difference is real.\n\nAlso: a biased sample of 100,000 is worse than a representative sample of 100. Check who\'s in it before checking how many.' },
+      { heading: 'Common Statistical Mistakes', body: '• Using the mean on heavily skewed data → use median\n• Ignoring distribution shape and reporting only summary stats\n• Drawing conclusions from very small samples\n• Comparing groups without considering different group sizes\n• Treating correlation as causation\n• Cherry-picking time periods to support a conclusion\n• Confusing statistical significance with practical importance\n• Ignoring sampling bias (who got included, who didn\'t)\n• Reporting precision the data doesn\'t support (£1,234,567.89 from a rough estimate)' },
+      { heading: 'Sanity Checks Before Sharing', body: 'Before presenting any statistical finding, ask:\n\n• Is the sample size large enough to support this claim?\n• Could selection bias explain the result?\n• Is there a confounding variable?\n• Have I checked the distribution, not just the summary?\n• Would the conclusion change if I removed outliers?\n• Am I conflating correlation with causation?\n• Is the precision I\'m reporting actually supported by the data?\n\nIf any answer is "I don\'t know", caveat your finding accordingly.' }
+    ]
+  }
+];
+
+const CHEAT_SHEET_CATEGORIES = {
+  spreadsheets: { label: 'Spreadsheets', short: 'Excel', gradient: 'from-emerald-600 to-green-700', icon: Calculator },
+  sql: { label: 'SQL & Data', short: 'SQL', gradient: 'from-blue-600 to-indigo-700', icon: Database },
+  storytelling: { label: 'Storytelling', short: 'Story', gradient: 'from-pink-600 to-rose-700', icon: BookOpen },
+  stats: { label: 'Statistics', short: 'Stats', gradient: 'from-purple-600 to-violet-700', icon: BarChart3 }
+};
+
+function downloadCheatSheet(sheet) {
+  const content = `${sheet.title}\n${'='.repeat(sheet.title.length)}\n\n${sheet.description}\n\n` +
+    sheet.sections.map(s => `${s.heading}\n${'-'.repeat(s.heading.length)}\n${s.body}`).join('\n\n');
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${sheet.id}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 const PLAYBOOKS = [
@@ -503,6 +799,70 @@ const StepIcon = ({ type }) => {
   return (<div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shadow-lg shadow-black/5`}><Icon className="w-5 h-5 text-white" /></div>);
 };
 
+// ==================== TEMPLATE VIEWER MODAL ====================
+function TemplateViewer({ template, onClose, onDownload }) {
+  const [copied, setCopied] = useState(false);
+  const cat = TEMPLATE_CATEGORIES[template.category];
+
+  const handleCopy = () => {
+    const content = `${template.title}\n\n${template.description}\n\n` +
+      template.sections.map(s => `${s.heading}\n${s.body}`).join('\n\n');
+    navigator.clipboard?.writeText(content);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md p-4 overflow-y-auto" onClick={onClose}>
+      <div className="max-w-3xl mx-auto my-8 bg-white rounded-3xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div className={`bg-gradient-to-r ${cat.gradient} p-6 md:p-8 text-white relative`}>
+          <button onClick={onClose} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center transition">
+            <X className="w-5 h-5" />
+          </button>
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-white/20 backdrop-blur-sm mb-3">
+            <cat.icon className="w-3 h-3" />
+            {cat.label}
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-2">{template.title}</h2>
+          <p className="text-white/90 text-sm md:text-base leading-relaxed">{template.description}</p>
+        </div>
+
+        <div className="p-6 md:p-8 max-h-[60vh] overflow-y-auto">
+          <div className="space-y-6">
+            {template.sections.map((section, idx) => (
+              <div key={idx}>
+                <h3 className="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
+                  <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${cat.gradient}`} />
+                  {section.heading}
+                </h3>
+                <p className="text-slate-700 leading-relaxed whitespace-pre-line text-sm md:text-base pl-4 border-l-2 border-slate-100">
+                  {section.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="p-4 md:p-6 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row gap-3">
+          <button
+            onClick={handleCopy}
+            className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 transition font-semibold"
+          >
+            {copied ? <><Check className="w-4 h-4 text-emerald-600" /> Copied!</> : <><Copy className="w-4 h-4" /> Copy to clipboard</>}
+          </button>
+          <button
+            onClick={() => onDownload(template)}
+            className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r ${cat.gradient} text-white hover:opacity-90 transition font-bold shadow-lg`}
+          >
+            <Download className="w-4 h-4" />
+            Download as .txt
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ==================== AUTH SCREEN ====================
 function AuthScreen({ users, onLogin, onSignUp, onClose, isModal = false, contextMessage }) {
   const [mode, setMode] = useState('signin'); // 'signin' or 'signup'
@@ -744,14 +1104,18 @@ export default function App() {
 
   // App state
   const [view, setView] = useState('library');
+  const [section, setSection] = useState('playbooks'); // 'playbooks' or 'templates'
   const [activePlaybook, setActivePlaybook] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
+  const [activeTemplate, setActiveTemplate] = useState(null);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
+  const [templateFilter, setTemplateFilter] = useState('all');
   const [showCelebration, setShowCelebration] = useState(false);
   const [showAccountMenu, setShowAccountMenu] = useState(false);
   const [showAuthGate, setShowAuthGate] = useState(false);
   const [pendingPlaybook, setPendingPlaybook] = useState(null);
+  const [pendingTemplate, setPendingTemplate] = useState(null);
 
   const dailyQuote = getDailyQuote();
 
@@ -777,11 +1141,14 @@ export default function App() {
     }));
     setCurrentUser(email);
     setShowAuthGate(false);
-    // If they were trying to access a playbook, take them there
     if (pendingPlaybook) {
       setActivePlaybook(pendingPlaybook);
       setView('runner');
       setPendingPlaybook(null);
+    }
+    if (pendingTemplate) {
+      setActiveTemplate(pendingTemplate);
+      setPendingTemplate(null);
     }
   };
 
@@ -792,6 +1159,10 @@ export default function App() {
       setActivePlaybook(pendingPlaybook);
       setView('runner');
       setPendingPlaybook(null);
+    }
+    if (pendingTemplate) {
+      setActiveTemplate(pendingTemplate);
+      setPendingTemplate(null);
     }
   };
 
@@ -833,6 +1204,21 @@ export default function App() {
     setActivePlaybook(pb);
     setView('runner');
   };
+
+  const openTemplate = (template) => {
+    if (!currentUser) {
+      setPendingTemplate(template);
+      setShowAuthGate(true);
+      return;
+    }
+    setActiveTemplate(template);
+  };
+
+  const filteredTemplates = TEMPLATES.filter(t => {
+    const matchesSearch = !search || t.title.toLowerCase().includes(search.toLowerCase()) || t.description.toLowerCase().includes(search.toLowerCase());
+    const matchesFilter = templateFilter === 'all' || t.category === templateFilter;
+    return matchesSearch && matchesFilter;
+  });
 
   const exitToLibrary = () => {
     if (activePlaybook) {
@@ -1022,9 +1408,21 @@ export default function App() {
           users={users}
           onLogin={handleLogin}
           onSignUp={handleSignUp}
-          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); }}
+          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); setPendingTemplate(null); }}
           isModal={true}
-          contextMessage={pendingPlaybook ? `Sign in to start "${pendingPlaybook.title}" and save your progress.` : undefined}
+          contextMessage={
+            pendingPlaybook ? `Sign in to start "${pendingPlaybook.title}" and save your progress.` :
+            pendingTemplate ? `Sign in to access "${pendingTemplate.title}".` :
+            undefined
+          }
+        />
+      )}
+
+      {activeTemplate && (
+        <TemplateViewer
+          template={activeTemplate}
+          onClose={() => setActiveTemplate(null)}
+          onDownload={downloadTemplate}
         />
       )}
 
@@ -1106,6 +1504,31 @@ export default function App() {
         {/* Daily quote widget */}
         <DailyQuoteWidget quote={dailyQuote} />
 
+        {/* Section tabs */}
+        <div className="flex gap-2 mb-8 p-1 bg-slate-100 rounded-2xl w-fit">
+          <button
+            onClick={() => { setSection('playbooks'); setSearch(''); }}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${
+              section === 'playbooks' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <Zap className="w-4 h-4" />
+            Playbooks
+            <span className={`text-xs px-2 py-0.5 rounded-full ${section === 'playbooks' ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-600'}`}>{PLAYBOOKS.length}</span>
+          </button>
+          <button
+            onClick={() => { setSection('templates'); setSearch(''); }}
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-bold transition-all ${
+              section === 'templates' ? 'bg-white text-slate-900 shadow-md' : 'text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <Briefcase className="w-4 h-4" />
+            Freelance Toolkit
+            <span className={`text-xs px-2 py-0.5 rounded-full ${section === 'templates' ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-600'}`}>{TEMPLATES.length}</span>
+          </button>
+        </div>
+
+        {section === 'playbooks' && (<>
         <div className="mb-8 space-y-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -1223,6 +1646,105 @@ export default function App() {
             <p className="text-slate-500 text-sm">Try a different keyword or category</p>
           </div>
         )}
+        </>)}
+
+        {section === 'templates' && (<>
+          <div className="mb-6 bg-gradient-to-br from-slate-900 via-violet-900 to-fuchsia-900 rounded-3xl p-6 md:p-8 text-white relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-gradient-to-br from-amber-400 to-pink-500 opacity-20 blur-3xl pointer-events-none" />
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-bold uppercase tracking-wider mb-3">
+                <Briefcase className="w-3 h-3 text-amber-300" />
+                Freelance Toolkit
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 leading-tight">Everything you need to run a consulting practice.</h2>
+              <p className="text-slate-300 leading-relaxed">From the first discovery call to the final invoice — proposals, contracts, discovery toolkits, onboarding forms, and finance templates. Battle-tested, ready to customise.</p>
+            </div>
+          </div>
+
+          <div className="mb-8 space-y-4">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search templates..."
+                className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400 font-medium"
+              />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button onClick={() => setTemplateFilter('all')} className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${templateFilter === 'all' ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'}`}>
+                All ({TEMPLATES.length})
+              </button>
+              {Object.entries(TEMPLATE_CATEGORIES).map(([key, cat]) => {
+                const count = TEMPLATES.filter(t => t.category === key).length;
+                const Icon = cat.icon;
+                return (
+                  <button key={key} onClick={() => setTemplateFilter(key)} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${templateFilter === key ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg` : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'}`}>
+                    <Icon className="w-4 h-4" />
+                    {cat.label} ({count})
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {filteredTemplates.map(template => {
+              const cat = TEMPLATE_CATEGORIES[template.category];
+              const Icon = cat.icon;
+              return (
+                <div key={template.id} className="relative bg-white rounded-2xl border-2 border-slate-200 hover:border-slate-300 overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 group">
+                  <div className={`h-1.5 bg-gradient-to-r ${cat.gradient}`} />
+                  <div className="p-6">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-gradient-to-r ${cat.gradient} text-white shadow-sm`}>
+                        <Icon className="w-3 h-3" />
+                        {cat.short}
+                      </div>
+                      <div className="flex items-center gap-1 text-xs font-medium text-slate-500">
+                        <FileText className="w-3 h-3" />
+                        {template.sections.length} sections
+                      </div>
+                    </div>
+                    <h2 className="text-xl font-bold text-slate-900 mb-2 leading-tight">{template.title}</h2>
+                    <p className="text-slate-600 mb-4 leading-relaxed text-sm">{template.description}</p>
+                    <div className="flex items-center gap-2">
+                      <button onClick={() => openTemplate(template)} className={`flex-1 bg-gradient-to-r ${cat.gradient} text-white py-3 rounded-xl font-bold hover:opacity-90 transition shadow-md hover:shadow-lg flex items-center justify-center gap-2`}>
+                        <Eye className="w-4 h-4" />
+                        Preview
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (!currentUser) {
+                            setPendingTemplate(template);
+                            setShowAuthGate(true);
+                            return;
+                          }
+                          downloadTemplate(template);
+                        }}
+                        className="p-3 rounded-xl border-2 border-slate-200 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition"
+                        title="Download"
+                      >
+                        <Download className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {filteredTemplates.length === 0 && (
+            <div className="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-slate-200">
+              <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-slate-100 flex items-center justify-center">
+                <Search className="w-8 h-8 text-slate-400" />
+              </div>
+              <p className="text-slate-700 font-semibold mb-1">No templates match your search</p>
+              <p className="text-slate-500 text-sm">Try a different keyword or category</p>
+            </div>
+          )}
+        </>)}
 
         <footer className="mt-16 pt-8 border-t-2 border-slate-100 text-center">
           <div className="inline-flex items-center gap-2 text-sm text-slate-500 font-medium">
