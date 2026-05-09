@@ -1,5 +1,56 @@
 import { useState, useEffect } from 'react';
-import { Search, ArrowLeft, ArrowRight, CheckCircle2, Circle, Clock, Sparkles, RotateCcw, Zap, TrendingUp, Target, Compass, Flame, Trophy } from 'lucide-react';
+import { Search, ArrowLeft, ArrowRight, CheckCircle2, Circle, Clock, Sparkles, RotateCcw, Zap, TrendingUp, Target, Compass, Flame, Trophy, LogOut, User, Mail, Lock, Eye, EyeOff, AlertCircle, Quote, LogIn } from 'lucide-react';
+
+const QUOTES = [
+  { text: "The only way to make sense out of change is to plunge into it, move with it, and join the dance.", author: "Alan Watts" },
+  { text: "It is not the strongest of the species that survives, but the one most responsive to change.", author: "Charles Darwin" },
+  { text: "Progress is impossible without change, and those who cannot change their minds cannot change anything.", author: "George Bernard Shaw" },
+  { text: "If you don't like change, you're going to like irrelevance even less.", author: "General Eric Shinseki" },
+  { text: "The art and science of asking questions is the source of all knowledge.", author: "Thomas Berger" },
+  { text: "If I had an hour to solve a problem, I'd spend 55 minutes thinking about the problem and 5 minutes thinking about solutions.", author: "Albert Einstein" },
+  { text: "Quality is never an accident; it is always the result of intelligent effort.", author: "John Ruskin" },
+  { text: "However beautiful the strategy, you should occasionally look at the results.", author: "Winston Churchill" },
+  { text: "It is not the answer that enlightens, but the question.", author: "Eugène Ionesco" },
+  { text: "Without data, you're just another person with an opinion.", author: "W. Edwards Deming" },
+  { text: "Excellence is never an accident. It is always the result of high intention, sincere effort, and intelligent execution.", author: "Aristotle" },
+  { text: "We can't solve problems by using the same kind of thinking we used when we created them.", author: "Albert Einstein" },
+  { text: "The biggest room in the world is the room for improvement.", author: "Helmut Schmidt" },
+  { text: "Continuous improvement is better than delayed perfection.", author: "Mark Twain" },
+  { text: "Good business leaders create a vision, articulate the vision, passionately own the vision, and relentlessly drive it to completion.", author: "Jack Welch" },
+  { text: "If you can't describe what you are doing as a process, you don't know what you're doing.", author: "W. Edwards Deming" },
+  { text: "Change before you have to.", author: "Jack Welch" },
+  { text: "The greatest danger in times of turbulence is not the turbulence; it is to act with yesterday's logic.", author: "Peter Drucker" },
+  { text: "What gets measured gets managed.", author: "Peter Drucker" },
+  { text: "The single biggest problem in communication is the illusion that it has taken place.", author: "George Bernard Shaw" },
+  { text: "Behaviour is a function of the person and their environment.", author: "Kurt Lewin" },
+  { text: "There is nothing so practical as a good theory.", author: "Kurt Lewin" },
+  { text: "Between stimulus and response there is a space. In that space is our power to choose our response.", author: "Viktor Frankl" },
+  { text: "People do not resist change. They resist being changed.", author: "Peter Senge" },
+  { text: "Tell me and I forget. Teach me and I remember. Involve me and I learn.", author: "Benjamin Franklin" },
+  { text: "Insanity is doing the same thing over and over and expecting different results.", author: "Often attributed to Einstein" },
+  { text: "If you want to go fast, go alone. If you want to go far, go together.", author: "African proverb" },
+  { text: "The whole is greater than the sum of its parts.", author: "Aristotle" },
+  { text: "Make everything as simple as possible, but not simpler.", author: "Albert Einstein" },
+  { text: "A goal without a plan is just a wish.", author: "Antoine de Saint-Exupéry" },
+  { text: "Plans are nothing; planning is everything.", author: "Dwight D. Eisenhower" },
+  { text: "The pessimist complains about the wind; the optimist expects it to change; the realist adjusts the sails.", author: "William Arthur Ward" },
+  { text: "Do not wait to strike till the iron is hot, but make it hot by striking.", author: "William Butler Yeats" },
+  { text: "An organisation's ability to learn, and translate that learning into action rapidly, is the ultimate competitive advantage.", author: "Jack Welch" },
+  { text: "The most dangerous phrase in the language is, 'We've always done it this way.'", author: "Grace Hopper" },
+  { text: "Culture eats strategy for breakfast.", author: "Peter Drucker" },
+  { text: "Vision without execution is hallucination.", author: "Thomas Edison" },
+  { text: "If you do not change direction, you may end up where you are heading.", author: "Lao Tzu" },
+  { text: "Listen with the will to learn.", author: "Unknown" },
+  { text: "The first responsibility of a leader is to define reality. The last is to say thank you. In between, the leader is a servant.", author: "Max De Pree" }
+];
+
+function getDailyQuote() {
+  // Same quote for everyone on the same day; rotates at midnight
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  const index = (dayOfYear + today.getFullYear()) % QUOTES.length;
+  return QUOTES[index];
+}
 
 const PLAYBOOKS = [
   {
@@ -46,102 +97,6 @@ const PLAYBOOKS = [
       { type: 'reference', title: 'Common roots and responses', body: 'Loss of control → Involve them in design. Fear of inadequacy → Strengthen training and reassurance. Change fatigue → Acknowledge it, slow down, sequence better. Design flaw → Actually fix the design. Misinformation → Communicate clearly and repeatedly.' },
       { type: 'checklist', title: 'Engage, don\'t avoid', body: 'For each significant resistor:', items: ['Hear them out fully before responding', 'Validate the underlying concern', 'Be honest about what can and can\'t change', 'Offer a role in shaping the rollout', 'Follow up — don\'t make it a one-off'] },
       { type: 'instruction', title: 'Know when to hold the line', body: 'Some resistance is genuine input that should change your plan. Some is a refusal to accept a legitimate decision. Distinguish the two. Be flexible on the how, firm on the what and why.' }
-    ]
-  },
-  {
-    id: 'requirements-gathering',
-    title: 'Requirements Gathering',
-    category: 'ba',
-    description: 'Run effective elicitation sessions and capture requirements that survive contact with reality.',
-    estMinutes: 35,
-    steps: [
-      { type: 'instruction', title: 'Clarify the problem first', body: 'Before gathering requirements, agree on the problem. Write a problem statement in one sentence: who is affected, what\'s wrong, and the impact. Requirements are answers — make sure you have the right question.' },
-      { type: 'checklist', title: 'Pick the right elicitation techniques', body: 'Different sources need different tools:', items: ['1:1 interviews — for depth and sensitive topics', 'Workshops — for cross-functional alignment', 'Observation/shadowing — for "how it really works"', 'Document analysis — for existing systems and policies', 'Surveys — for breadth across many users', 'Prototyping — when people can\'t articulate until they see it'] },
-      { type: 'instruction', title: 'Prepare before every session', body: 'Send an agenda. Share artefacts in advance. Have specific questions ready but leave space for discovery. Decide who will facilitate and who will scribe — never the same person.' },
-      { type: 'reference', title: 'Question hierarchy', body: 'Start broad ("Walk me through how you do X today"), then narrow ("What happens when Y is missing?"), then validate ("So if I changed Z, would that work?"). Avoid leading questions and yes/no questions early on.' },
-      { type: 'checklist', title: 'Capture requirements well', body: 'Each requirement should be:', items: ['Specific (no vague words like "fast" or "user-friendly")', 'Measurable (testable acceptance criteria)', 'Attributed (who asked for it)', 'Prioritised (MoSCoW: Must/Should/Could/Won\'t)', 'Traceable (linked to the underlying need)'] },
-      { type: 'instruction', title: 'Validate, don\'t assume', body: 'Play back what you heard. Send written summaries within 24 hours. Get explicit sign-off on must-haves. Requirements you didn\'t validate will come back as scope changes later.' },
-      { type: 'reference', title: 'Watch for these traps', body: 'Solutions disguised as requirements ("we need a dropdown" → why?). Requirements without owners. Requirements that contradict each other across stakeholders. Silent stakeholders whose needs you missed entirely.' }
-    ]
-  },
-  {
-    id: 'process-mapping',
-    title: 'Process Mapping (As-Is)',
-    category: 'ba',
-    description: 'Document how a process actually works today, not how people think it works.',
-    estMinutes: 45,
-    steps: [
-      { type: 'instruction', title: 'Define scope and boundaries', body: 'Pick one process. Define the trigger (what starts it) and the outcome (what ends it). Resist the urge to map everything — a tightly scoped map is far more useful than a sprawling one.' },
-      { type: 'checklist', title: 'Identify the cast', body: 'List everyone who touches the process:', items: ['The customer or initiator', 'Each role/team that does work', 'Approvers and decision-makers', 'Systems involved', 'Any external parties'] },
-      { type: 'instruction', title: 'Walk the process with real people', body: 'Don\'t map from a desk. Sit with the people who do the work. Ask them to walk you through a recent real example, end to end. The official process and the actual process are almost never the same.' },
-      { type: 'reference', title: 'Choose a notation', body: 'Swimlane diagrams (one lane per role) are the most readable for stakeholders. BPMN is more rigorous if your audience knows it. Whichever you pick, be consistent: same shape for the same kind of element throughout.' },
-      { type: 'checklist', title: 'Capture the truth, not the ideal', body: 'For each step, note:', items: ['Who does it', 'What system or tool they use', 'How long it takes (range, not average)', 'Common exceptions and workarounds', 'Where it waits or queues', 'Where rework happens'] },
-      { type: 'instruction', title: 'Review with participants', body: 'Walk the map back through the people who do the work. They will spot what you missed. Expect at least two revisions before it\'s right.' },
-      { type: 'reference', title: 'What "as-is" reveals', body: 'A good as-is map exposes: handoffs (often where delays live), rework loops, shadow processes (workarounds), bottlenecks, and steps that add no value. Note these now — you\'ll target them in the to-be design.' }
-    ]
-  },
-  {
-    id: 'gap-analysis',
-    title: 'Gap Analysis',
-    category: 'ba',
-    description: 'Compare current state to desired state and define what bridges the gap.',
-    estMinutes: 30,
-    steps: [
-      { type: 'instruction', title: 'Define the desired future state', body: 'Be concrete. "Better customer service" isn\'t a state — it\'s a wish. "Average first-response time under 4 hours, 90% of tickets resolved on first contact" is a state. Use specific metrics where possible.' },
-      { type: 'instruction', title: 'Document the current state', body: 'Measure and describe where you are today, against the same dimensions you used for the future state. Apples-to-apples comparison or the analysis is meaningless.' },
-      { type: 'reference', title: 'Dimensions to compare', body: 'Process (how work flows), People (skills and roles), Technology (systems and tools), Data (what\'s captured and how), Performance (KPIs and metrics), Customer experience (what they see and feel).' },
-      { type: 'checklist', title: 'Identify each gap', body: 'For each dimension, ask:', items: ['What\'s the difference between current and desired?', 'Is the gap quantitative (numbers) or qualitative (capability)?', 'How big is it — small adjustment or fundamental rework?', 'What\'s the impact of leaving it unaddressed?'] },
-      { type: 'instruction', title: 'Prioritise gaps', body: 'You can\'t close every gap at once. Plot gaps on impact vs. effort. Quick wins (high impact, low effort) go first. Major projects (high impact, high effort) need proper planning. Skip the low-impact, high-effort ones unless they\'re mandatory.' },
-      { type: 'checklist', title: 'Define the bridge', body: 'For each gap you\'ll address:', items: ['Specific actions or initiatives required', 'Owner and target date', 'Resources and budget needed', 'Dependencies on other gaps closing first', 'How you\'ll measure that the gap is actually closed'] }
-    ]
-  },
-  {
-    id: 'five-whys',
-    title: '5 Whys Root Cause Analysis',
-    category: 'pi',
-    description: 'Peel back symptoms to find the actual root cause of a problem.',
-    estMinutes: 20,
-    steps: [
-      { type: 'reference', title: 'What it is', body: 'A simple technique from Toyota: ask "why" repeatedly (typically five times) to move past surface symptoms to root causes. Best for problems with mostly linear cause-and-effect.' },
-      { type: 'instruction', title: 'Define the problem precisely', body: 'Write the problem in one specific sentence. Avoid vague framing. "Sales are down" is too broad. "Online conversion rate dropped 18% week-over-week starting March 3rd" is workable.' },
-      { type: 'checklist', title: 'Get the right people in the room', body: 'You need:', items: ['Someone close to the work who knows what actually happens', 'Someone with access to data to validate hypotheses', 'A facilitator who keeps the group on track', 'No one whose presence will make people self-censor'] },
-      { type: 'instruction', title: 'Ask why — and why again', body: 'Ask "why did that happen?" Take the answer, then ask "why?" of that answer. Continue until you hit something that, if fixed, would actually prevent recurrence. Stop when going further leads to "human nature" or things you can\'t change.' },
-      { type: 'reference', title: 'Worked example', body: 'Problem: report was sent late. Why? — The data wasn\'t ready. Why? — The overnight job failed. Why? — A schema change broke it. Why? — The change wasn\'t communicated to the data team. Why? — There\'s no process for upstream teams to flag schema changes. ← Root cause.' },
-      { type: 'checklist', title: 'Validate before fixing', body: 'A plausible answer isn\'t a confirmed cause. Before committing to a fix:', items: ['Check the chain against actual evidence (logs, data, interviews)', 'Ask: if we removed this cause, would the problem disappear?', 'Look for other possible causes you may have missed', 'Beware of stopping at the first answer that blames a person — usually there\'s a system cause behind it'] },
-      { type: 'instruction', title: 'Design and test the fix', body: 'Address the root cause, not the symptom. Define how you\'ll know the fix worked (a metric, a recurrence check at 30/60/90 days). If the problem comes back, your "root cause" wasn\'t the root cause.' }
-    ]
-  },
-  {
-    id: 'value-stream-mapping',
-    title: 'Value Stream Mapping',
-    category: 'pi',
-    description: 'Visualise material and information flow to expose waste end-to-end.',
-    estMinutes: 60,
-    steps: [
-      { type: 'reference', title: 'What VSM does', body: 'A Lean tool that maps every step a product or service goes through, capturing both work time and wait time. Its power is in the ratio: most processes have far more wait than work, and the wait is invisible until you map it.' },
-      { type: 'instruction', title: 'Pick one product family', body: 'Choose one specific product, service, or request type. Don\'t try to map everything. The goal is depth on one stream, not coverage of all of them.' },
-      { type: 'checklist', title: 'Walk the process — backwards', body: 'Start from the customer end and walk upstream. This keeps you focused on what creates value for the customer. At each step, capture:', items: ['Process step name and who does it', 'Cycle time (active work time)', 'Wait time before this step starts', 'First-pass yield (% done right first time)', 'Inventory/queue size in front of this step', 'Information flows (what triggers this step?)'] },
-      { type: 'instruction', title: 'Draw the current state map', body: 'Use standard VSM symbols if your team knows them, or simple boxes and arrows if not. Below the boxes, draw a timeline alternating cycle time and wait time. Sum them at the end — total lead time vs. total value-added time.' },
-      { type: 'reference', title: 'The eye-opening number', body: 'Calculate: value-added time ÷ total lead time. In most office processes this is under 5%. Manufacturing is often under 1%. The gap between them is your improvement opportunity.' },
-      { type: 'checklist', title: 'Identify waste', body: 'Look for the seven (or eight) wastes:', items: ['Overproduction — making more than needed', 'Waiting — queues, approvals, dependencies', 'Transport — moving things unnecessarily', 'Over-processing — doing more than the customer values', 'Inventory — work-in-progress sitting around', 'Motion — unnecessary movement', 'Defects — rework, errors, returns', 'Unused talent — people doing work below their capability'] },
-      { type: 'instruction', title: 'Design the future state', body: 'Don\'t try to fix everything. Pick 2–4 high-impact changes (often: combining steps, reducing batch sizes, eliminating approvals, fixing first-pass yield). Draw a future-state map showing the improved flow.' },
-      { type: 'instruction', title: 'Build a transition plan', body: 'Break the future state into a sequence of improvements with owners, dates, and metrics. VSM is most powerful when the map drives a kaizen burst — a focused improvement event with clear scope.' }
-    ]
-  },
-  {
-    id: 'kaizen-event',
-    title: 'Running a Kaizen Event',
-    category: 'pi',
-    description: 'Plan and run a focused, time-boxed improvement workshop.',
-    estMinutes: 35,
-    steps: [
-      { type: 'reference', title: 'What a Kaizen event is', body: 'A 2–5 day cross-functional workshop focused on improving one specific process. The team analyses, designs, and implements changes within the event itself — not after it. Speed and focus are the point.' },
-      { type: 'checklist', title: 'Pre-event preparation (2–4 weeks before)', body: 'Set up for success:', items: ['Define a tight scope and clear objective with measurable target', 'Select a 5–8 person team — mix of process workers, support roles, and a sponsor', 'Brief participants and clear their calendars completely', 'Gather baseline data (current performance, customer feedback, defect rates)', 'Secure a dedicated room with wall space for mapping', 'Get sponsor commitment to remove blockers in real time'] },
-      { type: 'instruction', title: 'Day 1 — Understand', body: 'Train the team on the basics (waste, flow, basic Lean). Walk the actual process — go to where the work happens. Build the current-state map. Resist designing solutions today. Today is for seeing reality clearly.' },
-      { type: 'instruction', title: 'Day 2 — Analyse and design', body: 'Identify root causes of the biggest issues. Brainstorm solutions widely before narrowing. Design the future state. Produce a specific implementation plan: what changes, who does it, by when, how it will be measured.' },
-      { type: 'instruction', title: 'Days 3–4 — Implement', body: 'Make the changes during the event itself. Move workstations, rewrite procedures, update systems, train people on the new way. Test it with real work. This is what makes Kaizen different from traditional projects — change happens in the room.' },
-      { type: 'checklist', title: 'Day 5 — Sustain and report', body: 'Lock in the gains:', items: ['Document the new standard work clearly', 'Train anyone who wasn\'t in the event on the new process', 'Set up daily/weekly measures to track that the change holds', 'Identify any follow-up items that couldn\'t be done in the week', 'Present results to leadership with before/after metrics', 'Recognise the team'] },
-      { type: 'reference', title: 'After the event — the 30-day rule', body: 'Most Kaizen events that fail, fail in the 30 days after. Schedule a 30-day check: are the changes still in place? Are metrics holding? If not, find out why immediately. The follow-up is part of the work.' }
     ]
   },
   {
@@ -226,6 +181,53 @@ const PLAYBOOKS = [
     ]
   },
   {
+    id: 'requirements-gathering',
+    title: 'Requirements Gathering',
+    category: 'ba',
+    description: 'Run effective elicitation sessions and capture requirements that survive contact with reality.',
+    estMinutes: 35,
+    steps: [
+      { type: 'instruction', title: 'Clarify the problem first', body: 'Before gathering requirements, agree on the problem. Write a problem statement in one sentence: who is affected, what\'s wrong, and the impact. Requirements are answers — make sure you have the right question.' },
+      { type: 'checklist', title: 'Pick the right elicitation techniques', body: 'Different sources need different tools:', items: ['1:1 interviews — for depth and sensitive topics', 'Workshops — for cross-functional alignment', 'Observation/shadowing — for "how it really works"', 'Document analysis — for existing systems and policies', 'Surveys — for breadth across many users', 'Prototyping — when people can\'t articulate until they see it'] },
+      { type: 'instruction', title: 'Prepare before every session', body: 'Send an agenda. Share artefacts in advance. Have specific questions ready but leave space for discovery. Decide who will facilitate and who will scribe — never the same person.' },
+      { type: 'reference', title: 'Question hierarchy', body: 'Start broad ("Walk me through how you do X today"), then narrow ("What happens when Y is missing?"), then validate ("So if I changed Z, would that work?"). Avoid leading questions and yes/no questions early on.' },
+      { type: 'checklist', title: 'Capture requirements well', body: 'Each requirement should be:', items: ['Specific (no vague words like "fast" or "user-friendly")', 'Measurable (testable acceptance criteria)', 'Attributed (who asked for it)', 'Prioritised (MoSCoW: Must/Should/Could/Won\'t)', 'Traceable (linked to the underlying need)'] },
+      { type: 'instruction', title: 'Validate, don\'t assume', body: 'Play back what you heard. Send written summaries within 24 hours. Get explicit sign-off on must-haves. Requirements you didn\'t validate will come back as scope changes later.' },
+      { type: 'reference', title: 'Watch for these traps', body: 'Solutions disguised as requirements ("we need a dropdown" → why?). Requirements without owners. Requirements that contradict each other across stakeholders. Silent stakeholders whose needs you missed entirely.' }
+    ]
+  },
+  {
+    id: 'process-mapping',
+    title: 'Process Mapping (As-Is)',
+    category: 'ba',
+    description: 'Document how a process actually works today, not how people think it works.',
+    estMinutes: 45,
+    steps: [
+      { type: 'instruction', title: 'Define scope and boundaries', body: 'Pick one process. Define the trigger (what starts it) and the outcome (what ends it). Resist the urge to map everything — a tightly scoped map is far more useful than a sprawling one.' },
+      { type: 'checklist', title: 'Identify the cast', body: 'List everyone who touches the process:', items: ['The customer or initiator', 'Each role/team that does work', 'Approvers and decision-makers', 'Systems involved', 'Any external parties'] },
+      { type: 'instruction', title: 'Walk the process with real people', body: 'Don\'t map from a desk. Sit with the people who do the work. Ask them to walk you through a recent real example, end to end. The official process and the actual process are almost never the same.' },
+      { type: 'reference', title: 'Choose a notation', body: 'Swimlane diagrams (one lane per role) are the most readable for stakeholders. BPMN is more rigorous if your audience knows it. Whichever you pick, be consistent: same shape for the same kind of element throughout.' },
+      { type: 'checklist', title: 'Capture the truth, not the ideal', body: 'For each step, note:', items: ['Who does it', 'What system or tool they use', 'How long it takes (range, not average)', 'Common exceptions and workarounds', 'Where it waits or queues', 'Where rework happens'] },
+      { type: 'instruction', title: 'Review with participants', body: 'Walk the map back through the people who do the work. They will spot what you missed. Expect at least two revisions before it\'s right.' },
+      { type: 'reference', title: 'What "as-is" reveals', body: 'A good as-is map exposes: handoffs (often where delays live), rework loops, shadow processes (workarounds), bottlenecks, and steps that add no value. Note these now — you\'ll target them in the to-be design.' }
+    ]
+  },
+  {
+    id: 'gap-analysis',
+    title: 'Gap Analysis',
+    category: 'ba',
+    description: 'Compare current state to desired state and define what bridges the gap.',
+    estMinutes: 30,
+    steps: [
+      { type: 'instruction', title: 'Define the desired future state', body: 'Be concrete. "Better customer service" isn\'t a state — it\'s a wish. "Average first-response time under 4 hours, 90% of tickets resolved on first contact" is a state. Use specific metrics where possible.' },
+      { type: 'instruction', title: 'Document the current state', body: 'Measure and describe where you are today, against the same dimensions you used for the future state. Apples-to-apples comparison or the analysis is meaningless.' },
+      { type: 'reference', title: 'Dimensions to compare', body: 'Process (how work flows), People (skills and roles), Technology (systems and tools), Data (what\'s captured and how), Performance (KPIs and metrics), Customer experience (what they see and feel).' },
+      { type: 'checklist', title: 'Identify each gap', body: 'For each dimension, ask:', items: ['What\'s the difference between current and desired?', 'Is the gap quantitative (numbers) or qualitative (capability)?', 'How big is it — small adjustment or fundamental rework?', 'What\'s the impact of leaving it unaddressed?'] },
+      { type: 'instruction', title: 'Prioritise gaps', body: 'You can\'t close every gap at once. Plot gaps on impact vs. effort. Quick wins (high impact, low effort) go first. Major projects (high impact, high effort) need proper planning. Skip the low-impact, high-effort ones unless they\'re mandatory.' },
+      { type: 'checklist', title: 'Define the bridge', body: 'For each gap you\'ll address:', items: ['Specific actions or initiatives required', 'Owner and target date', 'Resources and budget needed', 'Dependencies on other gaps closing first', 'How you\'ll measure that the gap is actually closed'] }
+    ]
+  },
+  {
     id: 'user-stories',
     title: 'Writing Effective User Stories',
     category: 'ba',
@@ -305,6 +307,55 @@ const PLAYBOOKS = [
       { type: 'reference', title: 'The diverge-converge pattern', body: 'Most good workshops follow: frame the problem, diverge (generate options/inputs broadly, no judgement), converge (narrow down, evaluate, decide). Skip the diverge and you get groupthink. Skip the converge and you get a list of unprioritised ideas.' },
       { type: 'checklist', title: 'Manage energy and dynamics', body: 'A two-hour workshop is a managed performance:', items: ['Vary activity types every 20–30 minutes', 'Mix individual, pair, and group work', 'Make the introvert input visible (sticky notes before discussion)', 'Watch for the loud voice dominating — invite quieter people directly', 'Park off-topic items visibly so they\'re not lost', 'Take breaks; people make worse decisions when tired'] },
       { type: 'instruction', title: 'Close with explicit decisions and owners', body: 'Don\'t end on a high. End on commitments. Walk through every decision and action, name an owner, set a date, and confirm out loud. Send the summary within 24 hours — the gap is where misunderstanding lives.' }
+    ]
+  },
+  {
+    id: 'five-whys',
+    title: '5 Whys Root Cause Analysis',
+    category: 'pi',
+    description: 'Peel back symptoms to find the actual root cause of a problem.',
+    estMinutes: 20,
+    steps: [
+      { type: 'reference', title: 'What it is', body: 'A simple technique from Toyota: ask "why" repeatedly (typically five times) to move past surface symptoms to root causes. Best for problems with mostly linear cause-and-effect.' },
+      { type: 'instruction', title: 'Define the problem precisely', body: 'Write the problem in one specific sentence. Avoid vague framing. "Sales are down" is too broad. "Online conversion rate dropped 18% week-over-week starting March 3rd" is workable.' },
+      { type: 'checklist', title: 'Get the right people in the room', body: 'You need:', items: ['Someone close to the work who knows what actually happens', 'Someone with access to data to validate hypotheses', 'A facilitator who keeps the group on track', 'No one whose presence will make people self-censor'] },
+      { type: 'instruction', title: 'Ask why — and why again', body: 'Ask "why did that happen?" Take the answer, then ask "why?" of that answer. Continue until you hit something that, if fixed, would actually prevent recurrence. Stop when going further leads to "human nature" or things you can\'t change.' },
+      { type: 'reference', title: 'Worked example', body: 'Problem: report was sent late. Why? — The data wasn\'t ready. Why? — The overnight job failed. Why? — A schema change broke it. Why? — The change wasn\'t communicated to the data team. Why? — There\'s no process for upstream teams to flag schema changes. ← Root cause.' },
+      { type: 'checklist', title: 'Validate before fixing', body: 'A plausible answer isn\'t a confirmed cause. Before committing to a fix:', items: ['Check the chain against actual evidence (logs, data, interviews)', 'Ask: if we removed this cause, would the problem disappear?', 'Look for other possible causes you may have missed', 'Beware of stopping at the first answer that blames a person — usually there\'s a system cause behind it'] },
+      { type: 'instruction', title: 'Design and test the fix', body: 'Address the root cause, not the symptom. Define how you\'ll know the fix worked (a metric, a recurrence check at 30/60/90 days). If the problem comes back, your "root cause" wasn\'t the root cause.' }
+    ]
+  },
+  {
+    id: 'value-stream-mapping',
+    title: 'Value Stream Mapping',
+    category: 'pi',
+    description: 'Visualise material and information flow to expose waste end-to-end.',
+    estMinutes: 60,
+    steps: [
+      { type: 'reference', title: 'What VSM does', body: 'A Lean tool that maps every step a product or service goes through, capturing both work time and wait time. Its power is in the ratio: most processes have far more wait than work, and the wait is invisible until you map it.' },
+      { type: 'instruction', title: 'Pick one product family', body: 'Choose one specific product, service, or request type. Don\'t try to map everything. The goal is depth on one stream, not coverage of all of them.' },
+      { type: 'checklist', title: 'Walk the process — backwards', body: 'Start from the customer end and walk upstream. This keeps you focused on what creates value for the customer. At each step, capture:', items: ['Process step name and who does it', 'Cycle time (active work time)', 'Wait time before this step starts', 'First-pass yield (% done right first time)', 'Inventory/queue size in front of this step', 'Information flows (what triggers this step?)'] },
+      { type: 'instruction', title: 'Draw the current state map', body: 'Use standard VSM symbols if your team knows them, or simple boxes and arrows if not. Below the boxes, draw a timeline alternating cycle time and wait time. Sum them at the end — total lead time vs. total value-added time.' },
+      { type: 'reference', title: 'The eye-opening number', body: 'Calculate: value-added time ÷ total lead time. In most office processes this is under 5%. Manufacturing is often under 1%. The gap between them is your improvement opportunity.' },
+      { type: 'checklist', title: 'Identify waste', body: 'Look for the seven (or eight) wastes:', items: ['Overproduction — making more than needed', 'Waiting — queues, approvals, dependencies', 'Transport — moving things unnecessarily', 'Over-processing — doing more than the customer values', 'Inventory — work-in-progress sitting around', 'Motion — unnecessary movement', 'Defects — rework, errors, returns', 'Unused talent — people doing work below their capability'] },
+      { type: 'instruction', title: 'Design the future state', body: 'Don\'t try to fix everything. Pick 2–4 high-impact changes (often: combining steps, reducing batch sizes, eliminating approvals, fixing first-pass yield). Draw a future-state map showing the improved flow.' },
+      { type: 'instruction', title: 'Build a transition plan', body: 'Break the future state into a sequence of improvements with owners, dates, and metrics. VSM is most powerful when the map drives a kaizen burst — a focused improvement event with clear scope.' }
+    ]
+  },
+  {
+    id: 'kaizen-event',
+    title: 'Running a Kaizen Event',
+    category: 'pi',
+    description: 'Plan and run a focused, time-boxed improvement workshop.',
+    estMinutes: 35,
+    steps: [
+      { type: 'reference', title: 'What a Kaizen event is', body: 'A 2–5 day cross-functional workshop focused on improving one specific process. The team analyses, designs, and implements changes within the event itself — not after it. Speed and focus are the point.' },
+      { type: 'checklist', title: 'Pre-event preparation (2–4 weeks before)', body: 'Set up for success:', items: ['Define a tight scope and clear objective with measurable target', 'Select a 5–8 person team — mix of process workers, support roles, and a sponsor', 'Brief participants and clear their calendars completely', 'Gather baseline data (current performance, customer feedback, defect rates)', 'Secure a dedicated room with wall space for mapping', 'Get sponsor commitment to remove blockers in real time'] },
+      { type: 'instruction', title: 'Day 1 — Understand', body: 'Train the team on the basics (waste, flow, basic Lean). Walk the actual process — go to where the work happens. Build the current-state map. Resist designing solutions today. Today is for seeing reality clearly.' },
+      { type: 'instruction', title: 'Day 2 — Analyse and design', body: 'Identify root causes of the biggest issues. Brainstorm solutions widely before narrowing. Design the future state. Produce a specific implementation plan: what changes, who does it, by when, how it will be measured.' },
+      { type: 'instruction', title: 'Days 3–4 — Implement', body: 'Make the changes during the event itself. Move workstations, rewrite procedures, update systems, train people on the new way. Test it with real work. This is what makes Kaizen different from traditional projects — change happens in the room.' },
+      { type: 'checklist', title: 'Day 5 — Sustain and report', body: 'Lock in the gains:', items: ['Document the new standard work clearly', 'Train anyone who wasn\'t in the event on the new process', 'Set up daily/weekly measures to track that the change holds', 'Identify any follow-up items that couldn\'t be done in the week', 'Present results to leadership with before/after metrics', 'Recognise the team'] },
+      { type: 'reference', title: 'After the event — the 30-day rule', body: 'Most Kaizen events that fail, fail in the 30 days after. Schedule a 30-day check: are the changes still in place? Are metrics holding? If not, find out why immediately. The follow-up is part of the work.' }
     ]
   },
   {
@@ -394,113 +445,50 @@ const PLAYBOOKS = [
 ];
 
 const CATEGORIES = {
-  change: {
-    label: 'Change Management',
-    short: 'Change',
-    gradient: 'from-fuchsia-500 to-pink-600',
-    bg: 'bg-fuchsia-50',
-    text: 'text-fuchsia-700',
-    border: 'border-fuchsia-200',
-    accent: '#d946ef',
-    icon: Compass
-  },
-  ba: {
-    label: 'Business Analysis',
-    short: 'BA',
-    gradient: 'from-indigo-500 to-violet-600',
-    bg: 'bg-indigo-50',
-    text: 'text-indigo-700',
-    border: 'border-indigo-200',
-    accent: '#6366f1',
-    icon: Target
-  },
-  pi: {
-    label: 'Process Improvement',
-    short: 'Process',
-    gradient: 'from-amber-400 to-orange-500',
-    bg: 'bg-amber-50',
-    text: 'text-amber-800',
-    border: 'border-amber-200',
-    accent: '#f59e0b',
-    icon: TrendingUp
-  }
+  change: { label: 'Change Management', short: 'Change', gradient: 'from-fuchsia-500 to-pink-600', bg: 'bg-fuchsia-50', text: 'text-fuchsia-700', border: 'border-fuchsia-200', accent: '#d946ef', icon: Compass },
+  ba: { label: 'Business Analysis', short: 'BA', gradient: 'from-indigo-500 to-violet-600', bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200', accent: '#6366f1', icon: Target },
+  pi: { label: 'Process Improvement', short: 'Process', gradient: 'from-amber-400 to-orange-500', bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200', accent: '#f59e0b', icon: TrendingUp }
 };
 
-// Decorative SVG illustrations for each category
 const ChangeIllustration = ({ className = "" }) => (
   <svg className={className} viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="changeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#d946ef" />
-        <stop offset="100%" stopColor="#db2777" />
-      </linearGradient>
-    </defs>
-    <circle cx="60" cy="60" r="40" fill="url(#changeGrad)" opacity="0.15" />
-    <circle cx="140" cy="100" r="30" fill="url(#changeGrad)" opacity="0.2" />
+    <defs><linearGradient id="changeGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#d946ef" /><stop offset="100%" stopColor="#db2777" /></linearGradient></defs>
+    <circle cx="60" cy="60" r="40" fill="url(#changeGrad)" opacity="0.15" /><circle cx="140" cy="100" r="30" fill="url(#changeGrad)" opacity="0.2" />
     <path d="M40 80 Q 80 40, 120 80 T 180 80" stroke="url(#changeGrad)" strokeWidth="3" fill="none" strokeLinecap="round" />
-    <circle cx="40" cy="80" r="8" fill="#d946ef" />
-    <circle cx="120" cy="80" r="8" fill="#ec4899" />
-    <circle cx="180" cy="80" r="8" fill="#db2777" />
+    <circle cx="40" cy="80" r="8" fill="#d946ef" /><circle cx="120" cy="80" r="8" fill="#ec4899" /><circle cx="180" cy="80" r="8" fill="#db2777" />
     <path d="M155 70 L 165 80 L 155 90" stroke="#fff" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const BAIllustration = ({ className = "" }) => (
   <svg className={className} viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="baGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#6366f1" />
-        <stop offset="100%" stopColor="#8b5cf6" />
-      </linearGradient>
-    </defs>
-    <rect x="30" y="100" width="20" height="40" rx="3" fill="url(#baGrad)" opacity="0.4" />
-    <rect x="60" y="80" width="20" height="60" rx="3" fill="url(#baGrad)" opacity="0.6" />
-    <rect x="90" y="60" width="20" height="80" rx="3" fill="url(#baGrad)" opacity="0.8" />
-    <rect x="120" y="40" width="20" height="100" rx="3" fill="url(#baGrad)" />
-    <circle cx="160" cy="40" r="12" fill="none" stroke="url(#baGrad)" strokeWidth="3" />
-    <line x1="168" y1="48" x2="178" y2="58" stroke="#6366f1" strokeWidth="3" strokeLinecap="round" />
+    <defs><linearGradient id="baGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#6366f1" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
+    <rect x="30" y="100" width="20" height="40" rx="3" fill="url(#baGrad)" opacity="0.4" /><rect x="60" y="80" width="20" height="60" rx="3" fill="url(#baGrad)" opacity="0.6" />
+    <rect x="90" y="60" width="20" height="80" rx="3" fill="url(#baGrad)" opacity="0.8" /><rect x="120" y="40" width="20" height="100" rx="3" fill="url(#baGrad)" />
+    <circle cx="160" cy="40" r="12" fill="none" stroke="url(#baGrad)" strokeWidth="3" /><line x1="168" y1="48" x2="178" y2="58" stroke="#6366f1" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
 const PIIllustration = ({ className = "" }) => (
   <svg className={className} viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="piGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#f59e0b" />
-        <stop offset="100%" stopColor="#ea580c" />
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="piGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#f59e0b" /><stop offset="100%" stopColor="#ea580c" /></linearGradient></defs>
     <circle cx="100" cy="80" r="50" fill="none" stroke="url(#piGrad)" strokeWidth="3" strokeDasharray="8 4" opacity="0.4" />
-    <circle cx="100" cy="80" r="30" fill="url(#piGrad)" opacity="0.2" />
-    <circle cx="100" cy="80" r="14" fill="url(#piGrad)" />
-    <path d="M100 30 L 105 45 L 100 50 L 95 45 Z" fill="#f59e0b" />
-    <path d="M170 80 L 155 85 L 150 80 L 155 75 Z" fill="#ea580c" />
-    <path d="M100 130 L 95 115 L 100 110 L 105 115 Z" fill="#f59e0b" />
-    <path d="M30 80 L 45 75 L 50 80 L 45 85 Z" fill="#ea580c" />
+    <circle cx="100" cy="80" r="30" fill="url(#piGrad)" opacity="0.2" /><circle cx="100" cy="80" r="14" fill="url(#piGrad)" />
+    <path d="M100 30 L 105 45 L 100 50 L 95 45 Z" fill="#f59e0b" /><path d="M170 80 L 155 85 L 150 80 L 155 75 Z" fill="#ea580c" />
+    <path d="M100 130 L 95 115 L 100 110 L 105 115 Z" fill="#f59e0b" /><path d="M30 80 L 45 75 L 50 80 L 45 85 Z" fill="#ea580c" />
   </svg>
 );
 
 const HeroBlob = () => (
   <svg className="absolute -top-20 -right-20 w-96 h-96 opacity-20 pointer-events-none" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="heroBlob" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#fbbf24" />
-        <stop offset="50%" stopColor="#ec4899" />
-        <stop offset="100%" stopColor="#8b5cf6" />
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="heroBlob" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#fbbf24" /><stop offset="50%" stopColor="#ec4899" /><stop offset="100%" stopColor="#8b5cf6" /></linearGradient></defs>
     <path d="M200 50 Q 320 80, 340 200 Q 320 320, 200 350 Q 80 320, 60 200 Q 80 80, 200 50" fill="url(#heroBlob)" />
   </svg>
 );
 
 const HeroBlob2 = () => (
   <svg className="absolute -bottom-32 -left-32 w-96 h-96 opacity-15 pointer-events-none" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="heroBlob2" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#06b6d4" />
-        <stop offset="100%" stopColor="#6366f1" />
-      </linearGradient>
-    </defs>
+    <defs><linearGradient id="heroBlob2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#06b6d4" /><stop offset="100%" stopColor="#6366f1" /></linearGradient></defs>
     <circle cx="200" cy="200" r="180" fill="url(#heroBlob2)" />
   </svg>
 );
@@ -512,21 +500,263 @@ const StepIcon = ({ type }) => {
     reference: { bg: 'bg-gradient-to-br from-amber-400 to-orange-500', icon: Sparkles }
   };
   const { bg, icon: Icon } = config[type] || config.instruction;
-  return (
-    <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shadow-lg shadow-black/5`}>
-      <Icon className="w-5 h-5 text-white" />
-    </div>
-  );
+  return (<div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shadow-lg shadow-black/5`}><Icon className="w-5 h-5 text-white" /></div>);
 };
 
+// ==================== AUTH SCREEN ====================
+function AuthScreen({ users, onLogin, onSignUp, onClose, isModal = false, contextMessage }) {
+  const [mode, setMode] = useState('signin'); // 'signin' or 'signup'
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = (e) => {
+    e?.preventDefault?.();
+    setError('');
+
+    if (!email.trim() || !password) {
+      setError('Please fill in all required fields.');
+      return;
+    }
+
+    const emailLower = email.trim().toLowerCase();
+
+    if (mode === 'signup') {
+      if (!name.trim()) {
+        setError('Please enter your name.');
+        return;
+      }
+      if (password.length < 6) {
+        setError('Password must be at least 6 characters.');
+        return;
+      }
+      if (users[emailLower]) {
+        setError('An account with this email already exists. Try signing in.');
+        return;
+      }
+      onSignUp({ email: emailLower, name: name.trim(), password });
+    } else {
+      const user = users[emailLower];
+      if (!user) {
+        setError('No account found with that email. Try signing up.');
+        return;
+      }
+      if (user.password !== password) {
+        setError('Incorrect password.');
+        return;
+      }
+      onLogin(emailLower);
+    }
+  };
+
+  const switchMode = (newMode) => {
+    setMode(newMode);
+    setError('');
+    setPassword('');
+  };
+
+  const wrapperClass = isModal
+    ? "fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-md overflow-y-auto"
+    : "min-h-screen relative bg-gradient-to-br from-slate-900 via-violet-900 to-slate-900 flex items-center justify-center p-4 overflow-hidden";
+
+  return (
+    <div className={wrapperClass}>
+      {!isModal && <HeroBlob />}
+      {!isModal && <HeroBlob2 />}
+
+      <div className="relative w-full max-w-md my-8">
+        {isModal && onClose && (
+          <button
+            onClick={onClose}
+            className="absolute -top-12 right-0 text-white/70 hover:text-white text-sm font-medium flex items-center gap-1.5 transition"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to library
+          </button>
+        )}
+
+        {/* Brand */}
+        <div className="text-center mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-medium mb-4">
+            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+            <span>Work Playbooks</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2 leading-tight">
+            {mode === 'signup' ? 'Create your account' : 'Welcome back'}
+          </h1>
+          <p className="text-slate-300 text-base">
+            {contextMessage || (mode === 'signup' ? 'Start running playbooks in under a minute.' : 'Pick up where you left off.')}
+          </p>
+        </div>
+
+        {/* Card */}
+        <div className="bg-white rounded-3xl shadow-2xl p-7 md:p-8">
+          {/* Mode toggle */}
+          <div className="flex bg-slate-100 rounded-xl p-1 mb-6">
+            <button
+              type="button"
+              onClick={() => switchMode('signin')}
+              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                mode === 'signin' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              onClick={() => switchMode('signup')}
+              className={`flex-1 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                mode === 'signup' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+              }`}
+            >
+              Sign up
+            </button>
+          </div>
+
+          <div className="space-y-4">
+            {mode === 'signup' && (
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Name</label>
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                    className="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400"
+                    autoComplete="name"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Email</label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  className="w-full pl-11 pr-4 py-3 rounded-xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400"
+                  autoComplete="email"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+                  placeholder={mode === 'signup' ? 'At least 6 characters' : 'Your password'}
+                  className="w-full pl-11 pr-11 py-3 rounded-xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400"
+                  autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            {error && (
+              <div className="flex items-start gap-2 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm">
+                <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="w-full bg-gradient-to-r from-fuchsia-500 via-pink-500 to-violet-600 text-white py-3.5 rounded-xl font-bold hover:opacity-90 transition-all hover:scale-[1.01] shadow-lg shadow-pink-500/30 mt-2"
+            >
+              {mode === 'signup' ? 'Create account' : 'Sign in'}
+            </button>
+          </div>
+
+          <div className="mt-6 text-center text-sm text-slate-500">
+            {mode === 'signup' ? (
+              <>Already have an account? <button type="button" onClick={() => switchMode('signin')} className="text-violet-600 font-semibold hover:underline">Sign in</button></>
+            ) : (
+              <>New here? <button type="button" onClick={() => switchMode('signup')} className="text-violet-600 font-semibold hover:underline">Create an account</button></>
+            )}
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-slate-400 mt-6 px-4 leading-relaxed">
+          Accounts are stored locally on this device. Your progress saves automatically.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ==================== DAILY QUOTE WIDGET ====================
+function DailyQuoteWidget({ quote }) {
+  return (
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-violet-900 to-fuchsia-900 p-8 md:p-10 mb-8 shadow-xl">
+      {/* Decorative blobs */}
+      <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-gradient-to-br from-amber-400 to-pink-500 opacity-20 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-gradient-to-br from-violet-500 to-cyan-400 opacity-20 blur-3xl pointer-events-none" />
+
+      <div className="relative">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-bold uppercase tracking-wider">
+            <Sparkles className="w-3 h-3 text-amber-300" />
+            Quote of the day
+          </div>
+        </div>
+
+        <div className="flex items-start gap-4 md:gap-5">
+          <Quote className="w-10 h-10 md:w-14 md:h-14 text-white/20 flex-shrink-0 -mt-1" strokeWidth={1.5} />
+          <div className="flex-1">
+            <p className="text-xl md:text-2xl font-semibold text-white leading-relaxed mb-3">
+              {quote.text}
+            </p>
+            <p className="text-amber-200 font-medium text-sm md:text-base">
+              — {quote.author}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ==================== MAIN APP ====================
 export default function App() {
+  // Auth state
+  const [users, setUsers] = useState({}); // { email: { name, password, progress: {} } }
+  const [currentUser, setCurrentUser] = useState(null); // email of current user
+
+  // App state
   const [view, setView] = useState('library');
   const [activePlaybook, setActivePlaybook] = useState(null);
   const [activeStep, setActiveStep] = useState(0);
-  const [progress, setProgress] = useState({});
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('all');
   const [showCelebration, setShowCelebration] = useState(false);
+  const [showAccountMenu, setShowAccountMenu] = useState(false);
+  const [showAuthGate, setShowAuthGate] = useState(false);
+  const [pendingPlaybook, setPendingPlaybook] = useState(null);
+
+  const dailyQuote = getDailyQuote();
+
+  // Get current user's progress
+  const progress = currentUser && users[currentUser]?.progress ? users[currentUser].progress : {};
 
   useEffect(() => {
     if (view === 'runner' && activePlaybook) {
@@ -537,7 +767,56 @@ export default function App() {
         setActiveStep(0);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [view, activePlaybook]);
+
+  const handleSignUp = ({ email, name, password }) => {
+    setUsers(prev => ({
+      ...prev,
+      [email]: { name, password, progress: {} }
+    }));
+    setCurrentUser(email);
+    setShowAuthGate(false);
+    // If they were trying to access a playbook, take them there
+    if (pendingPlaybook) {
+      setActivePlaybook(pendingPlaybook);
+      setView('runner');
+      setPendingPlaybook(null);
+    }
+  };
+
+  const handleLogin = (email) => {
+    setCurrentUser(email);
+    setShowAuthGate(false);
+    if (pendingPlaybook) {
+      setActivePlaybook(pendingPlaybook);
+      setView('runner');
+      setPendingPlaybook(null);
+    }
+  };
+
+  const handleLogout = () => {
+    setCurrentUser(null);
+    setView('library');
+    setActivePlaybook(null);
+    setActiveStep(0);
+    setShowAccountMenu(false);
+    setFilter('all');
+    setSearch('');
+  };
+
+  const updateProgress = (updater) => {
+    if (!currentUser) return;
+    setUsers(prev => {
+      const user = prev[currentUser];
+      if (!user) return prev;
+      const newProgress = updater(user.progress || {});
+      return {
+        ...prev,
+        [currentUser]: { ...user, progress: newProgress }
+      };
+    });
+  };
 
   const filteredPlaybooks = PLAYBOOKS.filter(p => {
     const matchesSearch = !search || p.title.toLowerCase().includes(search.toLowerCase()) || p.description.toLowerCase().includes(search.toLowerCase());
@@ -546,6 +825,11 @@ export default function App() {
   });
 
   const startPlaybook = (pb) => {
+    if (!currentUser) {
+      setPendingPlaybook(pb);
+      setShowAuthGate(true);
+      return;
+    }
     setActivePlaybook(pb);
     setView('runner');
   };
@@ -554,13 +838,9 @@ export default function App() {
     if (activePlaybook) {
       const completedSteps = progress[activePlaybook.id]?.steps || {};
       const completedCount = Object.values(completedSteps).filter(Boolean).length;
-      setProgress(prev => ({
-        ...prev,
-        [activePlaybook.id]: {
-          steps: completedSteps,
-          completed: completedCount,
-          lastStep: activeStep
-        }
+      updateProgress(p => ({
+        ...p,
+        [activePlaybook.id]: { steps: completedSteps, completed: completedCount, lastStep: activeStep }
       }));
     }
     setView('library');
@@ -574,13 +854,9 @@ export default function App() {
     const updated = { ...current, [stepIdx]: !current[stepIdx] };
     const completedCount = Object.values(updated).filter(Boolean).length;
 
-    setProgress(prev => ({
-      ...prev,
-      [activePlaybook.id]: {
-        steps: updated,
-        completed: completedCount,
-        lastStep: activeStep
-      }
+    updateProgress(p => ({
+      ...p,
+      [activePlaybook.id]: { steps: updated, completed: completedCount, lastStep: activeStep }
     }));
 
     if (completedCount === activePlaybook.steps.length) {
@@ -589,8 +865,8 @@ export default function App() {
   };
 
   const resetPlaybook = (pbId) => {
-    setProgress(prev => {
-      const next = { ...prev };
+    updateProgress(p => {
+      const next = { ...p };
       delete next[pbId];
       return next;
     });
@@ -600,14 +876,16 @@ export default function App() {
     if (!activePlaybook) return;
     if (idx < 0 || idx >= activePlaybook.steps.length) return;
     setActiveStep(idx);
-    setProgress(prev => ({
-      ...prev,
-      [activePlaybook.id]: {
-        ...(prev[activePlaybook.id] || { steps: {}, completed: 0 }),
-        lastStep: idx
-      }
+    updateProgress(p => ({
+      ...p,
+      [activePlaybook.id]: { ...(p[activePlaybook.id] || { steps: {}, completed: 0 }), lastStep: idx }
     }));
   };
+
+  // ============ AUTH MODAL (shown when trying to access a playbook) ============
+  // Note: we no longer gate the whole app — auth shows as a modal when needed.
+
+  const user = currentUser ? users[currentUser] : null;
 
   // ============ RUNNER VIEW ============
   if (view === 'runner' && activePlaybook) {
@@ -622,7 +900,7 @@ export default function App() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
         {showCelebration && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4 animate-in fade-in duration-300">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4">
             <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-amber-100 via-pink-100 to-violet-100 opacity-50" />
               <div className="relative">
@@ -708,11 +986,7 @@ export default function App() {
           <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-2">
             {activePlaybook.steps.map((_, idx) => (
               <button key={idx} onClick={() => goToStep(idx)} className={`flex-shrink-0 w-9 h-9 rounded-xl text-xs font-bold transition-all ${
-                idx === activeStep
-                  ? `bg-gradient-to-br ${cat.gradient} text-white shadow-lg scale-110`
-                  : completedSteps[idx]
-                    ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200'
-                    : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
+                idx === activeStep ? `bg-gradient-to-br ${cat.gradient} text-white shadow-lg scale-110` : completedSteps[idx] ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
               }`}>
                 {completedSteps[idx] ? '✓' : idx + 1}
               </button>
@@ -743,13 +1017,70 @@ export default function App() {
   // ============ LIBRARY VIEW ============
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+      {showAuthGate && (
+        <AuthScreen
+          users={users}
+          onLogin={handleLogin}
+          onSignUp={handleSignUp}
+          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); }}
+          isModal={true}
+          contextMessage={pendingPlaybook ? `Sign in to start "${pendingPlaybook.title}" and save your progress.` : undefined}
+        />
+      )}
+
       <header className="relative bg-gradient-to-br from-slate-900 via-violet-900 to-slate-900 overflow-hidden">
         <HeroBlob />
         <HeroBlob2 />
+
+        {/* Account / Sign in button */}
+        <div className="absolute top-4 right-4 z-20">
+          {currentUser ? (
+            <div className="relative">
+              <button
+                onClick={() => setShowAccountMenu(!showAccountMenu)}
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition"
+              >
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-400 via-pink-500 to-violet-500 flex items-center justify-center text-white font-bold text-xs shadow-lg">
+                  {user?.name?.charAt(0).toUpperCase() || 'U'}
+                </div>
+                <span className="text-sm font-medium hidden sm:inline">{user?.name || 'Account'}</span>
+              </button>
+
+              {showAccountMenu && (
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setShowAccountMenu(false)} />
+                  <div className="absolute top-full right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden z-20">
+                    <div className="p-4 border-b border-slate-100 bg-gradient-to-br from-slate-50 to-white">
+                      <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Signed in as</div>
+                      <div className="font-semibold text-slate-900 truncate">{user?.name}</div>
+                      <div className="text-sm text-slate-500 truncate">{currentUser}</div>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-3 px-4 py-3 text-slate-700 hover:bg-slate-50 transition text-sm font-medium"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Sign out
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={() => setShowAuthGate(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition text-sm font-semibold"
+            >
+              <LogIn className="w-4 h-4" />
+              Sign in
+            </button>
+          )}
+        </div>
+
         <div className="relative max-w-5xl mx-auto px-4 py-12 md:py-20">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white/90 text-xs font-medium mb-6">
             <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>Interactive playbooks for practitioners</span>
+            <span>{currentUser ? `Welcome back, ${user?.name?.split(' ')[0]}` : 'Interactive playbooks for practitioners'}</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-[1.1] tracking-tight">
             Run a playbook.<br />
@@ -772,17 +1103,13 @@ export default function App() {
       </header>
 
       <main className="max-w-5xl mx-auto px-4 py-10">
-        {/* Search + filters */}
+        {/* Daily quote widget */}
+        <DailyQuoteWidget quote={dailyQuote} />
+
         <div className="mb-8 space-y-4">
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search playbooks..."
-              className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400 font-medium"
-            />
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search playbooks..." className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-slate-200 bg-white focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-100 transition text-slate-900 placeholder:text-slate-400 font-medium" />
           </div>
           <div className="flex flex-wrap gap-2">
             <button onClick={() => setFilter('all')} className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${filter === 'all' ? 'bg-slate-900 text-white shadow-lg' : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'}`}>
@@ -792,11 +1119,7 @@ export default function App() {
               const count = PLAYBOOKS.filter(p => p.category === key).length;
               const Icon = cat.icon;
               return (
-                <button key={key} onClick={() => setFilter(key)} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                  filter === key
-                    ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg`
-                    : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'
-                }`}>
+                <button key={key} onClick={() => setFilter(key)} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${filter === key ? `bg-gradient-to-r ${cat.gradient} text-white shadow-lg` : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-slate-300'}`}>
                   <Icon className="w-4 h-4" />
                   {cat.label} ({count})
                 </button>
@@ -805,18 +1128,13 @@ export default function App() {
           </div>
         </div>
 
-        {/* Category showcase strip when filter is 'all' */}
         {filter === 'all' && !search && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
             {Object.entries(CATEGORIES).map(([key, cat]) => {
               const Illustration = key === 'change' ? ChangeIllustration : key === 'ba' ? BAIllustration : PIIllustration;
               const count = PLAYBOOKS.filter(p => p.category === key).length;
               return (
-                <button
-                  key={key}
-                  onClick={() => setFilter(key)}
-                  className="relative group overflow-hidden rounded-2xl bg-white border-2 border-slate-200 hover:border-slate-300 p-5 text-left transition-all hover:shadow-lg hover:-translate-y-0.5"
-                >
+                <button key={key} onClick={() => setFilter(key)} className="relative group overflow-hidden rounded-2xl bg-white border-2 border-slate-200 hover:border-slate-300 p-5 text-left transition-all hover:shadow-lg hover:-translate-y-0.5">
                   <Illustration className="absolute -right-4 -top-4 w-32 h-32 opacity-40 group-hover:opacity-60 transition" />
                   <div className="relative">
                     <div className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-gradient-to-r ${cat.gradient} text-white mb-2`}>
@@ -832,7 +1150,6 @@ export default function App() {
           </div>
         )}
 
-        {/* Playbook grid */}
         <div className="grid gap-5 md:grid-cols-2">
           {filteredPlaybooks.map(pb => {
             const cat = CATEGORIES[pb.category];
