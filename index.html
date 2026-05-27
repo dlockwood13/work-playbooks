@@ -985,6 +985,635 @@ const CATEGORIES = {
   ba: { label: 'Business Analysis', short: 'BA', gradient: 'from-indigo-500 to-violet-600', bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200', accent: '#6366f1', icon: Target },
   pi: { label: 'Process Improvement', short: 'Process', gradient: 'from-amber-400 to-orange-500', bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200', accent: '#f59e0b', icon: TrendingUp }
 };
+// ==================== ACADEMIC TEMPLATES ====================
+// Block types:
+//  - { type: 'field', label, placeholder }       single inline label + blank
+//  - { type: 'fields', items: [{label, placeholder}] }   row of inline fields
+//  - { type: 'box', label, rows }                large empty area (rows = visual height hint)
+//  - { type: 'table', headers, rows, headerCol } headers = array of column headers; rows = number of empty rows; headerCol = true if first column is a row label
+//  - { type: 'tableData', headers, data }        table with prefilled label rows (data = array of row arrays, blank cells = '')
+//  - { type: 'heading', text }                   subsection heading
+//  - { type: 'note', text }                      tip/instruction (italic, small)
+
+const ACADEMIC_CATEGORIES = {
+  planning: { label: 'Academic Planning', short: 'Planning', gradient: 'from-sky-500 to-blue-600', icon: Calculator, description: 'Semesters, courses, grades and degree timelines.' },
+  projects: { label: 'Project Planning', short: 'Projects', gradient: 'from-violet-500 to-indigo-600', icon: Briefcase, description: 'Essays, individual and group projects.' },
+  research: { label: 'Studying & Research', short: 'Research', gradient: 'from-emerald-500 to-teal-600', icon: BookOpen, description: 'Study sessions, exam prep, reading and references.' },
+  notes: { label: 'Note-taking', short: 'Notes', gradient: 'from-amber-500 to-orange-600', icon: FileText, description: 'Cornell, charting, boxing, mapping and lab notes.' }
+};
+
+const ACADEMIC_TEMPLATES = [
+  // ==================== ACADEMIC PLANNING ====================
+  {
+    id: 'semester-schedule',
+    title: 'Semester Schedule',
+    category: 'planning',
+    description: 'A weekly grid for the whole semester, plus a course-list lookup.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Semester' }, { label: 'Year' }, { label: 'Start date' }, { label: 'End date' }] },
+      { type: 'heading', text: 'Weekly schedule' },
+      { type: 'table', headers: ['Time', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], headerCol: true, rows: [
+        ['8:00 AM'], ['9:00 AM'], ['10:00 AM'], ['11:00 AM'], ['12:00 PM'], ['1:00 PM'], ['2:00 PM'], ['3:00 PM'], ['4:00 PM'], ['5:00 PM'], ['6:00 PM'], ['7:00 PM'], ['8:00 PM']
+      ]},
+      { type: 'heading', text: 'Course list' },
+      { type: 'table', headers: ['Course code', 'Course name', 'Professor', 'Room / location'], rows: 5 }
+    ]
+  },
+  {
+    id: 'semester-overview',
+    title: 'Semester Overview',
+    category: 'planning',
+    description: 'Month-by-month breakdown of weeks plus key dates per course.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Semester' }, { label: 'Year' }] },
+      { type: 'fields', items: [{ label: 'Semester start' }, { label: 'Semester end' }, { label: 'Reading week' }] },
+      { type: 'heading', text: 'Months & weeks' },
+      { type: 'tableData', headers: ['Month', 'Week 1', 'Week 2', 'Week 3', 'Week 4'], data: [
+        ['September', '', '', '', ''],
+        ['October', '', '', '', ''],
+        ['November', '', '', '', ''],
+        ['December', '', '', '', '']
+      ]},
+      { type: 'heading', text: 'Key dates per course' },
+      { type: 'table', headers: ['Course', 'Midterm / test dates', 'Assignment due dates', 'Final exam'], rows: 5 }
+    ]
+  },
+  {
+    id: 'course-overview',
+    title: 'Course Overview',
+    category: 'planning',
+    description: 'Full reference page for a single course: info, assessments, resources.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Course code' }, { label: 'Course name' }] },
+      { type: 'fields', items: [{ label: 'Professor / instructor' }, { label: 'Credits' }] },
+      { type: 'fields', items: [{ label: 'Class days' }, { label: 'Class time' }, { label: 'Room / location' }] },
+      { type: 'fields', items: [{ label: 'Office hours' }, { label: 'Office location' }] },
+      { type: 'box', label: 'Course description / objectives', rows: 4 },
+      { type: 'heading', text: 'Assessments' },
+      { type: 'table', headers: ['Assignment / assessment', 'Grade weight', 'Due date', 'Target grade', 'Actual grade'], rows: 8 },
+      { type: 'box', label: 'Required textbooks / resources', rows: 3 }
+    ]
+  },
+  {
+    id: 'grades-tracker',
+    title: 'Grades Tracker',
+    category: 'planning',
+    description: 'Tracks targets and actual grades per assignment across multiple courses.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Semester' }, { label: 'Year' }, { label: 'GPA target' }] },
+      ...[1, 2, 3, 4, 5].flatMap(n => [
+        { type: 'heading', text: `Course ${n}` },
+        { type: 'fields', items: [{ label: `Course ${n} name` }, { label: 'Professor' }] },
+        { type: 'table', headers: ['Assignment', 'Type', 'Weight', 'Due date', 'Target', 'Actual grade'], rows: 4 }
+      ])
+    ]
+  },
+  {
+    id: 'degree-planner',
+    title: 'Degree Planner',
+    category: 'planning',
+    description: 'Year-by-year map of courses and credits for an entire degree.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Degree program' }, { label: 'University' }] },
+      { type: 'fields', items: [{ label: 'Major' }, { label: 'Minor / specialization' }] },
+      { type: 'fields', items: [{ label: 'Start year' }, { label: 'Expected graduation' }] },
+      { type: 'heading', text: 'Course plan' },
+      { type: 'tableData', headers: ['Year', 'Semester', 'Courses taken / planned', 'Credits', 'Notes'], data: [
+        ['Year 1', 'Fall', '', '', ''],
+        ['Year 1', 'Winter', '', '', ''],
+        ['Year 1', 'Summer', '', '', ''],
+        ['Year 2', 'Fall', '', '', ''],
+        ['Year 2', 'Winter', '', '', ''],
+        ['Year 2', 'Summer', '', '', ''],
+        ['Year 3', 'Fall', '', '', ''],
+        ['Year 3', 'Winter', '', '', ''],
+        ['Year 3', 'Summer', '', '', ''],
+        ['Year 4', 'Fall', '', '', ''],
+        ['Year 4', 'Winter', '', '', ''],
+        ['Year 4', 'Summer', '', '', '']
+      ]}
+    ]
+  },
+  {
+    id: 'internship-tracker',
+    title: 'Internship Applications Tracker',
+    category: 'planning',
+    description: 'Track companies, roles, interview dates and outcomes in one place.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Academic year' }, { label: 'Target industry' }] },
+      { type: 'table', headers: ['#', 'Company', 'Position / role', 'Date applied', 'Interview date', 'Status', 'Notes / outcome'], rows: 15, autoNumber: true },
+      { type: 'note', text: 'Status key: Applied · Application Viewed · Phone Screen · Interview Scheduled · Offer Received · Offer Accepted · Rejected · Withdrawn' }
+    ]
+  },
+
+  // ==================== PROJECT PLANNING ====================
+  {
+    id: 'essay-outline',
+    title: 'Essay Outline',
+    category: 'projects',
+    description: 'Thesis, three key points with evidence, intro and conclusion notes.',
+    blocks: [
+      { type: 'field', label: 'Title' },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Due date' }, { label: 'Grade weight' }] },
+      { type: 'field', label: 'Topic / subject' },
+      { type: 'box', label: 'Objectives & requirements', rows: 3 },
+      { type: 'box', label: 'Thesis statement', rows: 3 },
+      ...[1, 2, 3].flatMap(n => [
+        { type: 'heading', text: `Key point ${n}` },
+        { type: 'box', label: 'Key point', rows: 2 },
+        { type: 'box', label: 'Supporting evidence', rows: 3 },
+        { type: 'box', label: 'Analysis / argument', rows: 3 }
+      ]),
+      { type: 'box', label: 'Introduction notes', rows: 4 },
+      { type: 'box', label: 'Conclusion notes', rows: 4 }
+    ]
+  },
+  {
+    id: 'project-planner',
+    title: 'Project Planner',
+    category: 'projects',
+    description: 'Individual project: tasks, milestones, resources and progress.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Project title' }, { label: 'Course' }] },
+      { type: 'fields', items: [{ label: 'Due date' }, { label: 'Grade weight' }, { label: 'Target grade' }, { label: 'Actual grade' }] },
+      { type: 'box', label: 'Project description / objectives', rows: 3 },
+      { type: 'heading', text: 'Tasks & milestones' },
+      { type: 'table', headers: ['#', 'Task / milestone', 'Start date', 'Due date', 'Status', 'Notes'], rows: 8, autoNumber: true },
+      { type: 'box', label: 'Resources / references needed', rows: 4 },
+      { type: 'box', label: 'Progress notes', rows: 4 }
+    ]
+  },
+  {
+    id: 'group-project-planner',
+    title: 'Group Project Planner',
+    category: 'projects',
+    description: 'Set up a team project: members, roles, tasks and assignments.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Project title' }, { label: 'Course' }] },
+      { type: 'fields', items: [{ label: 'Due date' }, { label: 'Grade weight' }, { label: 'Submission format' }] },
+      { type: 'box', label: 'Project description / objectives', rows: 3 },
+      { type: 'heading', text: 'Team members' },
+      { type: 'table', headers: ['Team member', 'Email / contact', 'Role', 'Strengths'], rows: 5 },
+      { type: 'heading', text: 'Task assignments' },
+      { type: 'table', headers: ['Task', 'Assigned to', 'Due date', 'Status', 'Notes'], rows: 10 }
+    ]
+  },
+  {
+    id: 'group-project-progress',
+    title: 'Group Project Progress Tracker',
+    category: 'projects',
+    description: 'Track team progress with blockers and next steps.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Project title' }, { label: 'Course' }] },
+      { type: 'fields', items: [{ label: 'Due date' }, { label: 'Grade weight' }, { label: 'Team size' }] },
+      { type: 'table', headers: ['Task / deliverable', 'Assigned to', 'Start date', 'Due date', '% complete', 'Status'], rows: 10 },
+      { type: 'box', label: 'Blockers / issues', rows: 5 },
+      { type: 'box', label: 'Next steps / action items', rows: 5 }
+    ]
+  },
+  {
+    id: 'multiple-projects-tracker',
+    title: 'Multiple Projects Tracker',
+    category: 'projects',
+    description: 'Bird\'s-eye view of all projects this semester with target and actual grades.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Semester' }, { label: 'Year' }] },
+      { type: 'table', headers: ['#', 'Project title', 'Course', 'Due date', 'Weight', 'Target', 'Actual', 'Status'], rows: 12, autoNumber: true }
+    ]
+  },
+  {
+    id: 'meeting-minutes',
+    title: 'Meeting Minutes',
+    category: 'projects',
+    description: 'Structured notes for team meetings: agenda, actions, decisions.',
+    blocks: [
+      { type: 'field', label: 'Subject / project' },
+      { type: 'field', label: 'Meeting goal' },
+      { type: 'fields', items: [{ label: 'Date & time' }, { label: 'Venue / platform' }] },
+      { type: 'box', label: 'Attendees (names / roles)', rows: 3 },
+      { type: 'heading', text: 'Agenda & discussion' },
+      { type: 'table', headers: ['#', 'Agenda item', 'Discussion / notes'], rows: 6, autoNumber: true },
+      { type: 'heading', text: 'Action items' },
+      { type: 'table', headers: ['Action item', 'Assigned to', 'Due date', 'Status'], rows: 6 },
+      { type: 'box', label: 'Decisions made', rows: 3 },
+      { type: 'box', label: 'Next meeting date & agenda', rows: 3 }
+    ]
+  },
+
+  // ==================== STUDYING & RESEARCH ====================
+  {
+    id: 'study-session-notes',
+    title: 'Study Session Notes',
+    category: 'research',
+    description: 'Log a focused study session with priorities, time and notes.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Date' }, { label: 'Start time' }, { label: 'End time' }] },
+      { type: 'fields', items: [{ label: 'Study duration' }, { label: 'Location' }] },
+      { type: 'heading', text: 'Plan' },
+      { type: 'table', headers: ['Class', 'Topic', 'Priorities', 'Time allocated'], rows: 8 },
+      { type: 'box', label: 'Notes', rows: 16 }
+    ]
+  },
+  {
+    id: 'exam-prep-outline',
+    title: 'Exam Preparation Outline',
+    category: 'research',
+    description: 'Topic-by-topic study plan with confidence rating per area.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Exam date' }] },
+      { type: 'fields', items: [{ label: 'Exam type' }, { label: 'Weight' }, { label: 'Format' }] },
+      { type: 'heading', text: 'Topics' },
+      { type: 'table', headers: ['Topic / chapter', 'Key concepts', 'Study method', 'Confidence'], rows: 10 },
+      { type: 'box', label: 'Practice questions / notes', rows: 7 }
+    ]
+  },
+  {
+    id: 'reading-summary',
+    title: 'Reading Summary',
+    category: 'research',
+    description: 'Capture main ideas, key quotes and a personal reflection.',
+    blocks: [
+      { type: 'field', label: 'Title of reading' },
+      { type: 'fields', items: [{ label: 'Author(s)' }, { label: 'Year' }] },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date read' }] },
+      { type: 'box', label: 'Main ideas / key arguments', rows: 5 },
+      { type: 'heading', text: 'Key quotes' },
+      { type: 'table', headers: ['Key quote', 'Page / location'], rows: 5 },
+      { type: 'box', label: 'Summary in your own words', rows: 4 },
+      { type: 'box', label: 'Personal reflection / connection to course', rows: 3 }
+    ]
+  },
+  {
+    id: 'research-notes',
+    title: 'Research Notes',
+    category: 'research',
+    description: 'Source-by-source notes with key terms and follow-up questions.',
+    blocks: [
+      { type: 'field', label: 'Research topic / question' },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date' }] },
+      { type: 'heading', text: 'Source details' },
+      { type: 'table', headers: ['Source / author', 'Year / publication', 'Type (book / article / web)'], rows: 1 },
+      { type: 'box', label: 'Notes / key points', rows: 12 },
+      { type: 'heading', text: 'Terms & follow-up' },
+      { type: 'table', headers: ['Key terms / definitions', 'Questions for follow-up'], rows: 5 }
+    ]
+  },
+  {
+    id: 'reference-tracker',
+    title: 'Reference Tracker',
+    category: 'research',
+    description: 'Numbered list of references for any project — MLA, APA or Chicago.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Course / project' }, { label: 'Date' }] },
+      { type: 'note', text: 'Citation guides: MLA, APA and Chicago (Purdue OWL) all have free public guides online.' },
+      { type: 'table', headers: ['#', 'Author(s)', 'Title', 'Publication / journal', 'Year', 'Notes / in-text citation'], rows: 12, autoNumber: true }
+    ]
+  },
+  {
+    id: 'simple-todo',
+    title: 'Simple To-Do List',
+    category: 'research',
+    description: 'A clean checklist with due dates and priorities.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Date' }, { label: 'Course / project' }] },
+      { type: 'table', headers: ['✔', 'Task', 'Due date', 'Priority'], rows: 20, checkboxCol: 0 }
+    ]
+  },
+  {
+    id: 'detailed-todo',
+    title: 'Detailed To-Do List',
+    category: 'research',
+    description: 'A to-do list with space for steps, notes, priority and status per task.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Date' }, { label: 'Course / project' }] },
+      ...[1, 2, 3, 4, 5, 6, 7, 8].flatMap(n => [
+        { type: 'heading', text: `Task ${n}` },
+        { type: 'fields', items: [{ label: `Task ${n}` }, { label: 'Due' }] },
+        { type: 'table', headers: ['Steps / notes', 'Priority', 'Course', 'Status'], rows: 1 }
+      ])
+    ]
+  },
+
+  // ==================== NOTE-TAKING ====================
+  {
+    id: 'cornell-notes',
+    title: 'Cornell Notes',
+    category: 'notes',
+    description: 'Classic Cornell method: cues column, notes column, summary below.',
+    blocks: [
+      { type: 'note', text: 'Write cues/questions in the left column, notes on the right. Summarize at the bottom after class.' },
+      { type: 'field', label: 'Topic / lecture title' },
+      { type: 'table', headers: ['Course / class', 'Lecturer / professor', 'Date'], rows: 1 },
+      { type: 'heading', text: 'Cues & notes' },
+      { type: 'table', headers: ['Cues / questions', 'Notes'], rows: 18 },
+      { type: 'box', label: 'Summary', rows: 5 }
+    ]
+  },
+  {
+    id: 'charting-notes-1',
+    title: 'Charting Notes — 3 Concepts',
+    category: 'notes',
+    description: 'Three-column chart for organising notes under three main concepts.',
+    blocks: [
+      { type: 'note', text: 'Fill each column with notes organized under its main concept heading.' },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date' }] },
+      { type: 'field', label: 'Topic' },
+      { type: 'table', headers: ['Category', 'Main concept 1', 'Main concept 2', 'Main concept 3'], rows: 14 }
+    ]
+  },
+  {
+    id: 'charting-notes-2',
+    title: 'Charting Notes — Facts / Details / Examples',
+    category: 'notes',
+    description: 'Five-column chart for comparing facts, details, examples and key terms.',
+    blocks: [
+      { type: 'note', text: 'Categorize information across multiple columns for easy comparison and review.' },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date' }] },
+      { type: 'field', label: 'Topic' },
+      { type: 'table', headers: ['Category', 'Facts', 'Details', 'Examples', 'Key terms'], rows: 14 }
+    ]
+  },
+  {
+    id: 'boxing-notes',
+    title: 'Boxing Notes',
+    category: 'notes',
+    description: 'Four topic boxes with a connections section below.',
+    blocks: [
+      { type: 'note', text: 'Group related topics into separate boxes. Note connections between topics in the section below.' },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date' }] },
+      { type: 'field', label: 'Topic' },
+      { type: 'box', label: 'Topic 1', rows: 6 },
+      { type: 'box', label: 'Topic 2', rows: 6 },
+      { type: 'box', label: 'Topic 3', rows: 6 },
+      { type: 'box', label: 'Topic 4', rows: 6 },
+      { type: 'box', label: 'Key takeaways / connections', rows: 5 }
+    ]
+  },
+  {
+    id: 'mapping-notes',
+    title: 'Mapping Notes',
+    category: 'notes',
+    description: 'Mind-map style: main topic centre, four subtopics radiating out.',
+    blocks: [
+      { type: 'note', text: 'Place the main topic in the center. Branch out with subtopics and link related ideas.' },
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date' }] },
+      { type: 'field', label: 'Main topic' },
+      { type: 'box', label: 'Subtopic A', rows: 5 },
+      { type: 'box', label: 'Subtopic B', rows: 5 },
+      { type: 'box', label: 'Subtopic C', rows: 5 },
+      { type: 'box', label: 'Subtopic D', rows: 5 },
+      { type: 'box', label: 'Connections between subtopics', rows: 4 }
+    ]
+  },
+  {
+    id: 'tutorial-lab-notes',
+    title: 'Tutorial / Lab Notes',
+    category: 'notes',
+    description: 'Structured notes for tutorials and lab sessions with objectives and conclusions.',
+    blocks: [
+      { type: 'fields', items: [{ label: 'Course' }, { label: 'Date' }] },
+      { type: 'fields', items: [{ label: 'Tutorial / lab #' }, { label: 'Professor' }] },
+      { type: 'field', label: 'Topic / experiment title' },
+      { type: 'box', label: 'Objectives / purpose', rows: 3 },
+      { type: 'box', label: 'Notes', rows: 20 },
+      { type: 'box', label: 'Conclusions / takeaways', rows: 4 }
+    ]
+  }
+];
+
+// ==================== ACADEMIC DOWNLOAD ====================
+function downloadAcademicTemplate(template) {
+  let txt = `${template.title.toUpperCase()}\n${'='.repeat(template.title.length)}\n\n${template.description}\n\n`;
+
+  const blockToText = (block) => {
+    switch (block.type) {
+      case 'field':
+        return `${block.label}: ____________________________________________\n\n`;
+      case 'fields':
+        return block.items.map(it => `${it.label}: __________________`).join('     ') + '\n\n';
+      case 'box':
+        return `${block.label}:\n` + '_'.repeat(70) + '\n'.repeat(block.rows || 3) + '\n';
+      case 'heading':
+        return `\n--- ${block.text.toUpperCase()} ---\n\n`;
+      case 'note':
+        return `Note: ${block.text}\n\n`;
+      case 'table': {
+        const headers = block.headers;
+        const colWidths = headers.map(h => Math.max(h.length, 12));
+        const sep = '+' + colWidths.map(w => '-'.repeat(w + 2)).join('+') + '+';
+        const headerRow = '|' + headers.map((h, i) => ' ' + h.padEnd(colWidths[i]) + ' ').join('|') + '|';
+        const emptyRow = '|' + colWidths.map(w => ' '.repeat(w + 2)).join('|') + '|';
+        let out = sep + '\n' + headerRow + '\n' + sep + '\n';
+        const rowCount = typeof block.rows === 'number' ? block.rows : (block.rows || []).length;
+        for (let i = 0; i < rowCount; i++) {
+          if (block.autoNumber) {
+            let row = '|' + ' ' + String(i + 1).padEnd(colWidths[0]) + ' ';
+            for (let j = 1; j < headers.length; j++) row += '|' + ' '.repeat(colWidths[j] + 2);
+            out += row + '|\n';
+          } else {
+            out += emptyRow + '\n';
+          }
+        }
+        out += sep + '\n\n';
+        return out;
+      }
+      case 'tableData': {
+        const headers = block.headers;
+        const allRows = [headers, ...block.data];
+        const colWidths = headers.map((_, i) => Math.max(...allRows.map(r => String(r[i] || '').length), 12));
+        const sep = '+' + colWidths.map(w => '-'.repeat(w + 2)).join('+') + '+';
+        const fmt = row => '|' + headers.map((_, i) => ' ' + String(row[i] || '').padEnd(colWidths[i]) + ' ').join('|') + '|';
+        let out = sep + '\n' + fmt(headers) + '\n' + sep + '\n';
+        block.data.forEach(r => { out += fmt(r) + '\n'; });
+        out += sep + '\n\n';
+        return out;
+      }
+      default:
+        return '';
+    }
+  };
+
+  template.blocks.forEach(b => { txt += blockToText(b); });
+
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${template.id}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+// ==================== ACADEMIC TEMPLATE VIEWER (table-aware) ====================
+function AcademicTemplateViewer({ template, onClose, onDownload }) {
+  const cat = ACADEMIC_CATEGORIES[template.category];
+
+  const renderBlock = (block, idx) => {
+    switch (block.type) {
+      case 'heading':
+        return (
+          <h3 key={idx} className="text-base font-bold text-slate-900 mt-6 mb-2.5 flex items-center gap-2">
+            <span className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${cat.gradient}`} />
+            {block.text}
+          </h3>
+        );
+      case 'note':
+        return (
+          <div key={idx} className="my-3 px-3 py-2 rounded-lg bg-amber-50 border border-amber-200 text-xs text-amber-900 italic leading-relaxed">
+            {block.text}
+          </div>
+        );
+      case 'field':
+        return (
+          <div key={idx} className="my-3">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">{block.label}</div>
+            <div className="h-9 rounded-lg border border-slate-200 bg-slate-50" />
+          </div>
+        );
+      case 'fields':
+        return (
+          <div key={idx} className="my-3 grid gap-2" style={{ gridTemplateColumns: `repeat(${Math.min(block.items.length, 4)}, minmax(0, 1fr))` }}>
+            {block.items.map((item, i) => (
+              <div key={i}>
+                <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1 truncate">{item.label}</div>
+                <div className="h-9 rounded-lg border border-slate-200 bg-slate-50" />
+              </div>
+            ))}
+          </div>
+        );
+      case 'box':
+        return (
+          <div key={idx} className="my-3">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">{block.label}</div>
+            <div className="rounded-lg border border-slate-200 bg-slate-50" style={{ height: `${(block.rows || 3) * 22}px` }} />
+          </div>
+        );
+      case 'table': {
+        const rowCount = block.rows;
+        return (
+          <div key={idx} className="my-3 overflow-x-auto -mx-2 px-2">
+            <table className="w-full border-collapse text-xs">
+              <thead>
+                <tr>
+                  {block.headers.map((h, i) => (
+                    <th key={i} className={`border border-slate-300 bg-gradient-to-r ${cat.gradient} text-white px-2 py-2 font-bold text-left whitespace-nowrap`}>
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: rowCount }).map((_, ri) => (
+                  <tr key={ri}>
+                    {block.headers.map((_, ci) => (
+                      <td key={ci} className={`border border-slate-200 bg-white px-2 py-2 align-top ${block.headerCol && ci === 0 ? 'font-bold bg-slate-50 text-slate-700 whitespace-nowrap' : ''}`} style={{ minWidth: ci === 0 && block.headerCol ? '80px' : '100px', height: '32px' }}>
+                        {block.autoNumber && ci === 0 ? ri + 1 : block.headerCol && ci === 0 && block.rows && Array.isArray(block.rows) ? (block.rows[ri] && block.rows[ri][0]) || '' : ''}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      case 'tableData': {
+        return (
+          <div key={idx} className="my-3 overflow-x-auto -mx-2 px-2">
+            <table className="w-full border-collapse text-xs">
+              <thead>
+                <tr>
+                  {block.headers.map((h, i) => (
+                    <th key={i} className={`border border-slate-300 bg-gradient-to-r ${cat.gradient} text-white px-2 py-2 font-bold text-left whitespace-nowrap`}>
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {block.data.map((row, ri) => (
+                  <tr key={ri}>
+                    {block.headers.map((_, ci) => (
+                      <td key={ci} className={`border border-slate-200 px-2 py-2 align-top ${row[ci] ? 'bg-slate-50 font-bold text-slate-700 whitespace-nowrap' : 'bg-white'}`} style={{ minWidth: '90px', height: '32px' }}>
+                        {row[ci] || ''}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+      default:
+        return null;
+    }
+  };
+
+  // Special-case: 'table' with headerCol uses block.rows array of label-only rows
+  const renderTable = (block, idx) => {
+    if (block.type !== 'table' || !block.headerCol || !Array.isArray(block.rows)) return renderBlock(block, idx);
+    return (
+      <div key={idx} className="my-3 overflow-x-auto -mx-2 px-2">
+        <table className="w-full border-collapse text-xs">
+          <thead>
+            <tr>
+              {block.headers.map((h, i) => (
+                <th key={i} className={`border border-slate-300 bg-gradient-to-r ${cat.gradient} text-white px-2 py-2 font-bold text-left whitespace-nowrap`}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {block.rows.map((row, ri) => (
+              <tr key={ri}>
+                {block.headers.map((_, ci) => (
+                  <td key={ci} className={`border border-slate-200 px-2 py-2 align-top ${ci === 0 ? 'bg-slate-50 font-bold text-slate-700 whitespace-nowrap' : 'bg-white'}`} style={{ minWidth: ci === 0 ? '80px' : '90px', height: '32px' }}>
+                    {ci === 0 ? row[0] : ''}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md p-4 overflow-y-auto" onClick={onClose}>
+      <div className="max-w-4xl mx-auto my-8 bg-white rounded-3xl shadow-2xl overflow-hidden" onClick={(e) => e.stopPropagation()}>
+        <div className={`bg-gradient-to-r ${cat.gradient} p-6 md:p-8 text-white relative`}>
+          <button onClick={onClose} className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center transition">
+            <X className="w-5 h-5" />
+          </button>
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-bold bg-white/20 backdrop-blur-sm mb-3">
+            <cat.icon className="w-3 h-3" />
+            {cat.label}
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-2">{template.title}</h2>
+          <p className="text-white/90 text-sm md:text-base leading-relaxed">{template.description}</p>
+        </div>
+
+        <div className="p-6 md:p-8 max-h-[65vh] overflow-y-auto">
+          {template.blocks.map((b, i) => renderTable(b, i))}
+        </div>
+
+        <div className="p-4 md:p-6 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row gap-3">
+          <button onClick={onClose} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border-2 border-slate-200 text-slate-700 hover:bg-white hover:border-slate-300 transition font-semibold">
+            Close
+          </button>
+          <button onClick={() => onDownload(template)} className={`flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r ${cat.gradient} text-white hover:opacity-90 transition font-bold shadow-lg`}>
+            <Download className="w-4 h-4" />
+            Download as .txt
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ==================== ILLUSTRATIONS ====================
 const ChangeIllustration = ({ className = "" }) => (
   <svg className={className} viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
@@ -1329,6 +1958,10 @@ function App() {
   const [pendingTemplate, setPendingTemplate] = useState(null);
   const [pendingCheatSheet, setPendingCheatSheet] = useState(null);
   const [browsingCategory, setBrowsingCategory] = useState(null);
+  const [browsingAcademicCategory, setBrowsingAcademicCategory] = useState(null);
+  const [activeAcademicTemplate, setActiveAcademicTemplate] = useState(null);
+  const [academicFilter, setAcademicFilter] = useState('all');
+  const [pendingAcademicTemplate, setPendingAcademicTemplate] = useState(null);
 
   // PWA install state
   const [installPrompt, setInstallPrompt] = useState(null);
@@ -1421,6 +2054,9 @@ function App() {
     } else if (pendingCheatSheet) {
       setActiveCheatSheet(pendingCheatSheet);
       setPendingCheatSheet(null);
+    } else if (pendingAcademicTemplate) {
+      setActiveAcademicTemplate(pendingAcademicTemplate);
+      setPendingAcademicTemplate(null);
     }
   };
 
@@ -1438,6 +2074,9 @@ function App() {
     } else if (pendingCheatSheet) {
       setActiveCheatSheet(pendingCheatSheet);
       setPendingCheatSheet(null);
+    } else if (pendingAcademicTemplate) {
+      setActiveAcademicTemplate(pendingAcademicTemplate);
+      setPendingAcademicTemplate(null);
     }
   };
 
@@ -1875,6 +2514,10 @@ function App() {
             <FileText className="w-4 h-4" />
             Templates
           </button>
+          <button onClick={() => { setSection('academic'); setBrowsingAcademicCategory(null); setSearch(''); setAcademicFilter('all'); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition ${section === 'academic' ? 'bg-gradient-to-r from-sky-500 to-indigo-600 text-white shadow' : 'text-slate-600 hover:bg-slate-50'}`}>
+            <Calculator className="w-4 h-4" />
+            Academic
+          </button>
           <button onClick={() => { setSection('cheatsheets'); setSearch(''); }} className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold transition ${section === 'cheatsheets' ? 'bg-gradient-to-r from-fuchsia-500 to-violet-600 text-white shadow' : 'text-slate-600 hover:bg-slate-50'}`}>
             <Database className="w-4 h-4" />
             Cheat sheets
@@ -2140,6 +2783,134 @@ function App() {
           </>
         )}
 
+        {/* ACADEMIC SECTION */}
+        {section === 'academic' && (
+          <>
+            {/* Category landing */}
+            {!browsingAcademicCategory && !search ? (
+              <>
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-900 to-sky-900 p-6 md:p-8 mb-6 text-white">
+                  <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br from-sky-400 to-violet-500 opacity-20 blur-3xl pointer-events-none" />
+                  <div className="relative">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-bold uppercase tracking-wider mb-3">
+                      <Calculator className="w-3 h-3 text-sky-300" />
+                      Academic
+                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold mb-2">Templates for school, university and study.</h2>
+                    <p className="text-slate-300 text-sm md:text-base max-w-2xl">Plan a semester, outline an essay, prep for an exam, take better lecture notes. Pick a discipline to begin.</p>
+                  </div>
+                </div>
+
+                <h2 className="text-2xl font-bold text-slate-900 mb-4">Choose a discipline</h2>
+                <div className="grid md:grid-cols-2 gap-4 mb-12">
+                  {Object.entries(ACADEMIC_CATEGORIES).map(([key, cat]) => {
+                    const count = ACADEMIC_TEMPLATES.filter((t) => t.category === key).length;
+                    return (
+                      <button key={key} onClick={() => setBrowsingAcademicCategory(key)} className="relative overflow-hidden text-left bg-white rounded-3xl p-6 border border-slate-200 hover:border-sky-300 hover:shadow-2xl transition-all group">
+                        <div className={`relative inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br ${cat.gradient} mb-4 shadow-lg`}>
+                          <cat.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="relative font-bold text-slate-900 text-xl mb-1.5">{cat.label}</h3>
+                        <p className="relative text-slate-600 text-sm leading-relaxed mb-4">{cat.description}</p>
+                        <div className="relative flex items-center justify-between">
+                          <span className="text-xs text-slate-500 font-semibold">{count} template{count === 1 ? '' : 's'}</span>
+                          <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-sky-600 group-hover:translate-x-1 transition" />
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="bg-white rounded-2xl p-4 border border-slate-200 mb-6">
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search all academic templates…" className="w-full pl-11 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:border-sky-400 focus:bg-white transition text-slate-900 placeholder:text-slate-400 text-sm" />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Category nav + search */}
+                <div className="flex flex-col md:flex-row md:items-center gap-3 mb-6">
+                  {browsingAcademicCategory && (
+                    <button onClick={() => { setBrowsingAcademicCategory(null); setSearch(''); setAcademicFilter('all'); }} className="self-start flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-white transition">
+                      <ArrowLeft className="w-4 h-4" />
+                      All disciplines
+                    </button>
+                  )}
+                  <div className="relative flex-1">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search academic templates…" className="w-full pl-11 pr-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-sky-400 transition text-slate-900 placeholder:text-slate-400 text-sm" />
+                  </div>
+                </div>
+
+                {!browsingAcademicCategory && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    <button onClick={() => setAcademicFilter('all')} className={`px-3 py-1.5 rounded-full text-xs font-bold transition ${academicFilter === 'all' ? 'bg-slate-900 text-white' : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'}`}>All</button>
+                    {Object.entries(ACADEMIC_CATEGORIES).map(([key, cat]) => (
+                      <button key={key} onClick={() => setAcademicFilter(key)} className={`px-3 py-1.5 rounded-full text-xs font-bold transition inline-flex items-center gap-1.5 ${academicFilter === key ? `bg-gradient-to-r ${cat.gradient} text-white` : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'}`}>
+                        <cat.icon className="w-3 h-3" />
+                        {cat.short}
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                {browsingAcademicCategory && (
+                  <div className="mb-5">
+                    {(() => {
+                      const cat = ACADEMIC_CATEGORIES[browsingAcademicCategory];
+                      return (
+                        <div className="flex items-center gap-3">
+                          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center shadow-lg`}>
+                            <cat.icon className="w-6 h-6 text-white" />
+                          </div>
+                          <div>
+                            <h2 className="text-2xl font-bold text-slate-900">{cat.label}</h2>
+                            <p className="text-slate-500 text-sm">{cat.description}</p>
+                          </div>
+                        </div>
+                      );
+                    })()}
+                  </div>
+                )}
+
+                {/* Template cards */}
+                <div className="grid md:grid-cols-2 gap-4 mb-12">
+                  {ACADEMIC_TEMPLATES.filter((t) => {
+                    if (browsingAcademicCategory && t.category !== browsingAcademicCategory) return false;
+                    if (!browsingAcademicCategory && academicFilter !== 'all' && t.category !== academicFilter) return false;
+                    if (search) {
+                      const q = search.toLowerCase();
+                      return t.title.toLowerCase().includes(q) || t.description.toLowerCase().includes(q);
+                    }
+                    return true;
+                  }).map((t) => {
+                    const cat = ACADEMIC_CATEGORIES[t.category];
+                    return (
+                      <button key={t.id} onClick={() => {
+                        if (!currentUser) { setPendingAcademicTemplate(t); setShowAuthGate(true); return; }
+                        setActiveAcademicTemplate(t);
+                      }} className="text-left bg-white rounded-2xl p-5 border border-slate-200 hover:border-sky-300 hover:shadow-xl transition-all group">
+                        <div className="flex items-start gap-3 mb-3">
+                          <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center flex-shrink-0 shadow`}>
+                            <cat.icon className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{cat.short}</div>
+                            <h3 className="font-bold text-slate-900 leading-tight group-hover:text-sky-700 transition">{t.title}</h3>
+                          </div>
+                        </div>
+                        <p className="text-slate-600 text-sm leading-relaxed line-clamp-2">{t.description}</p>
+                      </button>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+          </>
+        )}
+
         {/* Footer */}
         <div className="text-center text-xs text-slate-400 py-8 border-t border-slate-200">
           <p>Work Playbooks · Installable offline app · Your data stays on this device.</p>
@@ -2149,6 +2920,11 @@ function App() {
       {/* Template modal */}
       {activeTemplate && (
         <TemplateViewer template={activeTemplate} onClose={() => setActiveTemplate(null)} onDownload={downloadTemplate} categoryMap={TEMPLATE_CATEGORIES} />
+      )}
+
+      {/* Academic template modal */}
+      {activeAcademicTemplate && (
+        <AcademicTemplateViewer template={activeAcademicTemplate} onClose={() => setActiveAcademicTemplate(null)} onDownload={downloadAcademicTemplate} />
       )}
 
       {/* Cheat sheet modal (reuses TemplateViewer with cheat sheet category map) */}
@@ -2162,9 +2938,9 @@ function App() {
           users={users}
           onLogin={handleLogin}
           onSignUp={handleSignUp}
-          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); setPendingTemplate(null); setPendingCheatSheet(null); }}
+          onClose={() => { setShowAuthGate(false); setPendingPlaybook(null); setPendingTemplate(null); setPendingCheatSheet(null); setPendingAcademicTemplate(null); }}
           isModal={true}
-          contextMessage={pendingPlaybook ? `Sign in to start "${pendingPlaybook.title}" and track your progress.` : pendingTemplate ? `Sign in to open "${pendingTemplate.title}".` : pendingCheatSheet ? `Sign in to open "${pendingCheatSheet.title}".` : null}
+          contextMessage={pendingPlaybook ? `Sign in to start "${pendingPlaybook.title}" and track your progress.` : pendingTemplate ? `Sign in to open "${pendingTemplate.title}".` : pendingCheatSheet ? `Sign in to open "${pendingCheatSheet.title}".` : pendingAcademicTemplate ? `Sign in to open "${pendingAcademicTemplate.title}".` : null}
         />
       )}
 
