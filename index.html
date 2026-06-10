@@ -285,18 +285,69 @@ function getDailyQuote() {
 
 // ==================== FREELANCE TEMPLATES ====================
 const TEMPLATES = [
+  // ==================== PROPOSALS ====================
   {
-    id: 'client-proposal',
-    title: 'Client Proposal Template',
+    id: 'consulting-proposal',
+    title: 'Consulting Proposal',
     category: 'proposals',
-    description: 'A clean structure for proposing a project to a new client — overview, objectives, approach, timeline, pricing.',
+    description: 'The pre-engagement document that wins the work: understanding, approach, pricing options, and acceptance.',
     sections: [
-      { heading: 'Project Overview', body: "Brief summary of the client's challenge and your proposed solution." },
-      { heading: 'Objectives', body: 'Key goals and outcomes the client should expect.' },
-      { heading: 'Approach', body: 'Outline your phases of work, methodology, and tools.' },
-      { heading: 'Timeline', body: 'Estimated start and end dates, along with milestones.' },
-      { heading: 'Pricing', body: 'Project-based pricing, optional extras, and payment terms.' },
-      { heading: 'Next Steps', body: 'Instructions for the client to proceed or book a call.' }
+      { heading: 'Header', body: `Proposal reference: [PROP-001]\nDate: [DATE]\nPrepared for: [Client name, contact]\nPrepared by: [Consultant name / company]\nValid until: [DATE]` },
+      { heading: '1. Executive summary', body: `[In three or four sentences: what the client wants to achieve, what you are proposing to do, the headline outcome, and the indicative investment and timeline. A busy reader should be able to grasp the whole proposal from this paragraph alone.]` },
+      { heading: '2. Understanding of your situation', body: `[Set out your understanding of the client's context and the problem or opportunity. Demonstrating that you have understood the brief is what separates a credible proposal from a generic one. Reference what you have heard in conversations or seen in any briefing materials.]` },
+      { heading: '3. Objectives and desired outcomes', body: `Based on that understanding, this work is aimed at the following outcomes:\n• [Outcome the client will be able to see or measure]\n• [Outcome]\n• [Outcome]` },
+      { heading: '4. Proposed approach', body: `[Describe how you will deliver the work, in phases. Keep it outcome focused rather than listing every task; the detailed task list belongs in the Scope of Work.]\n\nPhase | Focus | What you get\n1 | [Discovery / diagnosis] | [Output of this phase]\n2 | [Analysis / design] | [Output of this phase]\n3 | [Delivery / implementation] | [Output of this phase]\n4 | [Embed / handover] | [Output of this phase]` },
+      { heading: '5. Scope of services', body: `At a high level, this engagement includes:\n• [Service area included]\n• [Service area included]\n• [Service area included]\n\nNote: The full, detailed scope, including what is out of scope, is set out in the accompanying Scope of Work, which is issued once this proposal is accepted.` },
+      { heading: '6. Key deliverables', body: `Deliverable | Description\n[Deliverable] | [One line on what it is and the value it gives]\n[Deliverable] | [ ]\n[Deliverable] | [ ]` },
+      { heading: '7. Indicative timeline', body: `Phase | Indicative duration | Key outcome\n[Phase 1] | [e.g. 2 weeks] | [ ]\n[Phase 2] | [e.g. 3 weeks] | [ ]\n[Phase 3] | [e.g. 3 weeks] | [ ]\n\nNote: Timings are indicative and confirmed in the Scope of Work once the start date and client availability are agreed.` },
+      { heading: '8. Investment', body: `[Present pricing in a way that lets the client choose. Options work well: a focused option and a fuller option. If a single price is more appropriate, delete the option rows and state the fee. All figures exclude VAT.]\n\nOption | What is included | Fee (excl. VAT)\n[Option A: Essential] | [Scope summary] | [£ ]\n[Option B: Recommended] | [Scope summary] | [£ ]\n[Option C: Comprehensive] | [Scope summary] | [£ ]\n\nFee basis: [Fixed fee / day rate / retainer]\nExpenses: [Pre-agreed, recharged at cost]\nPayment terms: [e.g. phased; 30 days from invoice]` },
+      { heading: '9. Why work with me', body: `[Three or four short, specific reasons the client should choose you. Lead with relevant experience and results rather than adjectives, and tailor each line to this client's situation.]\n• [Relevant experience or result, with a concrete example]\n• [Relevant qualification or specialism that fits this brief]\n• [A distinctive perspective or method you bring]` },
+      { heading: '10. What I need from you', body: `To deliver to this timeline, I would need:\n• A single point of contact empowered to make decisions.\n• [Access, information or stakeholder time required]\n• Feedback on deliverables within [5] working days.` },
+      { heading: '11. Assumptions', body: `• [Assumption this proposal relies on]\n• [Assumption this proposal relies on]` },
+      { heading: '12. Terms and next steps', body: `This proposal is valid until the date shown above. It is an offer, not a commitment, and no contract arises until both parties sign a Scope of Work or the Consultancy Services Agreement. On acceptance, I will issue the Scope of Work for signature, confirm the start date, and arrange a kick off meeting.` },
+      { heading: '13. Acceptance', body: `To proceed on the basis of this proposal, please sign below. Acceptance authorises preparation of the Scope of Work and contract; it does not replace them.\n\nAccepted for the Client:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................\n\nFor the Consultant:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................` }
+    ]
+  },
+
+  // ==================== DISCOVERY & ONBOARDING ====================
+  {
+    id: 'engagement-initiation-brief',
+    title: 'Engagement Initiation Brief',
+    category: 'discovery',
+    description: 'Project initiation and kick-off: summary, objectives, scope, governance, plan, and sign-off.',
+    sections: [
+      { heading: 'Document control', body: `Document title: [ ]\nVersion: [0.1 Draft]\nDate: [DATE]\nAuthor: [Dan Lockwood]\nOwner: [ ]\nDistribution: [ ]\nStatus: [Draft / For review / Approved]` },
+      { heading: '1. Engagement summary', body: `[One paragraph summary of the engagement: the client, the problem, and what this work will deliver.]` },
+      { heading: '2. Background and problem statement', body: `[Set out the business context and the problem or opportunity. Be specific about the current pain and its cost or impact.]` },
+      { heading: '3. Objectives and success criteria', body: `Objective | How success will be measured\n[ ] | [Measurable outcome]\n[ ] | [Measurable outcome]\n[ ] | [Measurable outcome]` },
+      { heading: '4. Scope', body: `In scope:\n• [ ]\n• [ ]\n\nOut of scope:\n• [ ]\n• [ ]` },
+      { heading: '5. Key deliverables', body: `• [Deliverable]\n• [Deliverable]\n• [Deliverable]` },
+      { heading: '6. Approach and methodology', body: `[Describe the phases and the analysis techniques to be used, for example discovery, current-state analysis, requirements elicitation, future-state design, and handover.]` },
+      { heading: '7. Stakeholders', body: `[Summarise the key stakeholders. The full analysis is held in the Stakeholder Analysis and RACI document.]` },
+      { heading: '8. Governance and decision-making', body: `[State who sponsors the work, who makes decisions, the meeting cadence, and how progress is reported. The decision and accountability split is set out in the RACI matrix.]` },
+      { heading: '9. Assumptions, dependencies and constraints', body: `Assumptions | Dependencies | Constraints\n[ ] | [ ] | [ ]\n[ ] | [ ] | [ ]` },
+      { heading: '10. High-level plan and milestones', body: `Ref | Milestone | Target date | Status\nM1 | [ ] | [ ] | [ ]\nM2 | [ ] | [ ] | [ ]\nM3 | [ ] | [ ] | [ ]` },
+      { heading: '11. Initial risks', body: `[List the main risks now visible. These transfer into the RAID log for ongoing management.]` },
+      { heading: '12. Communication plan', body: `Audience | Message / purpose | Channel | Frequency\n[Sponsor] | [Status and decisions] | [Meeting] | [Weekly]\n[Project team] | [Progress and actions] | [Stand-up] | [Daily / weekly]` },
+      { heading: '13. Sign-off', body: `Sponsor:\nSignature: ..........................  Name: ..........................  Date: ..........................\n\nLead Business Analyst:\nSignature: ..........................  Name: ..........................  Date: ..........................` }
+    ]
+  },
+  {
+    id: 'client-onboarding-pack',
+    title: 'Client Onboarding Pack',
+    category: 'discovery',
+    description: 'Welcome and project setup once a deal is signed: ways of working, onboarding checklist, kick-off agenda.',
+    sections: [
+      { heading: '1. Welcome', body: `Dear [Client contact],\n\nThank you for choosing to work with [Consultant]. I am looking forward to getting started on [project name] and to delivering the outcomes we agreed. This pack explains how we will work together, what I will need from you, and what happens in the first few days, so we can begin quickly and smoothly.\n\n[Optional: one or two sentences personalising the welcome and restating the result the client will get.]\n\n[Consultant name]` },
+      { heading: '2. Your engagement at a glance', body: `Project: [Project name]\nScope of Work reference: [SOW-001]\nClient sponsor: [Name, role]\nConsultant: [Name / company]\nStart date: [DATE]\nIndicative end date: [DATE]\nFee basis: [Fixed fee / day rate / retainer]` },
+      { heading: '3. How we will work together', body: `Area | Way of working\nMain contact | [Consultant], reachable at [email / phone]\nYour point of contact | [Name], who can make or obtain decisions\nMeeting rhythm | [e.g. weekly 30 minute check in, day and time]\nProgress updates | [e.g. a short written status each Friday]\nResponse times | [e.g. replies within one working day]\nDocument sharing | [e.g. shared folder or email; note any tools]\nDecisions and changes | Logged, and where they affect scope, time or fee, handled through change control` },
+      { heading: '4. Key contacts', body: `Name | Organisation | Role | Contact\n[ ] | Client | [Sponsor] | [ ]\n[ ] | Client | [Day to day contact] | [ ]\n[ ] | Consultant | [Lead] | [ ]` },
+      { heading: '5. Onboarding checklist', body: `The tasks below get us ready to start. Most are quick, and I will lead on my side.\n\nTask | Owner | Due | Status\nConfirm and sign the Scope of Work or contract | Both | [ ] | [ ]\nSign the mutual NDA, if not already in place | Both | [ ] | [ ]\nAgree how confidential information and data will be shared | Both | [ ] | [ ]\nProvide access to systems, tools and any shared folders | Client | [ ] | [ ]\nShare the documents and data listed in section 7 | Client | [ ] | [ ]\nIntroduce key stakeholders and subject matter experts | Client | [ ] | [ ]\nSend calendar invitations for recurring check ins | Consultant | [ ] | [ ]\nSchedule and confirm the kick off meeting | Both | [ ] | [ ]` },
+      { heading: '6. Kick off meeting agenda', body: `Proposed agenda for our first meeting, allow [60] minutes:\n1. Introductions and roles.\n2. Confirm objectives, scope and the definition of success.\n3. Walk through the timeline, milestones and key dates.\n4. Confirm responsibilities, dependencies and decision making.\n5. Agree ways of working, meeting rhythm and reporting.\n6. Review access, information needs and any open onboarding items.\n7. Risks, assumptions and immediate next steps.` },
+      { heading: '7. Information we will need from you', body: `To start without delay, please have the following ready:\n• [Key documents, e.g. existing process maps, prior reports, policies]\n• [Data or reports relevant to the work]\n• [Access to named systems or environments]\n• [Names and availability of stakeholders to be involved]\n• [Any constraints, deadlines or sensitivities I should know about]` },
+      { heading: '8. Invoicing and payment', body: `[State how and when invoices are issued, for example monthly in arrears or on milestones, the payment terms, where invoices should be sent, and whether a purchase order is needed. Note that pre-agreed expenses are recharged at cost.]` },
+      { heading: '9. Confidentiality and data handling', body: `Your information will be treated as confidential and used only for this engagement, in line with the mutual NDA and applicable data protection law. [Note any specific handling requirements, for example where data must be stored, or how it must be returned or deleted at the end of the engagement.]` },
+      { heading: '10. What to expect next', body: `When | What happens\nOn signature | I confirm the start date and send calendar invitations and the shared folder.\nBefore kick off | You share the items in section 7; I prepare for discovery.\nWeek 1 | Kick off meeting, then discovery begins; first written update at the end of the week.\n[Week 2 onwards] | [Delivery proceeds against the milestones in the Scope of Work.]` }
     ]
   },
   {
@@ -347,63 +398,136 @@ const TEMPLATES = [
       { heading: '6. Post-Interview Checklist', body: '• Summarise insights: pain points, blockers, quick wins.\n• Note recurring quotes, phrases, or themes.\n• Capture stakeholder sentiment and change readiness.\n• Update stakeholder map with new intelligence.\n• Log areas needing further validation or deep-dive.' }
     ]
   },
+
+  // ==================== CONTRACTS & SETUP ====================
   {
-    id: 'client-onboarding',
-    title: 'Client Onboarding Form',
-    category: 'discovery',
-    description: 'A simple onboarding form to capture company details, objectives, stakeholders, and access needs.',
+    id: 'consultancy-services-agreement',
+    title: 'Consultancy Services Agreement',
+    category: 'contracts',
+    description: 'A full UK independent-contractor master agreement: status, IP, liability, IR35, termination, plus charges schedule.',
     sections: [
-      { heading: 'Company Information', body: 'Name, address, registration number, key contacts.' },
-      { heading: 'Project Background', body: 'Brief description of current challenges.' },
-      { heading: 'Key Objectives', body: 'Top goals and desired outcomes.' },
-      { heading: 'Stakeholders', body: 'Names and roles of decision-makers.' },
-      { heading: 'Access Needs', body: 'Systems, documents, or teams you\'ll need access to.' },
-      { heading: 'Preferred Communication', body: 'Email, video, phone, frequency.' }
+      { heading: 'Before you use this', body: `Template only; not legal, tax, or financial advice. Commercial and legal terms, in particular intellectual property, liability, payment, confidentiality, and IR35 or off-payroll status, should be reviewed and adapted to the engagement and, where appropriate, checked with a qualified solicitor or accountant before signing. Complete or delete text in square brackets, and delete italicised guidance notes before issuing.\n\nThis Agreement is dated [DATE].` },
+      { heading: 'Parties', body: `(1) [CLIENT COMPANY NAME], a company incorporated in England and Wales (company number [NUMBER]) whose registered office is at [ADDRESS] (the "Client"); and\n(2) [CONSULTANT COMPANY NAME], a company incorporated in England and Wales (company number [NUMBER]) whose registered office is at [ADDRESS] (the "Consultant").\nEach a "party" and together the "parties".` },
+      { heading: 'Background', body: `(A) The Client wishes to obtain business analysis and related consultancy services.\n(B) The Consultant has agreed to provide those services through a named individual, [CONSULTANT NAME], on the terms of this Agreement.\n(C) The parties intend that the Consultant supplies the services as an independent contractor and that this Agreement does not create a relationship of employment.` },
+      { heading: '1. Definitions and interpretation', body: `1.1 In this Agreement: "Services" means the services described in the Statement of Work; "Deliverables" means the outputs to be produced under the Statement of Work; "Statement of Work" or "SOW" means each statement of work agreed by the parties; "Charges" means the fees set out in Schedule 2 or the relevant SOW; "Confidential Information" has the meaning given in clause 9; "Intellectual Property Rights" or "IPR" means patents, copyright, database rights, trade marks, design rights, know-how and all other intellectual property rights, whether registered or unregistered.\n1.2 Clause and schedule headings do not affect interpretation. A reference to legislation includes any subordinate legislation made under it, as amended from time to time.\n1.3 If there is a conflict, the main body of this Agreement takes precedence over a Statement of Work, unless the SOW expressly states that it varies a specified clause.` },
+      { heading: '2. Appointment and services', body: `2.1 The Client appoints the Consultant to provide the Services, and the Consultant agrees to provide them, on the terms of this Agreement and each agreed Statement of Work.\n2.2 The Consultant shall provide the Services with reasonable skill and care and in accordance with good industry practice.\n2.3 Each Statement of Work shall set out the scope, deliverables, timescales, acceptance criteria and Charges for the relevant work. No SOW is binding until signed by both parties.\n2.4 The Consultant shall use the individual named in the Background to perform the Services, subject to the right of substitution in clause 8.` },
+      { heading: '3. Status of the Consultant', body: `Note: This clause records that the engagement sits outside employment and, where the rules apply, outside IR35. It is only persuasive if it matches the actual working practices.\n\n3.1 The relationship between the parties is that of independent contractor. Nothing in this Agreement constitutes a relationship of employer and employee, partnership, agency or joint venture between the Client and the Consultant or the individual performing the Services.\n3.2 The Consultant is responsible for the manner in which the Services are performed and is not subject to the supervision, direction or control of the Client as to how the Services are carried out.\n3.3 There is no obligation on the Client to offer further work and no obligation on the Consultant to accept it.\n3.4 The Consultant is not entitled to holiday pay, sick pay, pension contributions or any other employment benefit from the Client.\n3.5 The Consultant is responsible for all income tax, National Insurance contributions and other liabilities arising in respect of the Charges, save where the off-payroll working rules require another party in the chain to operate deductions. The parties shall co-operate in good faith on any status determination.\n3.6 The Consultant may provide services to other clients during the term, provided this does not give rise to a conflict of interest with the Services.` },
+      { heading: '4. Term', body: `4.1 This Agreement begins on [START DATE] and continues until terminated in accordance with clause 13.\n4.2 Each Statement of Work runs for the period stated in it, unless terminated earlier.` },
+      { heading: '5. Charges and payment', body: `5.1 The Client shall pay the Charges set out in Schedule 2 or the relevant Statement of Work.\n5.2 Unless stated otherwise, the Consultant shall invoice [monthly in arrears / on completion of agreed milestones]. Each invoice shall set out the days worked or milestone achieved and any agreed expenses.\n5.3 The Client shall pay each correctly rendered invoice within [30] days of the date of invoice, to the account notified by the Consultant.\n5.4 All Charges are exclusive of VAT, which shall be added at the prevailing rate where applicable.\n5.5 If the Client fails to pay a sum due by the due date, the Consultant may charge interest and recover reasonable costs under the Late Payment of Commercial Debts (Interest) Act 1998.\n5.6 The Consultant shall keep accurate records of time spent and make them available to the Client on reasonable request.` },
+      { heading: '6. Expenses', body: `6.1 The Client shall reimburse reasonable expenses necessarily incurred in providing the Services and agreed in advance in writing, on production of receipts, in line with the Client's expenses policy where notified.` },
+      { heading: '7. Intellectual property', body: `7.1 Subject to clause 7.3, all Intellectual Property Rights in the Deliverables created specifically for the Client under a Statement of Work shall, on payment in full of the relevant Charges, vest in and be assigned to the Client.\n7.2 The Consultant assigns those rights to the Client with full title guarantee, and shall execute any documents reasonably required to give effect to this clause.\n7.3 The Consultant retains all rights in methodologies, templates, tools, know-how and other materials existing before the engagement or developed independently of it ("Background IPR"). The Consultant grants the Client a non-exclusive, perpetual, royalty-free licence to use Background IPR to the extent it is incorporated in the Deliverables and necessary for the Client to use them.\n7.4 The Consultant warrants that the Deliverables will not, so far as it is reasonably aware, infringe the rights of any third party.` },
+      { heading: '8. Substitution and personnel', body: `8.1 The Consultant may provide a suitably qualified and experienced substitute to perform the Services, provided it gives reasonable notice, remains responsible for the acts and omissions of the substitute, and bears any additional cost of the substitution.\n8.2 The Client may decline a proposed substitute only on reasonable grounds relating to qualifications, security or confidentiality.` },
+      { heading: '9. Confidentiality', body: `9.1 Each party shall keep confidential all Confidential Information of the other and use it only for the purposes of this Agreement. "Confidential Information" means information disclosed by one party to the other that is marked, or would reasonably be regarded, as confidential, including business, technical, commercial and personal data.\n9.2 Clause 9.1 does not apply to information that is or becomes public other than by breach, is lawfully held without restriction, or is required to be disclosed by law or a regulator, provided reasonable notice is given where lawful.\n9.3 This clause survives termination. A separate non-disclosure agreement, if signed, applies in addition to this clause.` },
+      { heading: '10. Data protection', body: `10.1 Each party shall comply with the UK General Data Protection Regulation and the Data Protection Act 2018 in respect of any personal data processed under this Agreement.\n10.2 Where the Consultant processes personal data on behalf of the Client, the parties shall enter into appropriate data processing terms setting out the subject matter, duration, nature and purpose of the processing and the obligations of each party.` },
+      { heading: '11. Insurance', body: `11.1 The Consultant shall maintain, with a reputable insurer, professional indemnity insurance of not less than [£1,000,000] and public liability insurance of not less than [£1,000,000] for the duration of this Agreement, and shall provide evidence on request.` },
+      { heading: '12. Liability and indemnities', body: `12.1 Nothing in this Agreement limits or excludes liability for death or personal injury caused by negligence, for fraud or fraudulent misrepresentation, or for any other liability that cannot lawfully be limited.\n12.2 Subject to clause 12.1, neither party is liable for loss of profit, loss of business, loss of anticipated savings, or any indirect or consequential loss.\n12.3 Subject to clauses 12.1 and 12.2, the total liability of each party under or in connection with this Agreement, whether in contract, tort or otherwise, is limited to [the total Charges paid in the twelve months preceding the event giving rise to the claim / £[AMOUNT]].\n12.4 Where the off-payroll working rules apply, if income tax or National Insurance liability arises that the Client or a fee-payer must account for because the Consultant's working practices were inconsistent with the agreed status, the Consultant shall indemnify that party, save to the extent the liability arises from an incorrect status determination made by the Client.\n\nNote: Tax indemnities are heavily negotiated. Take advice before agreeing clause 12.4; the balance of risk should reflect who makes the status determination.` },
+      { heading: '13. Termination', body: `13.1 Either party may terminate this Agreement or a Statement of Work for convenience on [30] days' written notice.\n13.2 Either party may terminate immediately by written notice if the other commits a material breach not remedied within [14] days of notice, or becomes insolvent or unable to pay its debts.\n13.3 On termination the Client shall pay for Services properly performed up to the termination date and for any non-cancellable commitments reasonably incurred.` },
+      { heading: '14. Consequences of termination', body: `14.1 On termination each party shall return or destroy the other's Confidential Information, and the Consultant shall deliver up all completed and work-in-progress Deliverables for which payment has been made or is due.\n14.2 Clauses that by their nature should survive termination, including clauses 7, 9, 10, 12, 15 and 17, continue in force.` },
+      { heading: '15. Non-solicitation', body: `15.1 During the term and for [six] months afterwards, neither party shall knowingly solicit for employment any individual of the other who was directly involved in the Services, save through a general recruitment campaign not specifically targeted at that individual.` },
+      { heading: '16. Compliance', body: `16.1 Each party shall comply with all applicable laws, including the Bribery Act 2010 and the Criminal Finances Act 2017, and shall not engage in any activity that would constitute an offence under those Acts.` },
+      { heading: '17. General', body: `17.1 Entire agreement. This Agreement and the documents referred to in it constitute the entire agreement between the parties and supersede any prior arrangements.\n17.2 Variation. No variation is effective unless in writing and signed by both parties.\n17.3 Assignment. Neither party may assign or subcontract its rights or obligations without the prior written consent of the other, save that the Consultant may use a substitute under clause 8.\n17.4 Notices. Notices must be in writing and sent to the address or email notified by each party.\n17.5 Third parties. A person who is not a party has no rights under the Contracts (Rights of Third Parties) Act 1999.\n17.6 Governing law and jurisdiction. This Agreement and any dispute arising from it are governed by the law of England and Wales, and the parties submit to the exclusive jurisdiction of the courts of England and Wales.` },
+      { heading: 'Signed by the parties', body: `For and on behalf of the Client:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................\n\nFor and on behalf of the Consultant:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................` },
+      { heading: 'Schedule 1: Statement of Work', body: `Use the separate Statement of Work template for each piece of work and attach the signed SOW here.` },
+      { heading: 'Schedule 2: Charges', body: `Day rate (exclusive of VAT): [£ ]\nStandard working day: [7.5 hours]\nRate for part or additional days: [pro rata / £ ]\nExpenses: [Pre-agreed, at cost, on receipts]\nInvoicing frequency: [Monthly in arrears / on milestone]\nPayment terms: [30 days from invoice date]\nVAT registration number: [ ]\nRemittance details: [Bank, sort code, account number]` }
     ]
   },
   {
-    id: 'consultancy-agreement',
-    title: 'Freelance Consultancy Agreement',
+    id: 'statement-of-work-master',
+    title: 'Statement of Work (under master agreement)',
     category: 'contracts',
-    description: 'A full freelance consultancy agreement covering scope, payment, IP, confidentiality, and termination.',
+    description: 'A SOW issued beneath the Consultancy Services Agreement: scope, deliverables, milestones, charges, acceptance.',
     sections: [
-      { heading: 'Preamble', body: 'This Freelance Consultancy Agreement (the "Agreement") is made and entered into on this [DATE], by and between the Client (hereinafter referred to as "Client") and the Consultant (hereinafter referred to as "Consultant").' },
-      { heading: '1. Scope of Work', body: 'Consultant shall provide Business Transformation consultancy services to Client. The nature, scope, and deliverables of the services shall be mutually agreed in writing prior to the start of each project phase or engagement.' },
-      { heading: '2. Payment Terms', body: 'Client agrees to pay Consultant on a project basis, with invoices issued monthly. Payment shall be made within 14 days of receipt of invoice. Late payments may be subject to a 5% late fee.' },
-      { heading: '3. Work Location', body: 'Consultant may perform services remotely and/or on-site at the Client\'s location, as required. Travel and related expenses for on-site work shall be pre-approved by Client and reimbursed in full.' },
-      { heading: '4. Intellectual Property', body: 'Consultant retains ownership of all intellectual property, frameworks, templates, and materials created during services. Client is granted a non-exclusive, non-transferable licence to use the deliverables solely for internal business purposes.' },
-      { heading: '5. Confidentiality', body: 'Both parties agree to maintain the confidentiality of any proprietary or sensitive information disclosed during the engagement.' },
-      { heading: '6. Termination', body: 'Either party may terminate this Agreement with 14 days\' written notice. Client shall pay Consultant for all work completed up to the termination date.' },
-      { heading: '7. Governing Law', body: 'This Agreement shall be governed by and construed in accordance with the laws of England and Wales.' },
-      { heading: 'Signatures', body: 'IN WITNESS WHEREOF, the parties hereto have executed this Agreement as of the date first written above.\n\n__________________________          __________________________\nClient Name                                            Consultant Name' }
+      { heading: 'Header', body: `SOW reference: [SOW-001]\nVersion: [0.1]\nDate: [DATE]\nMaster agreement: Consultancy Services Agreement dated [DATE]\nClient: [CLIENT]\nConsultant: [CONSULTANT COMPANY] (via [NAME])` },
+      { heading: '1. Background and objectives', body: `[Describe the business context and the outcome the Client is seeking. State the specific objectives this engagement will deliver against.]` },
+      { heading: '2. Scope of services', body: `In scope:\n• [Activity or area in scope]\n• [Activity or area in scope]\n• [Activity or area in scope]\n\nOut of scope:\n• [Explicitly excluded activity, to manage expectations]\n• [Explicitly excluded activity]` },
+      { heading: '3. Deliverables', body: `Ref | Deliverable | Acceptance criteria | Due date\nD1 | [ ] | [How completion is judged] | [ ]\nD2 | [ ] | [ ] | [ ]\nD3 | [ ] | [ ] | [ ]` },
+      { heading: '4. Approach and methodology', body: `[Outline how the work will be carried out, the analysis techniques to be used, and any standards or frameworks applied. Note that the Consultant determines the manner of delivery.]` },
+      { heading: '5. Milestones and timeline', body: `Ref | Milestone | Target date | Status\nM1 | [Engagement start / discovery complete] | [ ] | [ ]\nM2 | [Requirements baselined] | [ ] | [ ]\nM3 | [Final deliverable accepted] | [ ] | [ ]` },
+      { heading: '6. Roles, responsibilities and Client dependencies', body: `• [Client to provide access to systems and stakeholders by [date]]\n• [Client to nominate a single point of contact and decision maker]\n• [Client to review deliverables within [n] working days of submission]` },
+      { heading: '7. Assumptions', body: `• [Assumption on which the estimate is based]\n• [Assumption on which the estimate is based]` },
+      { heading: '8. Charges', body: `Day rate (excl. VAT): [£ ]\nEstimated effort: [n days]\nEstimated total (excl. VAT): [£ ]\nExpenses: [Pre-agreed, at cost]\nInvoicing schedule: [Monthly in arrears / on milestone]\nPayment terms: [30 days]\n\nNote: This is an estimate, not a fixed price, unless stated. Material changes to scope are managed through the Change Control process.` },
+      { heading: '9. Acceptance', body: `Each Deliverable is deemed accepted when the Client confirms in writing that the acceptance criteria are met, or within [5] working days of submission if no comments are received.` },
+      { heading: '10. Change control', body: `Changes to scope, deliverables, timeline or charges are managed through the Change Control and Variation process. No change is effective until approved in writing by both parties.` },
+      { heading: '11. Key contacts', body: `Name | Organisation | Role | Contact\n[ ] | Client | [Sponsor / SPOC] | [ ]\n[ ] | Consultant | Lead Business Analyst | [ ]` },
+      { heading: '12. Sign-off', body: `For the Client:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................\n\nFor the Consultant:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................` }
     ]
   },
   {
-    id: 'statement-of-work',
-    title: 'Statement of Work Template',
+    id: 'scope-of-work-standalone',
+    title: 'Scope of Work (standalone)',
     category: 'contracts',
-    description: 'A clear SoW covering scope, timeline, responsibilities, payment, and acceptance criteria.',
+    description: 'A self-contained SOW for a single engagement with no master agreement, including short built-in terms.',
     sections: [
-      { heading: 'Scope of Services', body: 'Detailed description of the services and deliverables.' },
-      { heading: 'Project Timeline', body: 'Start date, end date, and major milestones.' },
-      { heading: 'Roles and Responsibilities', body: 'What you handle vs what the client handles.' },
-      { heading: 'Payment Terms', body: 'Project fee, invoice schedule, and payment method.' },
-      { heading: 'Acceptance Criteria', body: 'How and when the client will approve the work.' },
-      { heading: 'Signatures', body: 'Space for sign-off from both sides.' }
+      { heading: 'Header', body: `SOW reference: [SOW-001]\nVersion: [0.1]\nDate: [DATE]\nPrepared by: [Consultant name / company]\nPrepared for: [Client name / company]\nValid until: [DATE]\n\nNote: This is a self-contained Scope of Work suited to a single engagement where no separate master agreement is in place. For larger or ongoing work, use it alongside the Consultancy Services Agreement, in which case the short terms in section 11 are replaced by that agreement.` },
+      { heading: '1. Project title and overview', body: `Project title: [Short, descriptive project name]\n\n[Two or three sentences describing the engagement: who the client is, the situation prompting the work, and the result this project will deliver. Keep it plain and client facing.]` },
+      { heading: '2. Objectives', body: `This engagement is designed to achieve the following objectives:\n\nObjective | How success will be measured\n[Objective 1] | [Measure or evidence of success]\n[Objective 2] | [Measure or evidence of success]\n[Objective 3] | [Measure or evidence of success]` },
+      { heading: '3. Scope of services', body: `The following services are included in this engagement:\n• [Service or activity included]\n• [Service or activity included]\n• [Service or activity included]\n• [Service or activity included]` },
+      { heading: '4. Deliverables', body: `Ref | Deliverable | Format | Acceptance criteria\nD1 | [Deliverable] | [e.g. Word report, workshop, dashboard] | [How the client confirms it is complete]\nD2 | [Deliverable] | [ ] | [ ]\nD3 | [Deliverable] | [ ] | [ ]` },
+      { heading: '5. Timeline and milestones', body: `Phase | Milestone | Target date | Payment trigger\n1 | [Kick off and discovery] | [ ] | [e.g. on signature]\n2 | [Delivery of interim output] | [ ] | [e.g. on milestone]\n3 | [Final deliverable accepted] | [ ] | [e.g. on completion]\n\nNote: Dates assume a start on or before the date in section 1 and timely client input. Slippage in client dependencies may move these dates.` },
+      { heading: '6. Project requirements', body: `To deliver this work, the following are required:\n• [Access to systems, tools or environments needed]\n• [Documents, data or information to be provided]\n• [Stakeholders or subject matter experts to be made available]\n• [Facilities or equipment, if any]` },
+      { heading: '7. Client responsibilities', body: `• Nominate a single point of contact who can make, or quickly obtain, decisions.\n• Provide the access, information and people set out in section 6 by the agreed dates.\n• Review deliverables and provide consolidated feedback within [5] working days of submission.\n• [Any other client responsibility specific to this engagement]` },
+      { heading: '8. Assumptions and constraints', body: `Assumptions:\n• [Assumption the estimate and timeline rely on]\n• [Assumption the estimate and timeline rely on]\n\nConstraints:\n• [Known constraint, e.g. fixed go live date, budget ceiling, regulatory deadline]\n• [Known constraint]` },
+      { heading: '9. Out of scope', body: `To avoid misunderstanding, the following are not included in this engagement and would be handled as separate work or as a change to this Scope of Work:\n• [Explicitly excluded activity]\n• [Explicitly excluded activity]\n• [Explicitly excluded activity]` },
+      { heading: '10. Fees and payment terms', body: `Fee basis: [Fixed fee / day rate / retainer]\nDay rate (excl. VAT): [£ ], if applicable\nTotal or estimated fee (excl. VAT): [£ ]\nVAT: [Charged at the prevailing rate if registered / not applicable]\nExpenses: [Pre-agreed, recharged at cost]\nPayment terms: [30 days from invoice date]\n\nPayment schedule:\nPhase | Proportion | Amount (excl. VAT) | Trigger\n[Phase 1] | [%] | [£ ] | [On signature]\n[Phase 2] | [%] | [£ ] | [On milestone]\n[Phase 3] | [%] | [£ ] | [On completion]\n\nNote: Late payment of a commercial debt may incur statutory interest and a fixed recovery sum under the Late Payment of Commercial Debts (Interest) Act 1998.` },
+      { heading: '11. Engagement terms', body: `Where no separate master agreement applies, the following short terms govern this engagement:\n11.1 Status. The Consultant is an independent contractor. Nothing in this Scope of Work creates employment, agency or partnership.\n11.2 Confidentiality. Each party will keep the other's confidential information secret and use it only for this engagement.\n11.3 Intellectual property. On full payment of all sums due, the Consultant assigns to the Client the intellectual property rights in the deliverables created specifically for the Client. The Consultant keeps ownership of its pre-existing materials, methods and know-how, and grants the Client a licence to use them as part of the deliverables.\n11.4 Liability. Neither party excludes liability that cannot be excluded by law. Otherwise the Consultant's total liability is limited to the fees paid under this Scope of Work, and neither party is liable for indirect or consequential loss.\n11.5 Termination. Either party may end the engagement on [number] days' written notice. The Client will pay for all work done and expenses committed up to termination.\n11.6 Governing law. This Scope of Work is governed by the law of England and Wales, and the courts of England and Wales have exclusive jurisdiction.\n\nNote: These short terms are deliberately light. For higher value or higher risk engagements, use the Consultancy Services Agreement instead and have it reviewed by a solicitor.` },
+      { heading: '12. Acceptance and signatures', body: `By signing below, the parties agree to this Scope of Work, including the fees and terms set out above.\n\nFor the Client:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................\n\nFor the Consultant:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................` }
     ]
   },
   {
-    id: 'nda',
-    title: 'NDA Template',
+    id: 'change-control',
+    title: 'Change Control & Variation Form',
     category: 'contracts',
-    description: 'A standard non-disclosure agreement covering confidentiality scope, obligations, exclusions, and duration.',
+    description: 'A change request and variation form for scope, schedule or charge changes, plus a running change log.',
     sections: [
-      { heading: 'Definition of Confidential Information', body: 'Covers what counts as confidential between you and the client.' },
-      { heading: 'Obligations of Receiving Party', body: 'The client agrees not to disclose or misuse your confidential info.' },
-      { heading: 'Exclusions', body: 'Information that is public or already known is not covered.' },
-      { heading: 'Duration', body: 'Usually 2–5 years. Define how long confidentiality is required.' },
-      { heading: 'Governing Law', body: 'Subject to the laws of England and Wales.' },
-      { heading: 'Signatures', body: 'Space for both parties to sign and date.' }
+      { heading: '1. Change request details', body: `Change reference: [CR-001]\nDate raised: [DATE]\nRaised by: [ ]\nEngagement / project: [ ]\nRelated SOW: [SOW-001]\nPriority: [High / Medium / Low]` },
+      { heading: '2. Description of the change', body: `[Describe the proposed change clearly and specifically. State what is being added, removed or altered relative to the current SOW.]` },
+      { heading: '3. Reason and business driver', body: `[Explain why the change is needed and the consequence of not making it.]` },
+      { heading: '4. Impact assessment', body: `Area | Impact\nScope | [ ]\nDeliverables | [ ]\nTimeline | [Revised dates / no change]\nEffort (days) | [+/- n days]\nCharges | [Revised total / no change]\nRisks introduced | [ ]\nDependencies | [ ]` },
+      { heading: '5. Options considered', body: `Option | Description | Implication\n1 | Proceed with the change as described | [ ]\n2 | [Alternative] | [ ]\n3 | Do not proceed | [ ]` },
+      { heading: '6. Recommendation', body: `[State the recommended option and the rationale.]` },
+      { heading: '7. Decision', body: `Decision: [Approved / Rejected / Deferred]\nDecision date: [ ]\nDecision maker: [ ]\nRevised total charges (excl. VAT): [£ ]\nRevised end date: [ ]` },
+      { heading: '8. Approval', body: `For the Client:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................\n\nFor the Consultant:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................` },
+      { heading: 'Change log', body: `Maintain a running log of all change requests for the engagement.\n\nRef | Summary | Days +/- | Cost +/- | Status | Date\nCR-001 | [ ] | [ ] | [ ] | [ ] | [ ]\nCR-002 | [ ] | [ ] | [ ] | [ ] | [ ]\nCR-003 | [ ] | [ ] | [ ] | [ ] | [ ]` }
+    ]
+  },
+  {
+    id: 'mutual-nda',
+    title: 'Mutual Non-Disclosure Agreement',
+    category: 'contracts',
+    description: 'A two-way UK confidentiality agreement: purpose, definition, exclusions, obligations, return, and survival.',
+    sections: [
+      { heading: 'Parties', body: `This Agreement is dated [DATE] and is made between:\n(1) [PARTY A NAME], of [ADDRESS] ("Party A"); and\n(2) [PARTY B NAME], of [ADDRESS] ("Party B"),\neach a "party" and a "Discloser" when disclosing and a "Recipient" when receiving Confidential Information.` },
+      { heading: '1. Purpose', body: `1.1 The parties wish to explore and, if agreed, undertake [a business analysis and consultancy engagement] (the "Permitted Purpose") and may disclose Confidential Information to each other for that purpose.` },
+      { heading: '2. Confidential Information', body: `2.1 "Confidential Information" means any information disclosed by or on behalf of the Discloser, in any form, that is marked as confidential or would reasonably be regarded as confidential, including business plans, finances, methods, client and personnel data, technical information and the existence and content of discussions between the parties.` },
+      { heading: '3. Exclusions', body: `3.1 Confidential Information does not include information that: (a) is or becomes public other than through breach of this Agreement; (b) was lawfully in the Recipient's possession without restriction before disclosure; (c) is lawfully received from a third party without restriction; or (d) is independently developed without use of the Confidential Information.` },
+      { heading: '4. Obligations', body: `4.1 The Recipient shall: (a) keep the Confidential Information confidential; (b) use it only for the Permitted Purpose; (c) not disclose it to any third party except as permitted by clause 5; and (d) apply at least the same degree of care it applies to its own confidential information, and in any event reasonable care.` },
+      { heading: '5. Permitted disclosures', body: `5.1 The Recipient may disclose Confidential Information to its officers, employees, professional advisers and subcontractors who need to know it for the Permitted Purpose, provided they are bound by obligations of confidentiality no less protective than these.\n5.2 The Recipient may disclose Confidential Information to the extent required by law or a regulator, giving the Discloser reasonable prior notice where lawful.` },
+      { heading: '6. Return and destruction', body: `6.1 On the Discloser's written request, the Recipient shall return or securely destroy the Confidential Information and any copies, save for one copy that may be retained for legal or regulatory record-keeping or that is held in routine electronic backups.` },
+      { heading: '7. No licence and no warranty', body: `7.1 No licence or other right is granted under any intellectual property except the limited right to use the Confidential Information for the Permitted Purpose. The Confidential Information is provided without warranty as to accuracy or completeness.` },
+      { heading: '8. Term and survival', body: `8.1 This Agreement applies to Confidential Information disclosed during the period of [two] years from the date above, and the obligations of confidentiality continue for [three] years from the date of disclosure of the relevant information.` },
+      { heading: '9. Data protection', body: `9.1 Each party shall comply with the UK General Data Protection Regulation and the Data Protection Act 2018 in respect of any personal data disclosed under this Agreement.` },
+      { heading: '10. Remedies', body: `10.1 The parties agree that damages may not be an adequate remedy for breach, and that the Discloser is entitled to seek injunctive relief in addition to any other remedy.` },
+      { heading: '11. General', body: `11.1 This Agreement does not oblige either party to proceed with any transaction or to disclose any particular information.\n11.2 No variation is effective unless in writing and signed by both parties. Neither party may assign this Agreement without the other's written consent.\n11.3 This Agreement is governed by the law of England and Wales, and the parties submit to the exclusive jurisdiction of the courts of England and Wales.` },
+      { heading: 'Signed', body: `For Party A:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................\n\nFor Party B:\nSignature: ..........................  Name: ..........................  Title: ..........................  Date: ..........................` }
+    ]
+  },
+  {
+    id: 'ir35-setup-briefing',
+    title: 'IR35 & Freelance Setup Briefing',
+    category: 'contracts',
+    description: 'Practical UK guidance on operating models, off-payroll status, insurances, getting paid, and a pre-engagement checklist.',
+    sections: [
+      { heading: 'Before you use this', body: `This briefing is general information, not legal, tax, or financial advice. Tax rules, thresholds and figures change and depend on your circumstances. Confirm your position with a qualified accountant and, where contracts are involved, a solicitor before acting. Where this briefing refers to a threshold or figure, treat it as illustrative and verify the current value.` },
+      { heading: '1. Choosing how to operate', body: `Before your first contract, decide the vehicle you will trade through. The three common options for a UK contractor are a limited company (often called a personal service company, or PSC), an umbrella company, and sole trader. The choice affects your tax, your administrative burden, and which documents you need.\n\nOption | Suits when | Trade-offs\nLimited company (PSC) | Longer or higher-value outside-IR35 work; you want control and tax planning flexibility | More admin; corporation tax, accounts, payroll; responsibility for your own status where the small-company rules apply\nUmbrella | Short or inside-IR35 contracts; you want minimal admin | Taxed broadly like an employee through PAYE; umbrella fees; less take-home on outside-IR35 work\nSole trader | Lower-risk, direct-to-client work where the client accepts it | Personal liability; many agencies and larger clients will not engage sole traders; status still matters\n\nNote: Many contract BA roles run through an agency, which often mandates a PSC or umbrella. Confirm the client's and agency's accepted models before you commit.` },
+      { heading: '2. IR35 and the off-payroll working rules', body: `IR35 asks a single question: if you stripped away your company and looked only at how you actually work, would the relationship look like employment? If yes, the engagement is "inside IR35" and should be taxed broadly like employment. If no, it is "outside IR35" and can be taxed as genuine business-to-business work.\n\nWho decides depends on the size of the end client:\n• Medium and large private-sector clients, and all public-sector bodies, must assess your status and issue a Status Determination Statement (SDS). The party that pays your company (the client or the agency) operates any tax due if the role is inside.\n• Small private-sector clients are outside the off-payroll rules. In that case your own company assesses status under the original IR35 rules and is responsible for getting it right.\n\nNote: The definition of a small company is based on turnover, balance sheet total and employee numbers, and these thresholds have been subject to change. Ask the client which regime applies, and confirm current thresholds with your accountant.` },
+      { heading: '3. What determines status', body: `No single factor is decisive. Courts and HMRC weigh the whole picture. The main tests are:\n• Personal service and substitution. A genuine, unfettered right to send a competent substitute points strongly to being outside. A requirement that only you can do the work points towards employment.\n• Control. The more the client dictates what you do and, crucially, how, when and where you do it, the more it looks like employment. Autonomy over method points outside.\n• Mutuality of obligation. An ongoing obligation on the client to provide work and on you to accept it looks like employment. A defined piece of work with no expectation of more points outside.\n• Financial risk. Investing in your own equipment, insurance and training, quoting for work, and carrying the risk of correcting defects at your own cost all point outside.\n• Part and parcel. Being integrated into the organisation, for example managing staff, holding a permanent desk, or appearing on internal directories as if an employee, points towards employment.\n• Other factors. Exclusivity, employee-style benefits, and how the parties describe the relationship are all relevant.\n\nHMRC publishes the Check Employment Status for Tax (CEST) tool. A result can be useful evidence, but it is only as good as the answers, and it must reflect reality rather than the contract alone.` },
+      { heading: '4. Making working practices support an outside-IR35 position', body: `Only relevant where you and the client genuinely intend an outside-IR35 engagement. The contract and the day-to-day working must align; a strong contract with employee-like working practices will not hold up.\n• Keep a real right of substitution in the contract and be prepared to use it.\n• Agree deliverables and outcomes, not fixed hours under direction.\n• Retain control over how you carry out the work.\n• Use your own equipment where practical, and hold your own insurance.\n• Avoid employee-style benefits, line-management responsibility and open-ended commitments.\n• Keep your business genuinely separate: your own email, multiple clients over time, your own branding and tools.` },
+      { heading: '5. Insurance to hold', body: `Cover | Why\nProfessional indemnity | Protects against claims that your advice or deliverables caused loss. Frequently required by clients and agencies.\nPublic liability | Covers injury or damage to third parties or their property while you work, for example on a client site.\nEmployers' liability | Required by law if your company has employees. Often not needed for a sole director with no staff, but confirm.` },
+      { heading: '6. Contract checklist before you sign', body: `• Day rate and what counts as a working day.\n• Payment terms and a clear invoicing schedule.\n• Intellectual property: what transfers, and protection of your background tools and templates.\n• Liability: a cap proportionate to your fee, with the standard carve-outs.\n• A genuine right of substitution.\n• Termination notice that you can live with.\n• Expenses: what is reimbursable and how.\n• IR35: which regime applies, who issues the SDS, and where any tax indemnity sits.\n• Restrictive covenants: keep non-solicit and non-compete clauses narrow and time-limited.` },
+      { heading: '7. Getting paid', body: `Invoice promptly and to the agreed schedule. State your payment terms on every invoice. If a client pays late, the Late Payment of Commercial Debts (Interest) Act 1998 entitles you to statutory interest and reasonable recovery costs. Keep a simple, polite escalation: reminder at due date, follow-up a few days later, then a formal notice.` },
+      { heading: '8. Tax and admin basics', body: `• Register the company with Companies House, or register as self-employed with HMRC if a sole trader.\n• Consider VAT registration; there is a turnover threshold above which it is compulsory, and voluntary registration can make sense. Confirm the current threshold and the flat-rate scheme with your accountant.\n• Plan for corporation tax, and for the mix of salary and dividends if using a company.\n• Keep clean records of income, expenses and time. Use an accountant for year-end accounts and tax returns.\n• Open a dedicated business bank account.` },
+      { heading: '9. Red flags in a client contract', body: `• Unlimited or uncapped liability.\n• A broad assignment of all your intellectual property, including pre-existing tools.\n• Wide or long non-compete clauses that restrict future work.\n• No right of substitution combined with tight control over how you work.\n• Exclusivity that prevents you serving other clients.\n• A one-sided tax indemnity that loads all IR35 risk onto you regardless of who determined status.` },
+      { heading: 'Pre-engagement checklist', body: `Work through this before starting each new contract.\n1. Operating model confirmed (PSC / umbrella / sole trader) and accepted by client/agency [ ]\n2. IR35 regime identified and SDS obtained where required [ ]\n3. Consultancy agreement and SOW reviewed and signed [ ]\n4. NDA signed where needed [ ]\n5. Professional indemnity and public liability insurance in place [ ]\n6. Day rate, payment terms and expenses agreed in writing [ ]\n7. IP and liability clauses checked [ ]\n8. Business bank account and invoicing set up [ ]\n9. Accountant engaged and VAT position decided [ ]\n10. Start date, scope and first deliverables confirmed [ ]` }
     ]
   },
   {
@@ -420,30 +544,155 @@ const TEMPLATES = [
       { heading: 'Governing Law', body: 'Complies with UK GDPR.' }
     ]
   },
+
+  // ==================== BA DELIVERY ====================
   {
-    id: 'invoice-standard',
-    title: 'Invoice Template (Standard)',
-    category: 'finance',
-    description: 'A clean, professional invoice template for consulting services with VAT support.',
+    id: 'business-requirements-document',
+    title: 'Business Requirements Document (BRD)',
+    category: 'delivery',
+    description: 'Full BRD: context, goals, scope, current/future state, business/functional/non-functional requirements, traceability.',
     sections: [
-      { heading: 'Header', body: 'INVOICE\n\nConsultant Name: [Your Full Name]\nBusiness Address: [Your Address]\nEmail: [Your Email Address]\nPhone: [Your Phone Number]\n\nInvoice Date: [Date]\nInvoice Number: [Unique Number]' },
-      { heading: 'Bill To', body: 'Client Name: [Client\'s Name]\nClient Company: [Client\'s Company Name]\nClient Address: [Client\'s Address]' },
-      { heading: 'Line Items', body: 'Description | Hours/Days | Rate | Amount\n———————————————————————————————\nBusiness Transformation Consulting Services for [Month] | [e.g. 10] | £[Rate] | £[Total]' },
-      { heading: 'Totals', body: 'Subtotal: £[Subtotal]\nVAT (if applicable): £[VAT]\nTotal Amount Due: £[Total Amount]' },
-      { heading: 'Payment Terms', body: 'Payment is due within 14 days of invoice date.\n\nBank Details: [Your Bank Name, Sort Code, Account Number]\n\nThank you for your business!' }
+      { heading: 'Document control', body: `Document title: [ ]\nVersion: [0.1 Draft]\nDate: [DATE]\nAuthor: [Dan Lockwood]\nOwner: [ ]\nDistribution: [ ]\nStatus: [Draft / For review / Approved]` },
+      { heading: '1. Executive summary', body: `[Short summary of the need, the recommended direction, and the key requirements, written for a reader who will not read the full document.]` },
+      { heading: '2. Business context and problem statement', body: `[Describe the business area, the problem or opportunity, and why action is needed now.]` },
+      { heading: '3. Goals and objectives', body: `• [Goal aligned to a measurable objective]\n• [Goal aligned to a measurable objective]` },
+      { heading: '4. Scope', body: `In scope:\n• [ ]\n• [ ]\n\nOut of scope:\n• [ ]\n• [ ]` },
+      { heading: '5. Stakeholders', body: `[Summarise the stakeholder groups whose needs the requirements reflect. Cross-reference the Stakeholder Analysis.]` },
+      { heading: '6. Current state (As-Is)', body: `[Summarise how the process or system works today, with the main pain points. Attach process maps as an appendix.]` },
+      { heading: '7. Future state (To-Be)', body: `[Summarise the intended future process or system and the change from today.]` },
+      { heading: '8. Business requirements', body: `MoSCoW priority: Must, Should, Could, Won't (this time).\n\nID | Requirement | Priority | Source | Rationale\nBR-001 | [The business needs to ...] | [Must] | [ ] | [ ]\nBR-002 | [ ] | [Should] | [ ] | [ ]\nBR-003 | [ ] | [Could] | [ ] | [ ]` },
+      { heading: '9. Functional requirements', body: `ID | Requirement | Priority | Linked BR\nFR-001 | [The system shall ...] | [Must] | [BR-001]\nFR-002 | [ ] | [Should] | [ ]` },
+      { heading: '10. Non-functional requirements', body: `ID | Category | Requirement | Priority\nNFR-001 | Performance | [ ] | [Must]\nNFR-002 | Security | [ ] | [Must]\nNFR-003 | Availability | [ ] | [Should]` },
+      { heading: '11. Business rules', body: `• [Rule that constrains the process or decision]\n• [Rule that constrains the process or decision]` },
+      { heading: '12. Assumptions, constraints and dependencies', body: `Assumptions | Constraints | Dependencies\n[ ] | [ ] | [ ]` },
+      { heading: '13. Acceptance criteria', body: `[State the conditions under which the delivered solution will be accepted as meeting the requirements.]` },
+      { heading: '14. Traceability', body: `Requirements are traced from business need through to test in the Requirements Traceability Matrix (see the BA Trackers workbook).` },
+      { heading: '15. Glossary', body: `Term | Definition\n[ ] | [ ]\n[ ] | [ ]` },
+      { heading: '16. Sign-off', body: `Sponsor / Product Owner:\nSignature: ..........................  Name: ..........................  Date: ..........................\n\nLead Business Analyst:\nSignature: ..........................  Name: ..........................  Date: ..........................` }
     ]
   },
   {
-    id: 'invoice-logo',
-    title: 'Invoice Template (With Logo)',
-    category: 'finance',
-    description: 'Invoice template with a placeholder for your logo and a default day rate.',
+    id: 'business-case',
+    title: 'Business Case',
+    category: 'delivery',
+    description: 'Investment justification: options appraisal (incl. do-nothing), costs, benefits, cost-benefit summary, and the ask.',
     sections: [
-      { heading: 'Header', body: 'INVOICE\n\n[YOUR LOGO HERE]\n\nConsultant Name: [Your Full Name]\nBusiness Address: [Your Address]\nEmail: [Your Email Address]\nPhone: [Your Phone Number]\n\nInvoice Date: [Date]\nInvoice Number: [Unique Number]' },
-      { heading: 'Bill To', body: 'Client Name: [Client\'s Name]\nClient Company: [Client\'s Company Name]\nClient Address: [Client\'s Address]' },
-      { heading: 'Line Items', body: 'Description | Days | Rate | Amount\n———————————————————————————————\nBusiness Transformation Consulting Services for [Month] | [e.g. 10] | £500 | £[Total]' },
-      { heading: 'Totals', body: 'Subtotal: £[Subtotal]\nVAT (if applicable): £[VAT]\nTotal Amount Due: £[Total Amount]' },
-      { heading: 'Payment Terms', body: 'Payment is due within 14 days of invoice date.\n\nBank Details: [Your Bank Name, Sort Code, Account Number]\n\nThank you for your business!' }
+      { heading: 'Document control', body: `Document title: [ ]\nVersion: [0.1 Draft]\nDate: [DATE]\nAuthor: [Dan Lockwood]\nOwner: [ ]\nDistribution: [ ]\nStatus: [Draft / For review / Approved]` },
+      { heading: '1. Executive summary', body: `[Summarise the problem, the recommended option, the cost, the benefit, and the ask, in a few sentences.]` },
+      { heading: '2. Strategic context', body: `[Explain how this initiative supports the organisation's strategy and objectives.]` },
+      { heading: '3. Problem or opportunity', body: `[Describe the problem or opportunity and the cost or risk of inaction.]` },
+      { heading: '4. Objectives and benefits', body: `Objective | Measurable benefit\n[ ] | [ ]\n[ ] | [ ]` },
+      { heading: '5. Options appraisal', body: `Option | Description | Cost | Benefit | Risk\nDo nothing | [Baseline] | [£ ] | [Low] | [ ]\nOption A | [ ] | [£ ] | [ ] | [ ]\nOption B | [ ] | [£ ] | [ ] | [ ]` },
+      { heading: '6. Recommended option', body: `[State the recommended option and why it is preferred over the alternatives.]` },
+      { heading: '7. Costs', body: `Cost item | One-off | Recurring (annual)\n[ ] | [£ ] | [£ ]\n[ ] | [£ ] | [£ ]\nTotal | [£ ] | [£ ]` },
+      { heading: '8. Benefits', body: `Benefit | Type | Value / measure\n[ ] | [Tangible] | [£ / metric]\n[ ] | [Intangible] | [ ]` },
+      { heading: '9. Cost-benefit summary', body: `[Summarise the payback period, net benefit and any return-on-investment figure. State the assumptions behind the numbers.]` },
+      { heading: '10. Risks', body: `Risk | Likelihood | Mitigation\n[ ] | [ ] | [ ]` },
+      { heading: '11. Timeline and milestones', body: `Ref | Milestone | Target date | Status\nM1 | [ ] | [ ] | [ ]\nM2 | [ ] | [ ] | [ ]` },
+      { heading: '12. Dependencies and assumptions', body: `Dependencies | Assumptions\n[ ] | [ ]` },
+      { heading: '13. Investment ask and funding', body: `[State exactly what decision and what funding are being requested, and the funding source.]` },
+      { heading: '14. Recommendation and next steps', body: `[Restate the recommendation and the immediate next steps if approved.]` },
+      { heading: '15. Approval', body: `Sponsor:\nSignature: ..........................  Name: ..........................  Date: ..........................\n\nApproving authority:\nSignature: ..........................  Name: ..........................  Date: ..........................` }
+    ]
+  },
+  {
+    id: 'stakeholder-analysis-raci',
+    title: 'Stakeholder Analysis & RACI',
+    category: 'delivery',
+    description: 'Stakeholder register, power/interest grid, and a RACI matrix for the main activities.',
+    sections: [
+      { heading: 'Document control', body: `Document title: [ ]\nVersion: [0.1 Draft]\nDate: [DATE]\nAuthor: [Dan Lockwood]\nOwner: [ ]\nDistribution: [ ]\nStatus: [Draft / For review / Approved]` },
+      { heading: '1. Purpose', body: `This document identifies the stakeholders, assesses their interest and influence, sets the engagement approach for each, and records who is Responsible, Accountable, Consulted and Informed for the main activities.` },
+      { heading: '2. Stakeholder register', body: `Interest and influence: High, Medium or Low. Attitude: Supporter, Neutral or Sceptic.\n\nName / group | Role | Interest | Influence | Attitude | Engagement approach\n[ ] | [ ] | [ ] | [ ] | [ ] | [ ]\n[ ] | [ ] | [ ] | [ ] | [ ] | [ ]\n[ ] | [ ] | [ ] | [ ] | [ ] | [ ]` },
+      { heading: '3. Power and interest grid', body: `Map each stakeholder to one quadrant and apply the matching approach.\n• High influence, low interest -> Keep satisfied: [Names]\n• High influence, high interest -> Manage closely: [Names]\n• Low influence, low interest -> Monitor: [Names]\n• Low influence, high interest -> Keep informed: [Names]` },
+      { heading: '4. RACI matrix', body: `R = Responsible (does the work); A = Accountable (one per row, owns the outcome); C = Consulted (two-way input); I = Informed (kept up to date).\n\nActivity / deliverable | Sponsor | Lead BA | SME | PM | IT\n[Requirements gathering] | A | R | C | C | I\n[Requirements sign-off] | A | R | C | I | I\n[Solution design] | I | C | C | A | R\n[Testing] | I | C | C | A | R\n[Go-live decision] | A | C | I | R | C` },
+      { heading: '5. Notes', body: `[Record any conflicts of interest, escalation routes, or stakeholders requiring special handling.]` }
+    ]
+  },
+  {
+    id: 'workshop-pack',
+    title: 'Workshop Pack',
+    category: 'delivery',
+    description: 'Agenda, ground rules, and capture sheets (decisions, actions, requirements) for facilitating a workshop.',
+    sections: [
+      { heading: '1. Workshop details', body: `Title: [ ]\nDate and time: [ ]\nLocation / link: [ ]\nFacilitator: [Dan Lockwood]\nScribe: [ ]\nObjective: [What this workshop must achieve]` },
+      { heading: '2. Attendees', body: `Name | Role | Attending\n[ ] | [ ] | [Yes / No]\n[ ] | [ ] | [Yes / No]` },
+      { heading: '3. Preparation and pre-reading', body: `• [Document to read in advance]\n• [Question to think about before the session]` },
+      { heading: '4. Agenda', body: `Time | Item | Lead | Output\n[ ] | Welcome, objectives and ground rules | [Facilitator] | Shared understanding\n[ ] | [Topic] | [ ] | [ ]\n[ ] | [Topic] | [ ] | [ ]\n[ ] | Review, actions and next steps | [Facilitator] | Agreed actions` },
+      { heading: '5. Ground rules', body: `• One conversation at a time, and everyone contributes.\n• Challenge ideas, not people.\n• Decisions are captured and owned; open points go to the parking lot.` },
+      { heading: '6. Capture: decisions', body: `# | Decision | Owner\n1 | [ ] | [ ]\n2 | [ ] | [ ]` },
+      { heading: '7. Capture: actions', body: `# | Action | Owner | Due\n1 | [ ] | [ ] | [ ]\n2 | [ ] | [ ] | [ ]` },
+      { heading: '8. Capture: requirements and insights', body: `# | Requirement / insight raised\n1 | [ ]\n2 | [ ]` },
+      { heading: '9. Parking lot', body: `[Items raised but out of scope for this session, to be addressed later.]` },
+      { heading: '10. Next steps', body: `[Summarise the immediate follow-up and when the capture will be circulated.]` }
+    ]
+  },
+  {
+    id: 'status-report',
+    title: 'Engagement Status Report',
+    category: 'delivery',
+    description: 'Periodic RAG progress report: summary, workstream RAG, milestones, effort/budget, risks, and decisions needed.',
+    sections: [
+      { heading: 'Report details', body: `Engagement: [ ]\nReporting period: [ ]\nDate: [ ]\nAuthor: [Dan Lockwood]\nOverall RAG: [Green / Amber / Red]\n\nRAG key: Green on track, Amber at risk, Red off track.` },
+      { heading: '1. Executive summary', body: `[Two or three sentences: where the engagement stands, the headline progress, and anything the sponsor must act on.]` },
+      { heading: '2. RAG by workstream', body: `Workstream | RAG | Commentary\n[ ] | [Green] | [ ]\n[ ] | [Amber] | [ ]` },
+      { heading: '3. Progress this period', body: `• [Achievement]\n• [Achievement]` },
+      { heading: '4. Planned for next period', body: `• [Planned activity]\n• [Planned activity]` },
+      { heading: '5. Milestones', body: `Milestone | Baseline date | Forecast date | Status\n[ ] | [ ] | [ ] | [On track]\n[ ] | [ ] | [ ] | [At risk]` },
+      { heading: '6. Effort and budget', body: `Days planned to date: [ ]\nDays used to date: [ ]\nVariance: [ ]\nForecast at completion: [ ]` },
+      { heading: '7. Key risks and issues', body: `Ref | Risk / issue | Severity | Action\n[ ] | [ ] | [High] | [ ]\n[ ] | [ ] | [Medium] | [ ]` },
+      { heading: '8. Decisions needed and escalations', body: `• [Decision required, from whom, and by when]` },
+      { heading: '9. Dependencies', body: `• [Dependency and its status]` }
+    ]
+  },
+  {
+    id: 'closure-handover',
+    title: 'Closure & Handover Report',
+    category: 'delivery',
+    description: 'End-of-engagement report: objectives vs outcomes, handover to BAU, benefits realisation, and lessons learned.',
+    sections: [
+      { heading: 'Document control', body: `Document title: [ ]\nVersion: [0.1 Draft]\nDate: [DATE]\nAuthor: [Dan Lockwood]\nOwner: [ ]\nDistribution: [ ]\nStatus: [Draft / For review / Approved]` },
+      { heading: '1. Executive summary', body: `[Summarise what the engagement set out to do, what was delivered, and the position at close.]` },
+      { heading: '2. Objectives versus outcomes', body: `Objective | Outcome | Met?\n[ ] | [ ] | [Yes / Partial / No]\n[ ] | [ ] | [ ]` },
+      { heading: '3. Deliverables completed', body: `Ref | Deliverable | Status | Accepted\nD1 | [ ] | [Complete] | [Yes]\nD2 | [ ] | [Complete] | [Yes]` },
+      { heading: '4. Outstanding items and known issues', body: `Ref | Item | Owner | Target date\n[ ] | [ ] | [ ] | [ ]` },
+      { heading: '5. Handover and transition to business as usual', body: `Area | Detail\nOwner going forward | [ ]\nDocumentation location | [ ]\nAccess and credentials | [Transferred to ...]\nSupport arrangements | [ ]\nOutstanding knowledge transfer | [ ]` },
+      { heading: '6. Benefits realisation', body: `[State which benefits are realised, which are expected later, and how they will be tracked after close.]` },
+      { heading: '7. Effort and budget summary', body: `Days planned: [ ]\nDays used: [ ]\nVariance: [ ]\nFinal position: [ ]` },
+      { heading: '8. Lessons learned', body: `What went well | What did not | Recommendation\n[ ] | [ ] | [ ]\n[ ] | [ ] | [ ]\n[ ] | [ ] | [ ]` },
+      { heading: '9. Acknowledgements', body: `[Thank the people and teams who contributed.]` },
+      { heading: '10. Formal acceptance', body: `By signing below, the Client confirms that the engagement is complete and the deliverables are accepted, subject to the outstanding items listed in section 4.\n\nFor the Client:\nSignature: ..........................  Name: ..........................  Date: ..........................\n\nFor the Consultant:\nSignature: ..........................  Name: ..........................  Date: ..........................` }
+    ]
+  },
+  {
+    id: 'ba-trackers',
+    title: 'BA Trackers (RAID, RTM, Stakeholder, Action, Decision)',
+    category: 'delivery',
+    description: 'The column structure for the live BA tracker workbook. The interactive Excel version with formulas and dropdowns is provided as a separate file.',
+    sections: [
+      { heading: 'How to use', body: `These are the core logs a business analyst keeps running across an engagement. The interactive Excel workbook has drop-downs, a live dashboard that counts open items, and one worked example per tab. Use this text version as a quick reference or to rebuild the columns in another tool.` },
+      { heading: 'RAID Log', body: `Risks, Assumptions, Issues, Dependencies.\nColumns: ID | Type (Risk/Assumption/Issue/Dependency) | Date raised | Raised by | Description | Impact if realised | Likelihood (High/Med/Low) | Severity (High/Med/Low) | Mitigation / response | Owner | Target date | Status (Open/In Progress/On Hold/Closed) | Date closed | Notes` },
+      { heading: 'Requirements Traceability Matrix (RTM)', body: `Columns: Req ID | Requirement description | Type (Business/Functional/Non-Functional) | Priority (Must/Should/Could/Won't) | Source / stakeholder | Related process | Design ref | Build ref | Test case ref | Test status (Not Started/In Progress/Pass/Fail/Blocked) | Status (Proposed/Approved/In Development/Delivered/Deferred/Rejected) | Comments` },
+      { heading: 'Stakeholder Register', body: `Columns: ID | Name | Role / title | Organisation | Influence (High/Med/Low) | Interest (High/Med/Low) | Attitude (Champion/Supporter/Neutral/Critic/Blocker) | Engagement strategy | Comms preference | Frequency | Owner | Notes` },
+      { heading: 'Action Log', body: `Columns: ID | Date raised | Action description | Raised by | Owner | Priority (High/Med/Low) | Due date | Status (Open/In Progress/Completed/On Hold/Cancelled) | Date completed | Notes` },
+      { heading: 'Decision Log', body: `Columns: ID | Date | Decision | Context / rationale | Options considered | Decided by | Impact | Status (Proposed/Agreed/Implemented/Superseded) | Review date | Notes` },
+      { heading: 'Dashboard', body: `The Read Me tab counts open items automatically: open RAID items, high-severity risks open, open actions, actions completed, requirements logged, Must-have requirements, requirements delivered, stakeholders logged, high-influence stakeholders, and decisions agreed.` }
+    ]
+  },
+
+  // ==================== FINANCE & ADMIN ====================
+  {
+    id: 'timesheet-invoice',
+    title: 'Timesheet, Invoice & Expenses',
+    category: 'finance',
+    description: 'The structure for the billing workbook: weekly timesheet, monthly summary, VAT-aware invoice, and expenses log. The interactive Excel version with live formulas is provided as a separate file.',
+    sections: [
+      { heading: 'How to use', body: `A self-contained billing pack for a contract or freelance assignment. In the Excel version all totals are live formulas; cells you fill in are blue and the key assumptions you set once (day rate, VAT rate) are highlighted yellow. This text version mirrors the layout.` },
+      { heading: 'Weekly Timesheet', body: `Header: Consultant | Client | Project / assignment | PO / reference | Week commencing (Mon) | Day rate (GBP) | Standard day (hours)\n\nTable (Mon to Sun): Date | Day | Activity / notes | Days worked | Amount\nAmount = Days worked x Day rate. Weekly total sums the days and the amounts.` },
+      { heading: 'Monthly Summary', body: `Header: Consultant | Client | Month\nTable: Week ending | Days worked | Day rate | Amount\nAmount = Days x Day rate. The month total rolls up days and amount and can be dropped onto an invoice.` },
+      { heading: 'Invoice', body: `From: [Your name / company], address, company no (if applicable), VAT no (if registered), email\nBill to: [Client name], address, contact, PO number\nInvoice number: [INV-001] | Invoice date: [date] | Payment terms (days): [30] | Due date = invoice date + terms\n\nLine items: Description | Qty | Unit (Day/Hour/Item/Fixed fee) | Rate | Amount (= Qty x Rate)\nSubtotal = sum of amounts\nVAT = subtotal x VAT rate (set the rate; only charge if VAT registered)\nTotal due = subtotal + VAT\n\nPayment details: account name, sort code, account number, payment reference.\nNote: Late payment of a commercial debt may incur statutory interest and a fixed recovery sum under the Late Payment of Commercial Debts (Interest) Act 1998.` },
+      { heading: 'Expenses', body: `Header: Consultant | Client | Period\nTable: Date | Category (Travel/Accommodation/Subsistence/Mileage/Software-tools/Other) | Description | Net | VAT | Gross (= Net + VAT) | Billable? (Yes/No) | Receipt ref\nTotals sum net, VAT and gross. The billable total sums the gross of rows marked Yes.` },
+      { heading: 'VAT and late payment notes', body: `The VAT rate cells are assumptions for you to confirm. Only charge VAT if you are VAT registered, and use the rate and treatment your accountant confirms. Registration thresholds and rates change, so verify the current position rather than relying on a figure typed into a template.` }
     ]
   },
   {
@@ -462,7 +711,8 @@ const TEMPLATES = [
 const TEMPLATE_CATEGORIES = {
   proposals: { label: 'Proposals', short: 'Proposals', gradient: 'from-cyan-500 to-blue-600', icon: FileText },
   discovery: { label: 'Discovery & Onboarding', short: 'Discovery', gradient: 'from-emerald-500 to-teal-600', icon: Search },
-  contracts: { label: 'Contracts', short: 'Contracts', gradient: 'from-rose-500 to-red-600', icon: Briefcase },
+  contracts: { label: 'Contracts & Setup', short: 'Contracts', gradient: 'from-rose-500 to-red-600', icon: Briefcase },
+  delivery: { label: 'BA Delivery', short: 'Delivery', gradient: 'from-indigo-500 to-violet-600', icon: Target },
   finance: { label: 'Finance & Admin', short: 'Finance', gradient: 'from-amber-500 to-orange-600', icon: TrendingUp }
 };
 
@@ -1933,6 +2183,7 @@ function InstallBanner({ onInstall, onDismiss }) {
     </div>
   );
 }
+
 // ==================== MAIN APP ====================
 function App() {
   // Persisted state (loaded from IndexedDB)
