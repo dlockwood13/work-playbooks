@@ -738,6 +738,305 @@ const PLAYBOOKS = [
       { type: 'instruction', title: 'Keep it alive', body: 'A standard nobody updates is a standard nobody follows. Build in a quarterly review. Audit adherence by observation, not self-report. When deviations are found, ask whether the standard is wrong or the practice is — sometimes the operator has improved on it without telling anyone.' }
     ]
   }
+  {
+    id: 'requirements-elicitation',
+    title: 'Requirements Elicitation',
+    category: 'ba',
+    description: 'Elicit the right requirements, from the right people, at the right time — so the team builds the right thing.',
+    estMinutes: 45,
+    steps: [
+      { type: 'reference', title: 'What elicitation is — and when to use it', body: 'Elicitation is the structured process of collecting, clarifying, and agreeing what stakeholders need a solution to do, and why. Use it during initiate/define phases, discovery for new features or process change, and pre-refinement for complex items (rules, integrations, safety-critical changes). Skip it when the problem is already well understood and low-risk — move straight to validation and delivery planning.' },
+      { type: 'checklist', title: 'Capture the minimum set of requirement types', body: 'Aim to surface all of these, not just functional features:', items: ['Business requirements — why you are doing it; the benefits and outcomes', 'Stakeholder requirements — needs and expectations by role', 'Functional requirements — what the solution does', 'Non-functional requirements — how well it does it (performance, security, reliability, usability)', 'Delivery/transition requirements — what must happen to move from current to target state'] },
+      { type: 'checklist', title: 'Gather your inputs before any session', body: 'Walking in unprepared wastes stakeholder time. Have:', items: ['Objective and outcomes — what success means and why', 'Scope boundaries — what is in, what is out, and which users/paths are affected', 'Existing artefacts — process docs, policies, prior decisions', 'Baseline metrics and known issues — performance data, incidents, tickets', 'A stakeholder map — roles impacted plus decision-makers'] },
+      { type: 'instruction', title: 'Define scope before booking sessions', body: 'Clarify the objective and outcomes, what is in and out of scope, the target users and critical scenarios, and the constraints, assumptions, and dependencies. A tight scope keeps sessions focused and prevents requirements sprawl later.' },
+      { type: 'reference', title: 'Choose techniques to fit the context', body: 'Interviews — deep insight, good for complex decisions. Workshops — alignment, prioritisation, conflict resolution. Document analysis — existing procedures, policy, data definitions. Observation/shadowing — reveals real work and hidden steps. Surveys — breadth quickly. Most discoveries blend two or three.' },
+      { type: 'instruction', title: 'Elicit, clarify, and negotiate', body: 'Keep the focus on needs and outcomes, not interface solutions. Surface conflicts and resolve them through prioritisation and constraints. Stop eliciting when new use cases are low priority or out of scope for the current release.' },
+      { type: 'checklist', title: 'Run a Know / Don\'t-Know log', body: 'Make uncertainty explicit so it can be closed deliberately. For each area capture:', items: ['What we know', 'What we don\'t know', 'How we will find out', 'Owner', 'Due date'] },
+      { type: 'instruction', title: 'Analyse, structure, then validate and baseline', body: 'Convert raw inputs into epics/features/stories, business rules, acceptance criteria, NFRs, and process flows. Validate with stakeholders using process maps, scenarios, or wireframes, then baseline what is approved for delivery.' },
+      { type: 'reference', title: 'Common pitfalls', body: 'Stakeholders describe solutions ("add a button") instead of needs ("reduce incomplete submissions") — redirect to the outcome. Missing a key stakeholder group causes late scope churn. Never-ending requirements need a prioritisation and change-control route, not endless capture.' }
+    ]
+  },
+  {
+    id: 'writing-requirements',
+    title: 'Writing Clear, Testable Requirements',
+    category: 'ba',
+    description: 'Turn elicitation outputs into requirements that are unambiguous, testable, and traceable.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'What a requirement actually states', body: 'A requirement states what a system or process must do (function), how well it must do it (quality/performance), and the constraints that drive design choices. If it does none of these clearly, it is not yet a requirement — it is a note.' },
+      { type: 'reference', title: 'The quality standard: Clear, Common, Coherent', body: 'Clear — unambiguous, complete, concise. Common — every stakeholder shares the same interpretation. Coherent — the set is consistent and logically connected, with no contradictions.' },
+      { type: 'instruction', title: 'Use a consistent syntax', body: 'Write each requirement as: Trigger (When…) + Actor (who/what performs) + Action (shall/must + verb) + Object (what is acted on) + Condition/exception (unless/except if…) + Output (resulting state). Example shape: "When a user submits a form, the system shall validate required fields unless the submission is saved as a draft."' },
+      { type: 'reference', title: 'Prioritise with modal verbs (MoSCoW)', body: 'Must = mandatory for this release. Should = important but not essential this release. Could = desirable enhancement. Won\'t = explicitly agreed out of scope for this release. Consistent modal language removes arguments about what is actually committed.' },
+      { type: 'checklist', title: 'Test every requirement against this checklist', body: 'A good requirement is:', items: ['Testable — there is a clear pass/fail', 'Traceable — it links back to an objective or epic', 'Specific — no "fast" or "user-friendly" without a measure', 'Feasible — achievable within constraints', 'Atomic — one idea per requirement'] },
+      { type: 'reference', title: 'What to avoid', body: 'Vague acceptance like "works as expected". Compound requirements joined with "and" — split them. Requirements that bake in an interface solution instead of the outcome, unless a standard or regulation genuinely requires that specific solution.' },
+      { type: 'instruction', title: 'Record each requirement with its metadata', body: 'For each statement capture: ID, priority (MoSCoW), the statement, rationale (why), acceptance method (test/demo/analysis/inspection), source, and dependencies. This makes the set reviewable, testable, and traceable end to end.' }
+    ]
+  },
+  {
+    id: 'non-functional-requirements',
+    title: 'Defining Non-Functional Requirements (NFRs)',
+    category: 'ba',
+    description: 'Define the quality attributes — performance, availability, security, usability — so engineering and QA can build and verify to an agreed standard.',
+    estMinutes: 35,
+    steps: [
+      { type: 'reference', title: 'What NFRs are', body: 'Non-functional requirements describe how well the system must operate — speed, reliability, security — rather than which features it has. They are the difference between "it works in the demo" and "it holds up in production".' },
+      { type: 'checklist', title: 'Cover the practical NFR categories', body: 'Work through each category and decide whether it applies:', items: ['Performance — response time, throughput', 'Availability and resilience — uptime, recovery', 'Security — access control, audit, encryption', 'Privacy and compliance — data-protection obligations', 'Usability and accessibility — e.g. keyboard navigation', 'Maintainability/operability — monitoring, logging, deployability', 'Scalability — handling load growth'] },
+      { type: 'reference', title: 'Write NFRs that can actually be proven', body: 'Each NFR should be measurable (a metric/threshold), testable (how you prove it), scoped (which journeys/pages/APIs it applies to), and realistic (aligned to constraints). Pattern: "The system shall… measured by… under conditions…".' },
+      { type: 'checklist', title: 'Gather the inputs that drive NFRs', body: 'NFRs come from context, not imagination. Pull together:', items: ['Critical journeys — the flows that genuinely matter', 'Risk profile — safety, reliability, compliance, volume', 'Architecture constraints — hosting, integrations, dependencies', 'Governance requirements — audit, access control, retention', 'Support model — monitoring, incident response, recovery'] },
+      { type: 'reference', title: 'Examples of measurable NFRs', body: 'Performance: key pages load within 2 seconds under agreed peak load. Availability: meets an agreed target (e.g. 99.9%) excluding planned maintenance. Reliability: saving critical records prevents data loss; failure rate stays below an agreed threshold. Accessibility: primary actions reachable within an agreed number of tab steps. Backup/restore: defined cadence with tested restore (RPO/RTO agreed).' },
+      { type: 'instruction', title: 'Record verification and build the register', body: 'For each NFR capture its category, statement, justification, measurement/threshold, how it is verified (test/monitoring/audit/review), and scope. Hold them in a single NFR register so they become the agreed quality baseline for go-live.' },
+      { type: 'reference', title: 'Common pitfalls', body: 'Aspirations with no measure ("fast", "secure", "reliable"). Missing scope — "for everything" is not testable. No verification method — if it can\'t be proven, it will be disputed at UAT.' }
+    ]
+  },
+  {
+    id: 'business-rules',
+    title: 'Capturing Business Rules',
+    category: 'ba',
+    description: 'Capture decision logic — eligibility, routing, thresholds, constraints — so it is unambiguous, testable, and reusable across stories, automation, and reporting.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'What a business rule is', body: 'A business rule defines or constrains behaviour: classification (e.g. risk tier), eligibility (who qualifies), routing (where work goes), validation (what must be present), or constraints (what is or isn\'t allowed). Rules are reusable logic — distinct from the stories that consume them.' },
+      { type: 'checklist', title: 'Know when to extract a rule', body: 'Pull logic out into a named rule when:', items: ['Decisions must be consistent across teams or systems', 'Automation relies on stable, shared logic', 'Reporting needs a shared definition (e.g. what counts as "overdue", "eligible", or "red")'] },
+      { type: 'instruction', title: 'Assign an accountable business owner', body: 'Every rule needs an accountable business owner from the relevant function — even when delivery is implemented by a technical team. Without a business owner, rules drift and no one can authorise an exception.' },
+      { type: 'checklist', title: 'Structure each rule consistently', body: 'Each rule should include:', items: ['Rule ID and name', 'Statement — the rule itself', 'Rationale — why it exists', 'Scope — where it applies', 'Exceptions and override policy', 'Data inputs — the fields it depends on', 'Effective date/version', 'Related stories, process steps, and tests'] },
+      { type: 'reference', title: 'Worked examples', body: 'Eligibility: "A record is eligible for review when the eligibility criteria for its pathway are met and the review window is open." Validation: "A submission is Complete only when all mandatory fields for the current period are provided." Routing: "Items flagged Red route to the urgent queue; Amber to priority review; Green to standard." Each names its exceptions and data inputs.' },
+      { type: 'instruction', title: 'Maintain a rules register', body: 'Hold all rules in a single register as the source of truth, with ID, name, statement, scope, exceptions, owner, and status. This lets stories, tests, and reports reference the same definition instead of re-implementing logic.' },
+      { type: 'reference', title: 'Common pitfalls', body: 'Rules buried inside individual user stories (impossible to reuse). Missing definitions — exactly what counts as "overdue"? No exception handling or override policy, so edge cases get decided ad hoc.' }
+    ]
+  },
+  {
+    id: 'process-design',
+    title: 'Process Design & Levels of Mapping',
+    category: 'ba',
+    description: 'Model how work flows end-to-end so you can standardise, improve, and safely automate — with clear ownership, controls, and measures.',
+    estMinutes: 50,
+    steps: [
+      { type: 'reference', title: 'Process design vs procedure', body: 'A process model shows what happens — the flow, decisions, hand-offs, and where systems are used. A procedure (SOP/work instruction) shows how to do a single step. Design the process first; write procedures separately and link them to the relevant steps. Don\'t conflate the two.' },
+      { type: 'reference', title: 'Why it matters for automation', body: 'Process design reduces delivery risk by ensuring you change the right thing in the right place: less rework and manual chasing, explicit hand-offs and ownership, stable logic to automate against, and better auditability. The classic failure mode — automating a poorly understood process just automates its errors, exceptions, and rework.' },
+      { type: 'reference', title: 'Map in three levels to control clutter', body: 'Level 0 (value chain): 6–10 stages max, named noun–verb (e.g. "Triage Request", "Manage Review"). Level 1 (end-to-end): the happy path plus only the critical exceptions, aim for under ~40 activities, showing hand-offs, systems, and key decisions. Level 2 (sub-process): detailed view of a single stage with validations, queue logic, data rules, and controls.' },
+      { type: 'checklist', title: 'Apply the design principles', body: 'Keep maps usable and executable:', items: ['Progressive enrichment — start high-level, add detail only where needed', 'More than the happy path — include critical exceptions, not every edge case', 'Explicit hand-offs — show where work moves between roles/teams', 'Decision clarity — decisions visible with outcomes clearly labelled', 'Step attributes — capture role, system, key data, risks/controls where relevant', 'Measures built in — define how performance is monitored'] },
+      { type: 'checklist', title: 'Capture the minimum viable map', body: 'A process map should always capture:', items: ['Trigger — what starts the process', 'Objective — why it exists (the value/outcome)', 'Inputs and outputs — what is needed and what is produced/decided', 'Actors — roles involved (swimlanes recommended)', 'Systems — where steps occur', 'Key data and decisions used in the flow', 'Critical exceptions that materially change outcome or risk', 'Risks/controls and the measures (KPIs)', 'Linked procedures/SOPs'] },
+      { type: 'reference', title: 'Useful measures to build in', body: 'Time from trigger to completion. Percentage complete first time (no rework). Exception rate and its top drivers. Queue age / SLA adherence. Manual touches per case. Choose a small set that reveals whether the process is actually healthy.' },
+      { type: 'instruction', title: 'Make decisions visible, then publish with an owner', body: 'If a decision changes the route or outcome, it must be visible on the map (Level 1/2), not buried in an SOP. Agree maps with operational SMEs, assign a named process owner, publish with versioning, and link supporting SOPs to the relevant steps. Prioritise clarity over completeness at Levels 0 and 1.' }
+    ]
+  },
+  {
+    id: 'journey-mapping',
+    title: 'Customer Journey Mapping',
+    category: 'ba',
+    description: 'Understand the end-to-end experience from the user\'s perspective, find the moments that matter, and prioritise improvements with evidence.',
+    estMinutes: 50,
+    steps: [
+      { type: 'reference', title: 'Journey map vs process map', body: 'A journey map is "outside-in" — what people do, think, and feel at each stage, the touchpoints they hit, and the points where they pause, decide, or disengage. A process map is "inside-out" — how the organisation delivers the service. Use both together: the journey tells you where it hurts, the process tells you why.' },
+      { type: 'instruction', title: 'Set context before any workshop', body: 'Agree three things first or the map becomes opinion-led and too broad: the objective (what decision this map enables), the segment (who it represents), and the journey start and end points from the user\'s viewpoint. Also list the channels in scope (portal, email/SMS, phone, in-person).' },
+      { type: 'reference', title: 'Choose the right mapping approach', body: 'Users walk the journey for real — highest credibility, true emotion, but needs access and consent. Users recall/anticipate it — good for long or remote journeys, but memory bias. Knowledgeable staff walk it — quick and builds engagement, but guard against internal bias. Desk-based from existing research — fast and cheap, but lower credibility; validate with real users.' },
+      { type: 'instruction', title: 'Bring evidence into the room', body: 'Blend secondary research (existing data, analytics, reports), primary research (interviews, observation, surveys), and customer closeness (shadowing, call listening, frontline insight). Without evidence — metrics, call drivers, complaints, drop-off points — journey mapping becomes "loudest voice wins".' },
+      { type: 'checklist', title: 'Build the experience map', body: 'Identify 6–10 key steps in chronological order. For each step capture:', items: ['Actions — what the person does', 'Thoughts — what they are trying to work out', 'Feelings — the emotion and its intensity', 'Touchpoints — digital, human, comms', 'Evidence/quotes — in the user\'s real language where possible'] },
+      { type: 'reference', title: 'Moments of truth and the experience curve', body: 'Moments of truth are the points where users judge the experience, decide to continue, or disengage — be selective, don\'t label every step. Plot a "heart monitor" (experience score across steps) to show where experience peaks and dips, and to focus effort where it matters most.' },
+      { type: 'instruction', title: 'Link priority moments to the backstage', body: 'For each priority moment, map the backstage activities, hand-offs, queues, systems, and the failure points and recovery paths. This connects the felt experience to the process and rules that produce it.' },
+      { type: 'checklist', title: 'Turn insight into a prioritised action plan', body: 'Convert findings into a small set of executable actions. Every action needs:', items: ['The insight/problem it addresses', 'Proposed action and expected impact', 'Effort (S/M/L) and risks/dependencies', 'An owner and due date', 'A measure of success'] }
+    ]
+  },
+  {
+    id: 'swot-analysis',
+    title: 'SWOT Analysis',
+    category: 'ba',
+    description: 'Assess strengths, weaknesses, opportunities, and threats against a clear objective — and turn the grid into an action plan, not just a list.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'What SWOT is — and isn\'t', body: 'SWOT assesses a situation through four lenses: Strengths and Weaknesses (internal factors) and Opportunities and Threats (external conditions). It is only useful when anchored to a clear objective and ended with actions. A SWOT list with no decisions is waste.' },
+      { type: 'reference', title: 'The four definitions, kept simple', body: 'Strengths — attributes that help achieve the objective. Weaknesses — attributes that harm it. Opportunities — external conditions that can help. Threats — external conditions that can harm. The internal/external split is what keeps the grid honest.' },
+      { type: 'instruction', title: 'Step 1 — Define the objective (non-negotiable)', body: 'State the desired end state in one sentence. If you can\'t, pause and define the objective or vision first — running SWOT without it produces low-value, generic output.' },
+      { type: 'instruction', title: 'Step 2 — Prep evidence, not just opinion', body: 'Bring metrics (cycle times, completion rate), operational data (manual touches, queue age), user feedback, and known constraints. Tag each item as evidence-backed or assumption so the grid isn\'t "loudest voice wins".' },
+      { type: 'checklist', title: 'Step 3 — Capture, then tighten', body: 'Build four lists time-boxed, then sharpen them:', items: ['Remove duplicates', 'Remove items that are "always true" (generic)', 'Rewrite items to be specific and relevant to the objective', 'Distinguish "today" from "future potential"', 'Analyse against relevant benchmarks/alternatives, not in isolation'] },
+      { type: 'instruction', title: 'Step 4 — Validate for fitness', body: 'Challenge each item: Is it true? Does it matter for the objective? Is it distinctive or just table stakes? Drop "opportunities" available equally to everyone and "strengths" that aren\'t actually stronger than the benchmark.' },
+      { type: 'reference', title: 'Step 5 — Convert to action (the actual value)', body: 'Use the cross prompts: Use each Strength, Stop each Weakness, Exploit each Opportunity, Defend against each Threat. The end product is a prioritised plan with owners, dates, and success measures — aim for 5–10 actions per cycle. If you have 30, you don\'t have priorities.' }
+    ]
+  },
+  {
+    id: 'risks-issues-management',
+    title: 'Risks & Issues Management (RAID)',
+    category: 'ba',
+    description: 'Identify and manage risks before they materialise, and resolve issues fast when they do — protecting time, cost, and quality.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'Risk vs issue', body: 'A risk is an event that may or may not occur; if it does, it adversely impacts objectives — track it in the risk log. An issue is a realised risk that is already impacting objectives — track it in the issue log. Rule of thumb: if it might happen, it\'s a risk; if it has happened, it\'s an issue.' },
+      { type: 'instruction', title: 'Identify by asking "what if?"', body: 'Use structured prompts: What could go wrong? What could delay delivery? Do we rely on a vendor, another team, a governance approval, or a data dependency? Repeat "what if…" until you surface the real drivers, then quantify impact in time, cost, quality, and operational risk.' },
+      { type: 'checklist', title: 'Analyse and make each item actionable', body: 'For every risk/issue capture:', items: ['Probability (likelihood) and impact (severity)', 'Exposure — probability × impact', 'A single accountable owner', 'Early-warning indicators ("how we\'ll know it\'s getting worse")', 'A next review date'] },
+      { type: 'reference', title: 'Plan the response', body: 'For a risk, build a mitigation plan: what can we do now to reduce likelihood or impact, and who owns it. For an issue, build a response plan: understand what happened and who is affected, check whether it was a known risk, agree resolution options, then decide, communicate, and act with owners and dates.' },
+      { type: 'checklist', title: 'De-risk early to avoid late surprises', body: 'Deliberate early actions that reduce uncertainty:', items: ['Pre-mortem — "assume this failed, why?" then convert to risks/mitigations', 'Dependency handshake — confirm owners, dates, acceptance, and fallbacks', 'Rules-first clarification — validate logic before build', 'Early technical spikes — time-boxed proofs for complex unknowns', 'Risk-based slicing — deliver the highest-risk components first', 'Operational readiness — SOPs, training, comms, monitoring before go-live', 'Pilot / phased rollout to reduce blast radius'] },
+      { type: 'reference', title: 'Track, report, and escalate by severity', body: 'Every open item needs an owner, current status, next action, and next review date. Cadence: weekly minimum, daily during go-live. Escalate Critical/High to leadership with a move-forward plan; review Medium weekly; manage Low through routine monitoring. For past-due items, escalate for re-assessment.' },
+      { type: 'instruction', title: 'Close only when genuinely done', body: 'Close a risk when it is no longer applicable or mitigation has reduced it to an acceptable residual level. Close an issue only when resolved and verified, with prevention actions completed so it doesn\'t recur. The goal isn\'t a perfect log — it\'s fewer surprises and faster recovery.' }
+    ]
+  },
+  {
+    id: 'technical-debt-management',
+    title: 'Managing Technical Debt',
+    category: 'pi',
+    description: 'Manage technical debt deliberately so you can deliver change safely and quickly — without hidden maintenance cost, upgrade blockers, or key-person risk.',
+    estMinutes: 45,
+    steps: [
+      { type: 'reference', title: 'What technical debt is', body: 'Technical debt is the accumulated cost of deferred technical work and bespoke configuration that must be paid back later: end-of-support versions, duplicated/redundant apps, missing documentation, process workarounds, custom builds where an off-the-shelf capability exists, deviations from standards, and unfixed defects. If it affects safety, auditability, or data integrity, treat it as a delivery risk — not "housekeeping".' },
+      { type: 'reference', title: 'Why it matters', body: 'Debt causes complex, slow upgrades; reduced ability to adopt new capabilities; poor performance and stability; and rising key-person dependency. Operationally it shows up as more manual rework, higher incident load, and slower change throughput from fragile integrations and brittle rules.' },
+      { type: 'checklist', title: 'Tag debt with consistent categories', body: 'Keep the register consistent by tagging each item:', items: ['Best-practice / lifecycle debt — end-of-support versions, redundancy, excessive customisation', 'Policy / standard-deviation debt — non-standard security or integration patterns, non-compliant config', 'Delivery trade-off debt — deferred features, "temporary" solutions that became permanent, speed-over-design decisions'] },
+      { type: 'instruction', title: 'Make debt compete fairly for capacity', body: 'Dedicate a fixed proportion of engineering capacity (e.g. 10–15% of dev time, or an agreed debt sprint) to remediation. Track debt as backlog items in the same prioritisation system as features and defects — if it isn\'t visible there, it never competes fairly and never gets fixed.' },
+      { type: 'reference', title: 'The five-step strategy', body: '1) Document objectives and decision rights. 2) Collect information from architecture/code/config reviews, incident themes, performance monitoring, and support tickets. 3) Categorise and prioritise by how debt blocks objectives and affects upgradeability, performance, security, and operability — don\'t boil the ocean. 4) Engage decision-makers with a recommendation per item: Accept, Remediate, or Replace. 5) Improve controls to prevent new debt (reviews, static analysis, policy-as-code, governance gates).' },
+      { type: 'checklist', title: 'De-risk each decision', body: 'What "good" looks like for every debt decision:', items: ['Decision clarity — explicitly accept/remediate/replace, with rationale and a review date', 'Failure-mode coverage — define the operational impact if the debt fails (who is paged, the workaround)', 'Guardrails — include relevant NFRs (performance, security, audit, retention)', 'Release gating — add pre-release checks and rollback plans where debt raises release risk', 'Ownership — named owners for remediation and ongoing support'] },
+      { type: 'reference', title: 'The signal you\'re servicing debt, not fixing it', body: 'If the same area keeps generating defects, incidents, or manual workarounds, you are not fixing debt — you are servicing it. That recurring cost is the real problem to escalate.' }
+    ]
+  },
+  {
+    id: 'product-owner-role',
+    title: 'The Product Owner Role',
+    category: 'ba',
+    description: 'Clarify what a Product Owner is accountable for and how to run vision to roadmap to backlog to delivery with sharp prioritisation and measurement.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'What the PO is accountable for', body: 'The Product Owner is the accountable decision-maker for maximising product value under constraints — deciding what gets built next and why. The PO owns the "what and why"; the team owns the "how". Core accountabilities: vision and roadmap, backlog ownership, prioritisation, supporting planning/estimation, and stakeholder alignment.' },
+      { type: 'reference', title: 'The backlog is the primary tool', body: 'The product backlog is a prioritised list of everything that could benefit the product — user stories, defects, enhancements, spikes, and technical debt. Keep a visible balance across those types; if features always win, debt and risk work silently accumulate.' },
+      { type: 'checklist', title: 'Keep stories delivery-ready with INVEST', body: 'Default to user stories, and test each against INVEST:', items: ['Independent', 'Negotiable', 'Valuable', 'Estimable', 'Small (typically 1–5 days of effort)', 'Testable'] },
+      { type: 'reference', title: 'Pick one primary prioritisation method', body: 'Choose by context: Stack Ranking (most valuable first), MoSCoW (Must/Should/Could/Won\'t this release), Kano (basics vs performance vs delighters), Cost of Delay (cost of waiting), or risk-first slicing (reduce the biggest risks earliest). When two items deliver similar value, prefer the one that reduces operational risk or manual effort.' },
+      { type: 'checklist', title: 'Define success with outcomes and guardrails', body: 'Every roadmap theme and major epic should have at least one measurable outcome and one guardrail. Examples:', items: ['Outcome — reduced cycle time from request to decision', 'Outcome — improved complete-first-time rate', 'Outcome — fewer manual touches per case', 'Guardrail — no increase in escalations caused by tool/process failure', 'Guardrail — auditability preserved (who/what/when)'] },
+      { type: 'instruction', title: 'Run the loop: vision → roadmap → backlog → delivery → measure', body: 'Establish direction (audience, problem, 3–5 outcomes, 2–4 guardrails, decision rights). Convert to a roadmap of themes sequenced by value and risk, communicating what is in, later, and not doing. Keep the top of the backlog refined, testable, and measurable. Run delivery with refinement and reviews, updating priorities on evidence not momentum. Then measure outcomes and decide what to stop, change, or scale.' },
+      { type: 'reference', title: 'Readiness signal', body: 'If a backlog item cannot state its success measures and acceptance criteria, it is not ready to be prioritised into delivery. Reject vague items early rather than discovering the gap mid-sprint.' }
+    ]
+  },
+  {
+    id: 'defining-scope',
+    title: 'Defining & Managing Scope',
+    category: 'ba',
+    description: 'Set clear boundaries for what you will and won\'t deliver, so you can plan, resource, and prevent scope creep.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'What scope is', body: 'Scope is the detailed outline of everything an initiative includes: deliverables, timelines, resources, activities, constraints, assumptions, stakeholders, and — critically — what is in and what is out. Scope management is the process of determining and documenting those boundaries during planning.' },
+      { type: 'reference', title: 'The failure mode it prevents', body: 'Without agreed scope, teams tend to deliver "everything people mentioned" rather than "what is needed to achieve the outcome" — producing disputes, delays, and costly rework. Setting scope lets you size deliverables, resource demand, and delivery method up front.' },
+      { type: 'checklist', title: 'Gather inputs before setting boundaries', body: 'Have these to hand:', items: ['Objective/outcome — what you are trying to achieve and why', 'Vision and success measures — the anchor for trade-offs', 'Pathways/journeys/segments that might be included', 'Constraints — regulatory, operational, technical', 'Dependencies — external teams, systems, approvals', 'Stakeholders — decision-makers, SMEs, approvers'] },
+      { type: 'instruction', title: 'Set the boundaries explicitly', body: 'Clarify the objective, the users/segments in scope, the key deliverables and initial dates, and the constraints/assumptions/dependencies. Most importantly, write down what is explicitly out of scope — the significant exclusions are what stop arguments later.' },
+      { type: 'instruction', title: 'Write and baseline the scope statement', body: 'Capture purpose, in/out of scope, outcomes and milestones, stakeholders, duration, assumptions, constraints, dependencies, top risks, and a sign-off approach. Version it and keep a single source of truth so changes are visible.' },
+      { type: 'checklist', title: 'Control scope creep deliberately', body: 'Treat scope creep as a risk with early-warning indicators:', items: ['New stakeholder groups appearing late', 'Expanding exception scenarios', '"Just one more pathway" requests', 'Route every new request through a change decision with time/cost/risk impact assessed', 'Use MoSCoW / release slicing to sequence demand', 'Re-review scope at each milestone and refinement point'] },
+      { type: 'instruction', title: 'Get formal sign-off, then reconfirm', body: 'Have the sponsor or decision-maker formally authorise the baseline scope, and reconfirm at critical milestones. A scope no one authorised is a scope no one will defend when pressure arrives.' }
+    ]
+  },
+  {
+    id: 'product-vision',
+    title: 'Creating a Product Vision',
+    category: 'ba',
+    description: 'Write an aspirational, evidence-grounded vision that anchors prioritisation and that leaders can communicate consistently.',
+    estMinutes: 30,
+    steps: [
+      { type: 'reference', title: 'What a vision is — and what it gives you', body: 'A vision is an aspirational statement built on target-audience needs: it states the value delivered and how the offering is distinctive, made actionable through KPIs and roadmap. A good one gives you a shared rationale for why the initiative exists, a stable anchor for trade-offs, and a narrative leaders can repeat confidently.' },
+      { type: 'reference', title: 'The quality standard', body: 'A good vision is inspiring, big, clear and short, shared, and engaging. Don\'t over-engineer it — "good enough" beats "perfect but late". Visions are refined over several short workshops and are allowed to evolve as context changes.' },
+      { type: 'instruction', title: 'Build it in five moves', body: 'Define the target audience (who it is for); the need/job to be done (what they need to achieve); the initiative/product name; what it is (category/description); and its unique value (what makes it distinctive). These map directly onto the statement structure below.' },
+      { type: 'reference', title: 'Fill-in-the-blanks statement structure', body: 'For [this audience] / Who [need or want to achieve] / The [initiative or product] / Is a [category/description] / That [provides these distinctive benefits]. Keeping to this shape forces clarity on audience and value rather than vague aspiration.' },
+      { type: 'checklist', title: 'De-risk the vision so it\'s usable, not decorative', body: 'Run these checks:', items: ['Evidence — is the need grounded in research, data, or operational evidence?', 'Distinctiveness — can you say clearly how this differs from today?', 'Decision — does it actually help resolve scope and priority debates?', 'Feasibility — is the ambition credible given constraints?', 'Alignment — do all leads interpret the statement the same way?'] },
+      { type: 'reference', title: 'Add KPIs and non-goals', body: 'Make the vision actionable with a small set of KPIs (how you\'ll measure progress) and explicit non-goals (what it is not) to protect scope. Risk signal: if stakeholders can\'t agree the audience or the job, you don\'t have a stable proposition yet — run focused discovery before committing to a roadmap.' }
+    ]
+  },
+  {
+    id: 'build-measure-learn',
+    title: 'Build–Measure–Learn Discovery',
+    category: 'ba',
+    description: 'Run structured, evidence-led discovery and experimentation — find the right problems, create the best solutions, then scale value.',
+    estMinutes: 50,
+    steps: [
+      { type: 'reference', title: 'What Build–Measure–Learn means', body: 'An evidence-led cycle: form hypotheses, run lean tests, learn quickly, and iterate. It balances desirability (people want it), feasibility (you can deliver it), viability (it creates sustainable value), and responsibility (safe, ethical, compliant). Use it for early discovery and high-uncertainty work; skip it when the problem is already evidenced and low-risk.' },
+      { type: 'instruction', title: 'Stage 1 — Find the right problems', body: 'Describe the problem you believe exists and its impact. Map today\'s experience and list assumptions. Identify the riskiest assumptions ("leaps of faith") to test first, gather qualitative and quantitative evidence to validate or refute them, then convert validated insights into an opportunity definition (desired outcome + desired impact).' },
+      { type: 'reference', title: 'The core de-risking principle', body: 'Separate what you know from what you assume, then test the biggest leaps of faith first — not the easiest ones. The easy assumptions rarely sink a project; the unexamined load-bearing ones do.' },
+      { type: 'instruction', title: 'Stage 2 — Create the best solutions', body: 'Generate many diverse ideas (divergent), then group and score concepts against desirability/viability/feasibility/responsibility. Prototype quickly (prototypes need not be coded), test with users, learn, and iterate. Convert winning concepts into production-ready backlog items.' },
+      { type: 'instruction', title: 'Stage 3 — Maximise value at scale', body: 'Maintain traceability from insight → benefit → epic/feature/story. Track flow and outcomes, experiment on the end-to-end experience, and iterate continuously for incremental gains. Failure mode: if you can\'t explain the "why" behind a piece of work, you increase waste and reduce decision clarity.' },
+      { type: 'checklist', title: 'Run an experiment backlog', body: 'For each experiment capture:', items: ['Hypothesis — what you believe', 'Method — how you\'ll test it', 'Metric and pass threshold defined up front', 'Result', 'Decision — pivot, persevere, scale, or stop'] }
+    ]
+  },
+  {
+    id: 'minimum-viable-types',
+    title: 'MVP & "Minimum" Terms Lexicon',
+    category: 'ba',
+    description: 'Create shared language for "minimum" delivery types so teams align on intent — learning vs usability vs market vs commercial readiness.',
+    estMinutes: 25,
+    steps: [
+      { type: 'reference', title: 'Why this lexicon exists', body: '"Minimum" labels are used inconsistently across the industry. The point isn\'t to police language — it\'s to agree intent and "done" criteria so you don\'t over-scope, under-learn, or ship without readiness. Golden rule: "MVP" means a minimum viable end-to-end outcome, not "the first version of everything".' },
+      { type: 'reference', title: 'The core "minimum" types', body: 'MVP — Minimum Viable Product (learning & hypothesis validation). MUP — Minimum Usable Product (essential usability, core tasks). MLP — Minimum Lovable Product (delight, trust, adoption). MMP — Minimum Marketable Product (market entry, comms/support ready). MSP — Minimum Sellable Product (commercial viability). MVE — Minimum Viable Experience (coherent end-to-end). MVF — Minimum Viable Feature (smallest releasable unit of value). MVRelease — smallest increment ready for broader rollout. MVA — Minimum Viable Audience (smallest segment that validates demand).' },
+      { type: 'reference', title: 'Choosing the right "minimum"', body: 'Validate the problem fast → MVP/MVE. Make core tasks easy and safe → MUP. Ship something comms/support-ready → MMP/MVRelease. Drive early adoption and trust → MLP. Monetise from day one → MSP. Deliver value in slices → MVF. Pilot with the smallest credible segment → MVA.' },
+      { type: 'instruction', title: 'Pick one primary objective per increment', body: 'Choose a single intent per increment. If you try to make one release "MVP + MMP + MLP + MSP" at once, you will over-scope and under-learn. State the term and intent explicitly at the start of discovery (e.g. "this increment is an MVE aimed at reducing missed submissions").' },
+      { type: 'checklist', title: 'Apply the same de-risking to every type', body: 'Whatever "minimum" you choose:', items: ['Make the objective explicit (learning / usability / market / commercial)', 'Document top assumptions — what you believe but haven\'t proven', 'Test the riskiest assumptions first', 'Define success measures up front', 'Define critical exception paths and their owners', 'Include operational readiness if releasing beyond a pilot (support, comms, monitoring, rollback)'] },
+      { type: 'reference', title: 'Readiness signal', body: 'If you can\'t articulate how you\'ll measure success and what decision it enables (pivot / persevere / scale / stop), you don\'t yet have a viable "minimum" increment — and "minimum" never means unsafe, unsupported, or unowned.' }
+    ]
+  },
+  {
+    id: 'raci-matrix',
+    title: 'Clarifying Roles with RACI',
+    category: 'ba',
+    description: 'Make ownership and decision-making explicit so work flows faster, hand-offs are clear, and accountability is unambiguous.',
+    estMinutes: 35,
+    steps: [
+      { type: 'reference', title: 'What RACI means', body: 'A responsibility assignment model for activities, deliverables, and decisions. Responsible — does the work. Accountable — owns the outcome and signs off. Consulted — provides input before completion. Informed — kept up to date after. Golden rules: each row has at least one R, and exactly one A.' },
+      { type: 'reference', title: 'When it earns its keep', body: 'Use RACI when work crosses multiple teams/roles, when you see decision delays, repeated rework, or confusion about approvals, or when introducing automation/process change where recovery and operational ownership matter. If a RACI doesn\'t reduce ambiguity or speed delivery, it\'s too broad, too detailed, or not agreed with the people doing the work.' },
+      { type: 'instruction', title: 'Define scope and right-size it', body: 'Decide what you are mapping — deliverables, activities, or decisions. Start with the smallest useful matrix: 10–30 rows is typical for a feature/release. Split large programmes into separate RACIs rather than one giant grid.' },
+      { type: 'instruction', title: 'List roles, not names', body: 'Use roles (Service Owner, Ops Lead, Product/BA, Engineering Lead, QA, Data/Reporting, Comms/Training, Support) so the matrix stays reusable. Add individual names only later if genuinely required.' },
+      { type: 'instruction', title: 'Populate R, then A, then C/I', body: 'Assign Responsible first (who does the work), then Accountable (who owns the outcome and signs off), then Consulted (essential inputs before finalising), then Informed (who needs updates after). Sequencing this way prevents the common "everyone is accountable" mess.' },
+      { type: 'checklist', title: 'Validate against a quality checklist', body: 'In a short workshop with the roles involved, confirm:', items: ['Each row has at least one R and exactly one A', 'Accountable roles can actually approve/decide', 'Consulted roles are limited to the necessary few', 'Informed is broadcast only — not disguised approval', 'Exception/recovery activities have explicit owners (for automation/process change)', 'The matrix is agreed with the people doing the work'] },
+      { type: 'reference', title: 'De-risk: latency, exceptions, too many Cs', body: 'For every decision row, name one A and a decision deadline, linked to the decision log. Add explicit rows for failure detection, manual recovery, and override/audit so there are no "no owner" gaps at go-live. If a row has 6+ Consulted roles, the activity is poorly defined or authority is unclear — split it or clarify.' }
+    ]
+  },
+  {
+    id: 'six-thinking-hats',
+    title: 'Six Thinking Hats Facilitation',
+    category: 'ba',
+    description: 'Structure a group discussion so you separate facts from feelings, explore risks and benefits without talking past each other, and decide clearly.',
+    estMinutes: 45,
+    steps: [
+      { type: 'reference', title: 'What it is and when it works', body: 'A facilitation technique where the whole group "wears the same hat at the same time" — focusing on one mode of thinking at once. It reduces debate-by-opinion and makes trade-offs, assumptions, and risks visible. Best when a conversation is stuck, emotional, overly technical, or dominated by a few voices — especially in discovery, option assessment, and go/no-go decisions.' },
+      { type: 'reference', title: 'The six hats', body: 'White — facts and information (what we know, what\'s missing, what assumptions we treat as facts). Red — feelings and instincts (no justification required). Black — risks, downsides, failure modes. Yellow — benefits and value. Green — options, creativity, alternatives, mitigations. Blue — control: the facilitation hat for agenda, decisions, actions, and owners.' },
+      { type: 'instruction', title: 'Open on the Blue hat: define the decision', body: 'Write one clear statement the group is deciding on (e.g. "Proceed with v1 of X in Sprint N"). Set guardrails: timebox (30–60 mins single decision, 60–90 mins multi-option), roles (facilitator, scribe, decision owner), and required outputs (decision, top risks, de-risk actions, next steps).' },
+      { type: 'instruction', title: 'Run the hats in a controlled order', body: 'Recommended sequence: White (facts) → Red (reactions) → Yellow (benefits) → Black (risks) → Green (options/mitigations) → Blue (decision + actions). Aim for 5–8 minutes per hat in a 45-minute session; extend Green/Black when risk is high or the decision is irreversible.' },
+      { type: 'reference', title: 'Don\'t argue across hats', body: 'The classic failure mode: someone raises Black-hat risks during the Yellow-hat benefits round. Park the point and return to it in the right hat. The discipline of one-mode-at-a-time is the entire value of the technique.' },
+      { type: 'checklist', title: 'Close with mandatory de-risking outputs', body: 'Convert the discussion into a record before anyone leaves:', items: ['Top risks, ranked', 'Critical assumptions — what must be true', 'Mitigations/experiments to reduce uncertainty', 'Ownership and dates', 'The decision and its rationale, plus what you are not doing for now'] }
+    ]
+  },
+  {
+    id: 'service-blueprint',
+    title: 'Service Blueprinting',
+    category: 'ba',
+    description: 'Show how people, processes, and systems work together across a journey — linking what the user experiences to what happens backstage to deliver it.',
+    estMinutes: 50,
+    steps: [
+      { type: 'reference', title: 'What a service blueprint is', body: 'A diagram showing the relationships between service components — people, touchpoints, and processes — tied to each touchpoint in a journey. It connects the frontstage (what the user sees) to the backstage (what teams and systems do). Use it when a journey crosses multiple roles/teams/systems and exceptions/recovery are common or high-risk; a simple process map is enough for single-team, low-exception work.' },
+      { type: 'instruction', title: 'Step 1 — Define scope', body: 'Set the journey segment (start/end), the user segment/pathway in scope, and the key scenarios — the happy path plus the critical exceptions. Don\'t blueprint if you can only cover the happy path.' },
+      { type: 'checklist', title: 'Step 2 — Set the lanes', body: 'Use lanes that reflect how delivery actually works:', items: ['User actions', 'Frontstage interactions — what the user sees (messages, screens, calls)', 'Backstage activities — what teams do', 'Support processes — governance, reporting, training, escalation', 'Systems and data — platforms, integrations, records', 'Policies/controls where relevant'] },
+      { type: 'instruction', title: 'Step 3 — Map the happy path', body: 'Lay steps out in time order, left to right: touchpoint → internal step → system update → output. Keep it legible before adding complexity.' },
+      { type: 'instruction', title: 'Step 4 — Add critical exceptions and recovery', body: 'Add the failures that materially change risk or effort — missing data, failed comms, a threshold triggered, a manual override required. For each, define who does what, where the audit trail lives, and how the user is informed. This is where most operational cost and risk actually sit.' },
+      { type: 'checklist', title: 'Step 5 — De-risk each failure point', body: 'For every failure point capture, and sanity-check the blueprint against:', items: ['Early-warning indicators and controls/mitigations', 'Clear ownership for each backstage step', 'Explicit system/data updates (the source of truth)', 'Manual recovery paths, defined and tested', 'Auditability requirements (who/what/when)', 'Measures — quality, timeliness, workload, safety'] }
+    ]
+  },
+  {
+    id: 'service-design-document',
+    title: 'Writing a Service Design Document',
+    category: 'ba',
+    description: 'Create a single structured view of a service design — scope, requirements coverage, operating-model impacts, transition, and risks.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'When to write one (and when not to)', body: 'Create a service design document for a new service capability or major change crossing teams/systems, an operating-model change (new queues, responsibilities, reporting), or any change with material risk (safety, reliability, compliance, high volume). Skip it for minor copy or low-impact config — use a lightweight change note. If the service isn\'t yet understood end-to-end, do the journey/blueprint first, then document.' },
+      { type: 'checklist', title: 'Cover the six core sections', body: 'A complete pack includes:', items: ['Summary and context — background, objective, stakeholders, key decisions needed', 'Scope and principles — in/out of scope and design principles (safety, clarity, recoverability, auditability)', 'Requirements coverage — key functional requirements, business rules, NFRs', 'Service blueprint / operating-model impacts — roles (RACI-light), support model, reporting/KPIs', 'Transition and rollout — milestones, training/comms/support readiness, early-life support', 'Risks, assumptions, and constraints — with mitigations'] },
+      { type: 'instruction', title: 'Link, don\'t duplicate', body: 'The document is a single source of truth that links the core artefacts — vision, scope, journeys, blueprint, rules register, NFRs — rather than re-stating them. That keeps it maintainable and prevents conflicting copies of the same definition.' },
+      { type: 'checklist', title: 'Meet the de-risking minimum standard', body: 'At minimum, the document must record:', items: ['The top 5 service risks and their mitigations', 'Recovery paths for critical failures', 'Who owns each operational step on Day 1', 'What will be monitored and what triggers escalation'] },
+      { type: 'instruction', title: 'Drive delivery and approvals from it', body: 'Use the document to generate delivery inputs — backlog, test scope, readiness checklist — and to capture the approvals record. Review it at each stage gate and before go-live so it stays the authoritative view as the service evolves.' }
+    ]
+  },
+  {
+    id: 't-shaped-skills',
+    title: 'Developing T-Shaped BA Skills',
+    category: 'ba',
+    description: 'Develop analysts with deep BA mastery and broad adjacent skills — improving adaptability, delivery speed, and cross-team collaboration.',
+    estMinutes: 35,
+    steps: [
+      { type: 'reference', title: 'What "T-shaped" means', body: 'The vertical bar is depth — core specialist BA skills that define the discipline. The horizontal bar is breadth — broader skills that let you collaborate across functions and temporarily contribute outside your core role. Related shapes: I-shaped (deep, narrow), T-shaped (deep + broad), Pi-shaped (two specialisms), comb-shaped (three or more). T-shaping is not "become a generalist" — it\'s keeping strong BA depth while building enough breadth to remove blockers and improve flow.' },
+      { type: 'reference', title: 'Why it improves delivery', body: 'Narrow specialisms create inefficiency when people defend role boundaries instead of adding value. T-shaped capability reduces hand-off friction and translation overhead, enables faster alignment on requirements and rules, increases resilience when a squad lacks a specialist, and improves end-to-end outcomes by linking user experience to operational reality.' },
+      { type: 'instruction', title: 'Choose your delivery context first', body: 'Confirm whether your primary context is closer to Agile or Waterfall, and use that lens. Agile tends to emphasise story slicing, acceptance-criteria quality, backlog prioritisation, and collaborative facilitation; Waterfall emphasises long-form elicitation, process modelling, traceability, and documentation. Elicitation and stakeholder alignment matter in both.' },
+      { type: 'instruction', title: 'Turn gaps into a learning backlog', body: 'Identify skills missing from your individual profile and from team coverage. For each target skill, define the learning activity (training, reading, shadowing, pairing), a real practice opportunity (an actual delivery task), and the evidence of competence (an artefact or outcome) — not just "course completed".' },
+      { type: 'checklist', title: 'De-risk the development so it isn\'t wasted upskilling', body: 'Keep capability work honest:', items: ['Anchor development to outcomes (less rework, faster decisions, fewer defects), not training completion', 'Separate "awareness" from "practitioner" expectations — for many adjacent skills, informed collaboration is the goal, not full proficiency', 'Build practice into real delivery, not side-of-desk', 'Use the model to focus investment, not as a universal "everyone learns everything" checklist'] },
+      { type: 'reference', title: 'Protect the vertical bar', body: 'The common failure mode is trying to make every analyst comb-shaped at once, which dilutes core BA mastery. This is a development and discussion aid — a skills snapshot — not a competency-scoring or line-management tool. Protect depth while building targeted breadth.' }
+    ]
+  },
 ];
 
 const CATEGORIES = {
