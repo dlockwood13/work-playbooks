@@ -3,7 +3,7 @@
 Step-by-step interactive playbooks for change management, business analysis, and process improvement.
 
 ## Features
-- 20 interactive playbooks across Change, BA, and Process Improvement
+- 43 interactive playbooks across Change, BA, and Process Improvement (incl. 18 new BA tools: elicitation, NFRs, business rules, process & service design, journey mapping, SWOT, RAID, technical debt, product ownership, scope & vision, Build–Measure–Learn, MVP lexicon, RACI, Six Thinking Hats, T-shaped skills)
 - 11 freelance templates (proposals, contracts, discovery, finance)
 - 4 cheat sheets (Excel, SQL, Data Storytelling, Statistics)
 - Progress tracking saved locally per user
