@@ -1058,6 +1058,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'requirements-gathering',
+    stage: 'elicit',
     title: 'Requirements Gathering',
     category: 'ba',
     description: 'Run effective elicitation sessions and capture requirements that survive contact with reality.',
@@ -1074,6 +1075,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'process-mapping',
+    stage: 'current',
     title: 'Process Mapping (As-Is)',
     category: 'ba',
     description: 'Document how a process actually works today, not how people think it works.',
@@ -1090,6 +1092,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'gap-analysis',
+    stage: 'current',
     title: 'Gap Analysis',
     category: 'ba',
     description: 'Compare current state to desired state and define what bridges the gap.',
@@ -1105,6 +1108,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'user-stories',
+    stage: 'design',
     title: 'Writing Effective User Stories',
     category: 'ba',
     description: 'Write user stories that drive useful conversations and shippable work.',
@@ -1121,6 +1125,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'moscow-prioritisation',
+    stage: 'decide',
     title: 'MoSCoW Prioritisation',
     category: 'ba',
     description: 'Use MoSCoW properly so it actually narrows scope instead of blessing it all.',
@@ -1137,6 +1142,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'business-case',
+    stage: 'decide',
     title: 'Building a Business Case for Process Improvement',
     category: 'ba',
     description: 'Make a compelling, numbers-backed case that wins funding and commitment.',
@@ -1154,6 +1160,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'to-be-process',
+    stage: 'design',
     title: 'Designing the To-Be Process',
     category: 'ba',
     description: 'Move from current state to a redesigned future process people will actually adopt.',
@@ -1171,6 +1178,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'workshop-facilitation',
+    stage: 'elicit',
     title: 'Facilitating a Workshop',
     category: 'ba',
     description: 'Run productive workshops where the right decisions get made by the right people.',
@@ -1320,6 +1328,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'requirements-elicitation',
+    stage: 'elicit',
     title: 'Requirements Elicitation',
     category: 'ba',
     description: 'Elicit the right requirements, from the right people, at the right time - so the team builds the right thing.',
@@ -1338,6 +1347,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'writing-requirements',
+    stage: 'design',
     title: 'Writing Clear, Testable Requirements',
     category: 'ba',
     description: 'Turn elicitation outputs into requirements that are unambiguous, testable, and traceable.',
@@ -1354,6 +1364,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'non-functional-requirements',
+    stage: 'design',
     title: 'Defining Non-Functional Requirements (NFRs)',
     category: 'ba',
     description: 'Define the quality attributes - performance, availability, security, usability - so engineering and QA can build and verify to an agreed standard.',
@@ -1370,6 +1381,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'business-rules',
+    stage: 'design',
     title: 'Capturing Business Rules',
     category: 'ba',
     description: 'Capture decision logic - eligibility, routing, thresholds, constraints - so it is unambiguous, testable, and reusable across stories, automation, and reporting.',
@@ -1386,6 +1398,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'process-design',
+    stage: 'design',
     title: 'Process Design & Levels of Mapping',
     category: 'ba',
     description: 'Model how work flows end-to-end so you can standardise, improve, and safely automate - with clear ownership, controls, and measures.',
@@ -1402,6 +1415,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'journey-mapping',
+    stage: 'current',
     title: 'Customer Journey Mapping',
     category: 'ba',
     description: 'Understand the end-to-end experience from the user\'s perspective, find the moments that matter, and prioritise improvements with evidence.',
@@ -1419,6 +1433,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'swot-analysis',
+    stage: 'initiate',
     title: 'SWOT Analysis',
     category: 'ba',
     description: 'Assess strengths, weaknesses, opportunities, and threats against a clear objective - and turn the grid into an action plan, not just a list.',
@@ -1435,6 +1450,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'risks-issues-management',
+    stage: 'deliver',
     title: 'Risks & Issues Management (RAID)',
     category: 'ba',
     description: 'Identify and manage risks before they materialise, and resolve issues fast when they do - protecting time, cost, and quality.',
@@ -1467,6 +1483,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'product-owner-role',
+    stage: 'deliver',
     title: 'The Product Owner Role',
     category: 'ba',
     description: 'Clarify what a Product Owner is accountable for and how to run vision to roadmap to backlog to delivery with sharp prioritisation and measurement.',
@@ -1483,6 +1500,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'defining-scope',
+    stage: 'initiate',
     title: 'Defining & Managing Scope',
     category: 'ba',
     description: 'Set clear boundaries for what you will and won\'t deliver, so you can plan, resource, and prevent scope creep.',
@@ -1499,6 +1517,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'product-vision',
+    stage: 'initiate',
     title: 'Creating a Product Vision',
     category: 'ba',
     description: 'Write an aspirational, evidence-grounded vision that anchors prioritisation and that leaders can communicate consistently.',
@@ -1514,6 +1533,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'build-measure-learn',
+    stage: 'elicit',
     title: 'Build–Measure–Learn Discovery',
     category: 'ba',
     description: 'Run structured, evidence-led discovery and experimentation - find the right problems, create the best solutions, then scale value.',
@@ -1529,6 +1549,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'minimum-viable-types',
+    stage: 'decide',
     title: 'MVP & "Minimum" Terms Lexicon',
     category: 'ba',
     description: 'Create shared language for "minimum" delivery types so teams align on intent - learning vs usability vs market vs commercial readiness.',
@@ -1544,6 +1565,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'raci-matrix',
+    stage: 'initiate',
     title: 'Clarifying Roles with RACI',
     category: 'ba',
     description: 'Make ownership and decision-making explicit so work flows faster, hand-offs are clear, and accountability is unambiguous.',
@@ -1560,6 +1582,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'six-thinking-hats',
+    stage: 'decide',
     title: 'Six Thinking Hats Facilitation',
     category: 'ba',
     description: 'Structure a group discussion so you separate facts from feelings, explore risks and benefits without talking past each other, and decide clearly.',
@@ -1575,6 +1598,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'service-blueprint',
+    stage: 'design',
     title: 'Service Blueprinting',
     category: 'ba',
     description: 'Show how people, processes, and systems work together across a journey - linking what the user experiences to what happens backstage to deliver it.',
@@ -1590,6 +1614,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'service-design-document',
+    stage: 'design',
     title: 'Writing a Service Design Document',
     category: 'ba',
     description: 'Create a single structured view of a service design - scope, requirements coverage, operating-model impacts, transition, and risks.',
@@ -1604,6 +1629,7 @@ const PLAYBOOKS = [
   },
   {
     id: 't-shaped-skills',
+    stage: 'foundations',
     title: 'Developing T-Shaped BA Skills',
     category: 'ba',
     description: 'Develop analysts with deep BA mastery and broad adjacent skills - improving adaptability, delivery speed, and cross-team collaboration.',
@@ -1619,6 +1645,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'ba-delivery-lifecycle',
+    stage: 'foundations',
     title: 'The BA Delivery Lifecycle',
     category: 'ba',
     description: 'Move any change from problem to embedded solution through seven stages, with fixed stage gates and deliverables at each.',
@@ -1637,6 +1664,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'analysis-operating-principles',
+    stage: 'foundations',
     title: 'Analysis Operating Principles',
     category: 'ba',
     description: 'The habits that separate good analysis from box-ticking - and a governance and control checklist to run on every change.',
@@ -1653,6 +1681,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'ba-technique-catalogue',
+    stage: 'foundations',
     title: 'The BA Technique Catalogue',
     category: 'ba',
     description: 'A tiered menu of the core analysis techniques by category, with the level at which each is normally applied independently.',
@@ -1669,6 +1698,7 @@ const PLAYBOOKS = [
   },
   {
     id: 'slicing-work',
+    stage: 'design',
     title: 'Slicing Epics, Features & Stories',
     category: 'ba',
     description: 'Split big work into small, independently valuable pieces - slicing vertically by default so every slice is usable and testable now.',
@@ -1695,6 +1725,16 @@ const CATEGORIES = {
   ba: { label: 'Business Analysis', short: 'BA', gradient: 'from-indigo-500 to-violet-600', bg: 'bg-indigo-50', text: 'text-indigo-700', border: 'border-indigo-200', accent: '#6366f1', icon: Target },
   pi: { label: 'Process Improvement', short: 'Process', gradient: 'from-amber-400 to-orange-500', bg: 'bg-amber-50', text: 'text-amber-800', border: 'border-amber-200', accent: '#f59e0b', icon: TrendingUp }
 };
+
+const BA_LIFECYCLE = [
+  { key: 'foundations', n: '0', label: 'Foundations & Practice', blurb: 'How the BA works - the lifecycle, principles, techniques and capability that underpin every engagement, whatever the methodology.' },
+  { key: 'initiate', n: '1', label: 'Initiate & Scope', blurb: 'Frame the problem, vision, boundaries, roles and objectives before diving into detail.' },
+  { key: 'current', n: '2', label: 'Understand Current State', blurb: 'Model how things work today and where the pain is, before redesigning anything.' },
+  { key: 'elicit', n: '3', label: 'Elicit & Discover', blurb: 'Draw out real needs from the right people, and validate the riskiest assumptions.' },
+  { key: 'design', n: '4', label: 'Analyse & Design', blurb: 'Turn needs into clear, testable requirements and a deliberate to-be design.' },
+  { key: 'decide', n: '5', label: 'Prioritise, Justify & Decide', blurb: 'Prioritise against objectives, build the case, and secure the decision.' },
+  { key: 'deliver', n: '6', label: 'Support Delivery & Validation', blurb: 'Keep requirements true through delivery, manage risk, and prove the solution works.' }
+];
 // ==================== ACADEMIC TEMPLATES ====================
 // Block types:
 //  - { type: 'field', label, placeholder }       single inline label + blank
@@ -3053,6 +3093,43 @@ function App() {
   };
 
   // Filtering
+  const renderPlaybookCard = (pb) => {
+    const cat = CATEGORIES[pb.category];
+    const userProgress = currentUser ? users[currentUser]?.progress?.[pb.id] : null;
+    const completed = userProgress?.completed || 0;
+    const total = pb.steps.length;
+    const pct = total > 0 ? (completed / total) * 100 : 0;
+    return (
+      <button key={pb.id} onClick={() => handlePlaybookClick(pb)} className="text-left bg-white rounded-2xl p-5 border border-slate-200 hover:border-violet-300 hover:shadow-xl transition-all group">
+        <div className="flex items-start gap-3 mb-3">
+          <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center flex-shrink-0 shadow`}>
+            <cat.icon className="w-5 h-5 text-white" />
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{cat.label}</div>
+            <h3 className="font-bold text-slate-900 leading-tight group-hover:text-violet-700 transition">{pb.title}</h3>
+          </div>
+        </div>
+        <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">{pb.description}</p>
+        <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
+          <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {pb.estMinutes} min</span>
+          <span className="flex items-center gap-1"><Target className="w-3 h-3" /> {total} steps</span>
+        </div>
+        {completed > 0 && (
+          <div>
+            <div className="flex items-center justify-between text-xs mb-1">
+              <span className="text-slate-500 font-semibold">{completed}/{total} done</span>
+              {completed === total && <span className="text-emerald-600 font-bold flex items-center gap-0.5"><CheckCircle2 className="w-3 h-3" /> Complete</span>}
+            </div>
+            <div className="h-1.5 rounded-full bg-slate-100 overflow-hidden">
+              <div className={`h-full bg-gradient-to-r ${cat.gradient}`} style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        )}
+      </button>
+    );
+  };
+
   const filteredPlaybooks = PLAYBOOKS.filter((pb) => {
     if (browsingCategory && pb.category !== browsingCategory) return false;
     if (filter !== 'all' && pb.category !== filter) return false;
@@ -3601,44 +3678,31 @@ function App() {
                 )}
 
                 {/* Playbook cards */}
-                <div className="grid md:grid-cols-2 gap-4 mb-12">
-                  {filteredPlaybooks.map((pb) => {
-                    const cat = CATEGORIES[pb.category];
-                    const userProgress = currentUser ? users[currentUser]?.progress?.[pb.id] : null;
-                    const completed = userProgress?.completed || 0;
-                    const total = pb.steps.length;
-                    const pct = total > 0 ? (completed / total) * 100 : 0;
-                    return (
-                      <button key={pb.id} onClick={() => handlePlaybookClick(pb)} className="text-left bg-white rounded-2xl p-5 border border-slate-200 hover:border-violet-300 hover:shadow-xl transition-all group">
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center flex-shrink-0 shadow`}>
-                            <cat.icon className="w-5 h-5 text-white" />
+                {browsingCategory === 'ba' && !search ? (
+                  <div className="mb-12 space-y-8">
+                    {BA_LIFECYCLE.map((stage) => {
+                      const items = filteredPlaybooks.filter((pb) => (pb.stage || 'foundations') === stage.key);
+                      if (items.length === 0) return null;
+                      return (
+                        <div key={stage.key}>
+                          <div className="flex items-center gap-3 mb-1">
+                            <span className="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 text-white text-xs font-bold flex-shrink-0">{stage.n}</span>
+                            <h3 className="text-lg font-bold text-slate-900">{stage.label}</h3>
+                            <span className="text-xs text-slate-400 font-semibold">{items.length}</span>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">{cat.label}</div>
-                            <h3 className="font-bold text-slate-900 leading-tight group-hover:text-violet-700 transition">{pb.title}</h3>
+                          <p className="text-slate-500 text-sm mb-4 ml-10">{stage.blurb}</p>
+                          <div className="grid md:grid-cols-2 gap-4">
+                            {items.map((pb) => renderPlaybookCard(pb))}
                           </div>
                         </div>
-                        <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2">{pb.description}</p>
-                        <div className="flex items-center gap-3 text-xs text-slate-500 mb-3">
-                          <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> {pb.estMinutes} min</span>
-                          <span className="flex items-center gap-1"><Target className="w-3 h-3" /> {total} steps</span>
-                        </div>
-                        {completed > 0 && (
-                          <div>
-                            <div className="flex items-center justify-between text-xs mb-1">
-                              <span className="text-slate-500 font-semibold">{completed}/{total} done</span>
-                              {completed === total && <span className="text-emerald-600 font-bold flex items-center gap-0.5"><CheckCircle2 className="w-3 h-3" /> Complete</span>}
-                            </div>
-                            <div className="h-1.5 rounded-full bg-slate-100 overflow-hidden">
-                              <div className={`h-full bg-gradient-to-r ${cat.gradient}`} style={{ width: `${pct}%` }} />
-                            </div>
-                          </div>
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="grid md:grid-cols-2 gap-4 mb-12">
+                    {filteredPlaybooks.map((pb) => renderPlaybookCard(pb))}
+                  </div>
+                )}
 
                 {filteredPlaybooks.length === 0 && (
                   <div className="text-center py-12 text-slate-500">
