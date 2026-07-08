@@ -715,7 +715,87 @@ const TEMPLATES = [
       { heading: 'Table Format', body: 'Include: Date | Description | Amount | Receipt Attached (Y/N)' },
       { heading: 'Submission', body: 'Include this report with your invoice.' }
     ]
-  }
+  },
+  {
+    id: 'terms-of-reference',
+    title: 'Terms of Reference',
+    category: 'delivery',
+    description: 'The Stage 1 project brief: the problem, objectives, scope boundaries, stakeholders, and constraints, agreed before any detailed analysis begins.',
+    sections: [
+      { heading: 'Document control', body: `Title: [Initiative name]\nReference: [TOR-001]\nVersion: [0.1 Draft]\nDate: [DATE]\nAuthor / owner: [ ]\nStatus: [Draft / For review / Approved]` },
+      { heading: '1. Background / problem', body: `[State the business problem in outcome terms, with evidence. What is happening today, what does it cost, and why act now? Avoid describing a solution.]` },
+      { heading: '2. Objectives & success measures', body: `Specific, measurable goals this change must achieve:\n• [Objective] - measured by [measure]\n• [Objective] - measured by [measure]` },
+      { heading: '3. Scope - in / out', body: `In scope:\n• [What is included - journeys, processes, teams, systems]\n\nOut of scope (explicit exclusions):\n• [What is deliberately excluded, so no one assumes it]` },
+      { heading: '4. Controls / regulated outputs touched', body: `[Name any controls, approvals, compliance obligations, or regulated outputs this change affects. Identify them now, not at sign-off.]` },
+      { heading: '5. Key stakeholders', body: `Role / function / site | Interest | Involvement\n[ ] | [ ] | [ ]` },
+      { heading: '6. Constraints & assumptions', body: `Constraints: [time, budget, integrity, continuity, technical]\nAssumptions: [what this brief relies on being true]` },
+      { heading: '7. Approach & deliverables', body: `Lifecycle stages to be run and the outputs each will produce (right-sized to the change).` },
+      { heading: '8. Initial risks', body: `• [Known risk, including any control/continuity risk]\n• [Known risk]` }
+    ]
+  },
+  {
+    id: 'requirements-catalogue',
+    title: 'Requirements Catalogue',
+    category: 'delivery',
+    description: 'The master list of requirements with IDs, type, priority, source, and acceptance criteria - the baseline everything else traces to.',
+    sections: [
+      { heading: 'How to use', body: `Give every requirement a unique ID and an acceptance criterion - if you cannot test it, rewrite it. One requirement per statement; use "shall" for mandatory behaviour. State the need, not the design. Attach the source, priority, and the objective it serves.` },
+      { heading: 'Requirement types', body: `Business - why (goals and outcomes)\nStakeholder - who needs what\nFunctional - what the solution must do\nNon-functional - how well (quality attributes)\nTransition - what is needed to move from current to target state` },
+      { heading: 'Catalogue', body: `ID | Requirement (shall statement) | Type | Priority (MoSCoW) | Source | Acceptance criterion | Status\nBR-01 | The business shall [outcome] | Business | Must | [Sponsor] | [Measure] | [Draft/Baselined]\nFR-14 | The system shall [behaviour] | Functional | Must | [Owner] | [Testable result] | [ ]\nNFR-03 | [Records] shall be [quality attribute] | Non-functional | Must | [Owner] | [Test passes] | [ ]` },
+      { heading: 'Prioritisation (MoSCoW)', body: `Prioritise against the objectives, not by who shouts loudest.\nMust have - non-negotiable, including legal/compliance\nShould have - important, not vital\nCould have - desirable if capacity allows\nWon't have this time - explicitly out, with rationale recorded` }
+    ]
+  },
+  {
+    id: 'requirements-traceability-matrix',
+    title: 'Requirements Traceability Matrix (RTM)',
+    category: 'delivery',
+    description: 'Links each requirement forward to design, build, and test, and backward to its objective - how you prove at handover and audit that nothing was lost or added silently.',
+    sections: [
+      { heading: 'Why an RTM', body: `Once requirements are baselined, they change only through change control. The RTM is the thread that proves completeness: every requirement connects back to the objective that justifies it and forward to the test that verifies it. Keep it current through delivery, not just at the start.` },
+      { heading: 'Matrix', body: `Req ID | Requirement | Objective / source | Design / build ref | Test / UAT ref | Status\nFR-14 | [Requirement summary] | [Objective it serves] | [DS-07] | [UAT-22] | [Passed/Open]\nNFR-03 | [Requirement summary] | [Compliance / objective] | [DS-11] | [UAT-31] | [ ]` },
+      { heading: 'Keeping it honest', body: `A requirement with no forward link is untested. A build item with no backward link is unrequested scope - question it. At handover, every baselined Must should trace to a passed test.` }
+    ]
+  },
+  {
+    id: 'user-story-acceptance',
+    title: 'User Story & Acceptance Criteria',
+    category: 'delivery',
+    description: 'The agile unit of work: an independent, valuable, testable story with Given/When/Then criteria and a Definition of Ready and Done.',
+    sections: [
+      { heading: 'Story', body: `As a [role]\nI want [capability]\nso that [outcome].\n\nKeep stories INVEST: Independent, Negotiable, Valuable, Estimable, Small, Testable. State the need, not the design.` },
+      { heading: 'Acceptance criteria', body: `Given [context], when [action], then [result].\n[Repeat one Given/When/Then per scenario - happy path, key alternates, and the error/boundary cases that matter.]` },
+      { heading: 'Controls', body: `Any integrity, traceability, or compliance criteria that must hold for this story. In a controlled environment these are "Must have" acceptance criteria, not optional extras.` },
+      { heading: 'Definition of Ready', body: `Problem clear · value stated · acceptance criteria drafted · dependencies identified · controls named · estimable.` },
+      { heading: 'Definition of Done', body: `Built to acceptance criteria · tested · integrity/control criteria verified · work instructions or training updated · signed off and traced in the RTM.` }
+    ]
+  },
+  {
+    id: 'elicitation-session-plan',
+    title: 'Elicitation Session Plan',
+    category: 'delivery',
+    description: 'A one-page plan for any elicitation event so sessions close a specific gap instead of wandering - objective, participants, technique, materials, and follow-up.',
+    sections: [
+      { heading: 'Objective', body: `[The specific gap this session will close. If you cannot name it, do not book the session.]` },
+      { heading: 'Participants', body: `[Coverage of function, site, and level. Include a sceptic. Never rely on a single source.]\nName / role | Why they are here` },
+      { heading: 'Technique', body: `[Choose deliberately: interview for depth, workshop for cross-functional design, observation for reality, survey for scale, prototype for system/report detail. Combine where useful.]` },
+      { heading: 'Materials / pre-work', body: `[Draft process maps, question set, decisions needed, data to review.]` },
+      { heading: 'Key questions', body: `• "Walk me through what actually happens, step by step - not what should happen."\n• "What happens when it goes wrong, and how often?"\n• "Who checks this, and what are they checking against?"\n• "What would break if we removed this step?"\n• "How is this done elsewhere / at other sites?"\n• "How will we know this is better - what measure moves?"` },
+      { heading: 'Outputs & follow-up', body: `Playback notes within 24 hours. Log actions, decisions, and open questions. Separate fact from opinion; corroborate what was said against what actually happens.` }
+    ]
+  },
+  {
+    id: 'process-map-structure',
+    title: 'As-is / To-be Process Map',
+    category: 'delivery',
+    description: 'The structure for modelling a process with swimlanes, control points, and hand-offs - kept as-is and to-be separately so current reality is never blurred with the desired future.',
+    sections: [
+      { heading: 'Header', body: `Process name: [ ]\nProcess owner: [ ]\nScope / sites in scope: [ ]\nVersion / date: [ ]\nView: [As-is] or [To-be] (never blur the two on one map)` },
+      { heading: 'Levels of modelling', body: `SIPOC - Suppliers, Inputs, Process, Outputs, Customers on one page (frame scope, align stakeholders fast).\nValue chain / L1 - end-to-end capabilities (executive view).\nProcess map / detailed (L2-L3) - activities, roles (swimlanes), decisions, hand-offs.\nProcedure / work instruction - step-level detail, controls, systems (rollout, training, evidence).` },
+      { heading: 'Swimlanes & flow', body: `One lane per role or system involved.\nFlow: trigger -> activities -> decisions -> hand-offs -> outcome.\nHand-offs between lanes are where risk and delay concentrate - mark them.` },
+      { heading: 'Annotations', body: `Control points - checks, approvals, compliance and data-integrity steps.\nSystems, key data, and volumes at each step.\nAs-is: pain points, rework loops, waiting, duplicate entry, unmanaged variation.\nTo-be: improvements, and confirmation that each control is preserved or strengthened - never weakened.` },
+      { heading: 'Conventions', body: `Keep one consistent notation across the group so maps are portable. Design standard-by-default, with genuine local variation captured as controlled exceptions.` }
+    ]
+  },
 ];
 
 const TEMPLATE_CATEGORIES = {
@@ -1535,6 +1615,77 @@ const PLAYBOOKS = [
       { type: 'instruction', title: 'Turn gaps into a learning backlog', body: 'Identify skills missing from your individual profile and from team coverage. For each target skill, define the learning activity (training, reading, shadowing, pairing), a real practice opportunity (an actual delivery task), and the evidence of competence (an artefact or outcome) - not just "course completed".' },
       { type: 'checklist', title: 'De-risk the development so it isn\'t wasted upskilling', body: 'Keep capability work honest:', items: ['Anchor development to outcomes (less rework, faster decisions, fewer defects), not training completion', 'Separate "awareness" from "practitioner" expectations - for many adjacent skills, informed collaboration is the goal, not full proficiency', 'Build practice into real delivery, not side-of-desk', 'Use the model to focus investment, not as a universal "everyone learns everything" checklist'] },
       { type: 'reference', title: 'Protect the vertical bar', body: 'The common failure mode is trying to make every analyst comb-shaped at once, which dilutes core BA mastery. This is a development and discussion aid - a skills snapshot - not a competency-scoring or line-management tool. Protect depth while building targeted breadth.' }
+    ]
+  },
+  {
+    id: 'ba-delivery-lifecycle',
+    title: 'The BA Delivery Lifecycle',
+    category: 'ba',
+    description: 'Move any change from problem to embedded solution through seven stages, with fixed stage gates and deliverables at each.',
+    estMinutes: 40,
+    steps: [
+      { type: 'reference', title: 'Why a lifecycle', body: 'Every engagement, large or small, moves through the same seven stages. The lifecycle is iterative - you revisit earlier stages as understanding deepens - but the stage gates and deliverables are fixed. It exists so that no matter the size of the change, the analysis is complete, traceable, and decision-ready. Right-size the rigour: match the depth of each stage to the risk and scale of the change.' },
+      { type: 'instruction', title: '1. Initiate & scope', body: 'Understand the problem, objectives, constraints, and stakeholders before eliciting any detail. Confirm the business need, measurable objectives, what is in and out of scope, key constraints, and who the stakeholders are. Produce a short terms of reference and a BA plan sized to the change. Techniques: problem statement, objectives model, scope/context diagram, stakeholder analysis, RACI. (Lead level: BA and above.)' },
+      { type: 'instruction', title: '2. Understand current state', body: 'Model reality before you redesign it. Walk the process where it actually happens and follow the work and the information end to end. Capture volumes, hand-offs, controls, systems, and pain points. Techniques: process mapping (SIPOC then detailed), observation/shadowing, document analysis, root-cause analysis. Record where any controls, approvals, or compliance checkpoints sit in the current flow. (Lead level: Junior and above.)' },
+      { type: 'instruction', title: '3. Elicit requirements', body: 'Draw out needs using the method that fits the audience: workshops for cross-functional design, interviews for depth, observation for reality, surveys for scale. Plan elicitation and never rely on a single source; always corroborate what people say with what actually happens. (Lead level: Junior and above.)' },
+      { type: 'instruction', title: '4. Analyse & design', body: 'Turn raw needs into a coherent, prioritised, testable set of requirements and a to-be design. Model options where the path is not obvious. Prioritise with MoSCoW against the objectives, then baseline the requirements. (Lead level: BA and above.)' },
+      { type: 'instruction', title: '5. Justify & decide', body: 'Package the analysis into a decision. Quantify costs, benefits, risks, and options; make a clear recommendation; route it through the right governance. Typically senior-led, but every analyst contributes the evidence. (Lead level: Senior and Lead.)' },
+      { type: 'instruction', title: '6. Support delivery', body: 'Requirements decay if left alone. Maintain the requirements traceability matrix, handle change through change control, answer build questions promptly, and prepare test scenarios so what is built is what was agreed. (Lead level: BA and above.)' },
+      { type: 'instruction', title: '7. Validate & transition', body: 'Prove the solution meets the need through user acceptance testing tied back to requirements, support training and handover, and check the benefits are actually being realised. Close the loop by confirming any controls and continuity requirements still hold in the new process. (Lead level: BA and above.)' },
+      { type: 'checklist', title: 'Stage-gate deliverables', body: 'Each stage produces an artefact that gates the next. A healthy engagement can show:', items: ['Terms of reference, stakeholder map, BA plan (Stage 1)', 'As-is process maps and root-cause analysis (Stage 2)', 'Elicitation notes and a requirements list (Stage 3)', 'To-be design, options paper, baselined requirements (Stage 4)', 'Business case, benefits map, recommendation (Stage 5)', 'RTM, change log, test support (Stage 6)', 'UAT results, training/handover, benefits check (Stage 7)'] }
+    ]
+  },
+  {
+    id: 'analysis-operating-principles',
+    title: 'Analysis Operating Principles',
+    category: 'ba',
+    description: 'The habits that separate good analysis from box-ticking - and a governance and control checklist to run on every change.',
+    estMinutes: 20,
+    steps: [
+      { type: 'reference', title: 'Start from the problem and the outcome', body: 'Never start from the requested feature. Ask what business result must change and how you will know it has. A request is a proposed solution in disguise; your job is to find the need underneath it.' },
+      { type: 'reference', title: 'Follow the flow', body: 'The physical and information flow is the spine of most processes. Map how work and data actually move - the real path, not the documented one - before proposing any change.' },
+      { type: 'reference', title: 'Protect controls by design', body: 'Assume every process touches a control, an approval, or a compliance checkpoint. Find it and preserve it. A change that quietly breaks a control is not a minor defect - it can invalidate the outcome the process exists to produce.' },
+      { type: 'reference', title: 'Standardise, then localise', body: 'Design for the whole group or organisation; capture genuine local variation as controlled exceptions, not as a reason to fork the process. One good local fix that cannot be standardised is often the wrong answer.' },
+      { type: 'reference', title: 'Leave an audit trail', body: 'Traceable requirements, decisions, and sign-offs are part of the deliverable, not overhead. If you cannot show at handover how a requirement traces back to an objective and forward to a test, the analysis is incomplete.' },
+      { type: 'reference', title: 'Right-size the rigour', body: 'Match the depth of analysis to the risk and scale of the change. A high-integrity, cross-team change needs full rigour and senior involvement; a small, low-risk change needs a lightweight note. Over-analysis is waste; under-analysis is risk.' },
+      { type: 'checklist', title: 'Governance & control checklist - run on every change', body: 'Before a change is done, confirm:', items: ['Which controls, approvals, or regulated outputs does this touch? (named explicitly)', 'Is the end-to-end record preserved and attributable - who did what, when?', 'Is segregation of duties intact - can the wrong person approve or edit a critical record?', 'Are retention and retrieval requirements met for records and results?', 'Have we removed, not added, single points of failure (single site, system, or expert)?', 'Does it standardise across teams/sites, with only controlled local exceptions?'] }
+    ]
+  },
+  {
+    id: 'ba-technique-catalogue',
+    title: 'The BA Technique Catalogue',
+    category: 'ba',
+    description: 'A tiered menu of the core analysis techniques by category, with the level at which each is normally applied independently.',
+    estMinutes: 15,
+    steps: [
+      { type: 'reference', title: 'How to use the catalogue', body: 'Choose the right tool for the task rather than reaching for the same one every time. The level shown is where an analyst is normally expected to apply the technique independently - everyone can grow into the senior set. Levels map to the career pathways: Junior, BA, and Senior & Lead.' },
+      { type: 'reference', title: 'Strategy & context', body: 'Context/scope diagram - fixing boundaries and interfaces (Junior). Business objectives model - anchoring change to measurable goals (BA). SWOT / PESTLE - framing the environment for a case (BA). Business capability model - positioning change in the whole business (Senior). Target operating model - designing cross-team future state (Senior).' },
+      { type: 'reference', title: 'Stakeholders & collaboration', body: 'Stakeholder register - capturing who is affected or involved (Junior). Power/interest grid - deciding engagement approach (Junior). RACI matrix - clarifying roles and decision rights (Junior). Facilitated workshop - cross-functional design and consensus (BA). Negotiation & conflict resolution - resolving cross-team trade-offs (Senior).' },
+      { type: 'reference', title: 'Elicitation & investigation', body: 'Structured interview - depth and expert knowledge (Junior). Observation/shadowing - seeing the real process (Junior). Document/procedure analysis - existing procedures and records (Junior). Survey/questionnaire - scale across teams or sites (BA). Prototyping/wireframing - clarifying system and report needs (BA).' },
+      { type: 'reference', title: 'Analysis & modelling', body: 'SIPOC - one-page process framing (Junior). Process map with swimlanes - modelling as-is and to-be (Junior to BA). Root-cause analysis (5 Whys, fishbone) - treating causes not symptoms (BA). Use case and user story - interaction and functional detail (BA). Data/entity model - defining core business entities (BA to Senior). Gap analysis - sizing current vs target (BA). MoSCoW prioritisation - ordering requirements by value (BA).' },
+      { type: 'reference', title: 'Justification & decision', body: 'Options appraisal (weighted) - comparing routes evenly (BA to Senior). Cost-benefit / payback - financial framing (BA). Risk analysis - surfacing and rating risks (BA). Benefits map / dependency network - linking change to outcomes (BA to Senior). Business case - securing the decision (Senior).' },
+      { type: 'reference', title: 'Validation & delivery', body: 'Requirements traceability matrix - proving nothing is lost (Junior). Acceptance criteria - making requirements testable (BA). Test scenario derivation - turning requirements into tests (BA). UAT planning & sign-off - proving fitness for purpose (BA). Definition of Ready / Done - consistent agile quality (BA).' }
+    ]
+  },
+  {
+    id: 'slicing-work',
+    title: 'Slicing Epics, Features & Stories',
+    category: 'ba',
+    description: 'Split big work into small, independently valuable pieces - slicing vertically by default so every slice is usable and testable now.',
+    estMinutes: 35,
+    related: ['user-stories', 'writing-requirements', 'product-owner-role'],
+    steps: [
+      { type: 'reference', title: 'Why we slice - and the one rule', body: 'Large items are unpredictable: an epic that takes months hides risk, blocks feedback, and cannot be tested or demonstrated until the very end. Slicing breaks big work into pieces small enough to estimate, build, test, and deliver value one piece at a time. The aim is not simply smaller - it is smaller AND independently valuable. The one rule: slice vertically by default. Every slice should be a thin, end-to-end piece a user can actually use and you can actually test. Slicing horizontally (by technical layer) is normally an anti-pattern because no single layer delivers usable value or can be validated alone.' },
+      { type: 'reference', title: 'The backlog hierarchy and sizes', body: 'Slicing happens at every level; each level is a container for the one below. Epic - a large body of work or business outcome (weeks to months; many features; a quarter or more). Feature - a distinct capability that delivers value (days to weeks; several stories; within a release). User story - a small, user-valuable change (hours to a few days; within one sprint). Task - a unit of technical work inside a story (hours). Rule of thumb: if the team cannot confidently finish a story inside one sprint, and ideally in a few days, it is still too big and needs another slice.' },
+      { type: 'reference', title: 'Vertical vs horizontal slicing', body: 'A vertical slice cuts top-to-bottom through every layer needed to deliver one thin piece of working functionality - interface, logic, data, and integration. Narrow in scope but complete in depth, so it can be demonstrated and tested end to end the moment it is done. A horizontal slice cuts along a single layer (all the screens, then all the services, then the database, or a "front-end story" and a "back-end story"). Each piece is broad but shallow and none delivers value or can be validated on its own - you only find out whether the pieces fit at the very end, which is exactly the risk slicing is meant to remove. Vertical: thin but end-to-end, usable and testable now, integration risk surfaces early, easy to demo and re-order. Horizontal: broad but shallow, nothing usable until the last layer lands, integration risk hidden until the end.' },
+      { type: 'checklist', title: 'The vertical-slice test', body: 'A candidate is a good vertical slice if you can answer yes to all three:', items: ['Can a real user do something useful with it, even something small?', 'Can you demonstrate it and write an acceptance test against it?', 'Does it deliver a slice of the business outcome, not just plumbing?'] },
+      { type: 'reference', title: 'When horizontal splitting is defensible', body: 'Horizontal is the exception, not the rule - and most legitimate cases are really about sequencing enabling work, not shipping a layer as "done value". A spike or proof of concept (timeboxed investigation; output is knowledge, not shippable function). A genuine enabling/foundation increment (e.g. standing up an integration or data pipeline several vertical slices will use) - keep it as small as possible and follow it immediately with a vertical slice that proves it end to end. Hard external sequencing (a third party genuinely cannot be called until its interface exists) - even then prefer a "walking skeleton", a hair-thin vertical path through the whole stack first. Non-functional hardening layered onto already-working function. The safety rule: never let horizontal/enabling work run long without a vertical slice that exercises it - a walking skeleton de-risks far better than a fully built single layer.' },
+      { type: 'reference', title: 'The pattern catalogue - how to slice vertically', body: 'When a story is too big, do not guess - apply a splitting pattern (the SPIDR set plus other proven patterns). Try them roughly in this order; the first that yields two or more independently valuable slices wins. 1) Workflow steps - split an end-to-end process into steps, ship the highest-value step first. 2) Business-rule variations - deliver the common rule first, add variations later. 3) Happy path vs alternate/error paths - build the main success path first, treat exceptions and errors as separate slices. 4) Data variations and entry methods - support one data type, format, or input method first, widen later. 5) Operations (CRUD) - split by the verbs; Create/Read often deliver value long before Update/Delete. 6) Interface/channel variations - one interface, channel, language, or site first. 7) Defer the -ilities - get it working correctly first, then harden performance, scale, security, or retention as explicit later slices, keeping controls as Must-have criteria. 8) Simple vs complex (zero/one/many) - build the simplest version that has value, add complexity as separate slices. 9) Spike (last resort) - if uncertainty blocks slicing, timebox a spike to learn, then split the real story properly.' },
+      { type: 'checklist', title: 'Signs a story is still too big', body: 'Re-slice when a story shows any of these:', items: ['It contains "and", "or", or a list of steps (register and test and approve and issue)', 'It has multiple acceptance criteria that could each stand alone as value', 'The team cannot estimate it, or estimates span a wide range', 'It covers several user roles, sites, channels, or data types at once', 'It cannot be finished inside one sprint'] },
+      { type: 'checklist', title: 'Check each slice against INVEST', body: 'If a slice fails a letter, it usually needs re-slicing. Small plus Valuable is the tension vertical slicing resolves.', items: ['Independent - few or no hard dependencies on other unfinished slices', 'Negotiable - room to discuss the how with the team, not an over-specified contract', 'Valuable - a real person is better off once it ships (this rules out horizontal layers)', 'Estimable - enough understanding to size it; if not, spike', 'Small - fits comfortably in a sprint, ideally a few days; if not, slice again', 'Testable - clear acceptance criteria, and you can prove controls hold'] },
+      { type: 'instruction', title: 'The decision guide', body: 'Run this sequence whenever an item feels too big. 1) Confirm the level - epic, feature, or story? Slice down one level at a time. 2) State the value - who is better off when this ships, and how? If you cannot answer, you have a horizontal/technical fragment; re-frame around value. 3) Pick a pattern - walk the catalogue in order (workflow, rules, paths, data, CRUD, interface, -ilities, simple/complex, spike) and take the first that yields two or more valuable slices. 4) Test each slice against INVEST and fix any that fail, especially Valuable and Small. 5) Sequence for value and risk - deliver the highest-value or highest-risk slice first; a thin walking skeleton first if integration is uncertain. 6) Preserve controls - carry integrity, traceability, and compliance criteria into every slice that touches them; never park them in a "later" horizontal layer. Sentence template: "As a [role], I can [do one small useful thing] for [one data type / step / channel], so that [outcome]." If your sentence names a layer (screen, service, table) instead of a user action, you are slicing horizontally - rewrite it.' },
+      { type: 'reference', title: 'Worked example - a customer self-service portal', body: 'Epic: "Give customers self-service access to their records online." Too big to estimate or test, so split into features: secure access, view records, download and share, notifications. Vertical stories under "view records", each usable and testable on its own and ordered by value: 1) view my single most recent record for one category (simple/complex + data); 2) see a list of all my records in that category (simple to many); 3) search and filter that list by date and reference (rules/data); 4) view records for the other categories too (data variation); 5) view records in my language (interface variation); 6) retrieval stays under 2 seconds across 10 years of records (defer -ilities). Every story carries the access-control and traceability criteria. The horizontal version - build all the screens, then the service, then the database - would deliver nothing demonstrable or auditable until the very end.' },
+      { type: 'reference', title: 'Do not over-slice', body: 'Slices can be too small too. If a slice delivers no observable value on its own, or the overhead of splitting exceeds the benefit, you have gone too far - recombine. The target is the smallest slice that is still independently valuable and testable.' }
     ]
   },
 ];
